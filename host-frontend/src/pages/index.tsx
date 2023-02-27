@@ -7,6 +7,7 @@ const SampleComponent = dynamic(() => import('tableConstructor/Scheme'), {
 });
 
 export default function Home() {
+
     return (
         <>
             <Suspense fallback={<>Loading…</>}>
