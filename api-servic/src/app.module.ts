@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-
 import { JwtModule } from "@nestjs/jwt";
+import { RMQModule } from "nestjs-rmq";
 
 import { AppService } from "@/app.service";
 import { AppController } from "@/app.controller";
@@ -15,7 +15,7 @@ import { LoggerModule } from "@/logger";
       isGlobal: true,
     }),
     LoggerModule,
-    // RMQModule.forRootAsync(getRMQConfig()),
+    RMQModule.forRootAsync(getRMQConfig()),
     JwtModule.registerAsync(getJWTConfig()),
   ],
   controllers: [AppController],

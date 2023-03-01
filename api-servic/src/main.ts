@@ -16,8 +16,12 @@ async function bootstrap() {
   app.use(logger);
   app.useLogger(app.get(PinoLoggerService));
 
-  await app.listen(3001, () => {
-    Logger.log(`Listening on http://localhost:${3001}`);
+  const globalPrefix = 'api';
+  app.setGlobalPrefix(globalPrefix);
+  const port = process.env.PORT || 3333;
+
+  await app.listen(port, () => {
+    Logger.log(`Listening on http://localhost:${port}/api`);
   });
 }
 

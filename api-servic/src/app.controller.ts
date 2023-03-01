@@ -1,5 +1,6 @@
-import {Controller, Get, Logger} from '@nestjs/common';
+import {Controller, Logger} from '@nestjs/common';
 import { AppService } from './app.service';
+import {RMQRoute} from "nestjs-rmq";
 
 @Controller()
 export class AppController {
@@ -7,7 +8,7 @@ export class AppController {
 
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @RMQRoute('')
   getHello(): string {
     this.logger.log('Log in hello method')
     return this.appService.getHello();
