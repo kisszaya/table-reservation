@@ -3,10 +3,10 @@ import { ConfigModule } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { RMQModule } from "nestjs-rmq";
 
-import { AppService } from "@/app.service";
-import { AppController } from "@/app.controller";
 import { getRMQConfig, getJWTConfig } from "@/configs";
 import { LoggerModule } from "@/logger";
+import { UsersController, AuthController } from "@/controllers";
+import { BrokerService } from "@/broker";
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { LoggerModule } from "@/logger";
     RMQModule.forRootAsync(getRMQConfig()),
     JwtModule.registerAsync(getJWTConfig()),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [UsersController, AuthController],
+  providers: [BrokerService],
 })
 export class AppModule {}

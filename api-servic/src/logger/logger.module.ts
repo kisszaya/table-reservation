@@ -14,6 +14,12 @@ const asyncLocalStorage = new AsyncLocalStorage();
       useValue: asyncLocalStorage,
     },
   ],
-  exports: [PinoLoggerService],
+  exports: [
+    PinoLoggerService,
+    {
+      provide: INJECT_TYPES.ASYNC_STORAGE,
+      useValue: asyncLocalStorage,
+    },
+  ],
 })
 export class LoggerModule {}
