@@ -19,8 +19,8 @@ export const vars = {
     PASSWORD: "POSTGRES_PASSWORD",
     NAME: "POSTGRES_NAME",
     HOST: "POSTGRES_HOST",
-    PORT: "POSTGRES_PORT"
-  }
+    PORT: "POSTGRES_PORT",
+  },
 };
 
 export const varsDefaultValues: IEnvDefaultValues<typeof vars> = {

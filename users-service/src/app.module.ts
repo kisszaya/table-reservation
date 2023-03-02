@@ -7,7 +7,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "@/app.controller";
 import { AppService } from "@/app.service";
-import { getJWTConfig, getRMQConfig, getPostgresConfig } from "@/configs";
+import { getJWTConfig, getPostgresConfig, getRMQConfig } from "@/configs";
+import { AuthModule } from "@/auth/auth.module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { getJWTConfig, getRMQConfig, getPostgresConfig } from "@/configs";
     RMQModule.forRootAsync(getRMQConfig()),
     JwtModule.registerAsync(getJWTConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

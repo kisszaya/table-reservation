@@ -6,3 +6,13 @@ services:
     restart: always
     ports:
       - "5672:5672"
+
+#  postgresql:
+#    image: postgres
+#    container_name: postgresql
+#    restart: always
+#    environment:
+#      POSTGRES_USER: svetlanamatveeva
+#      POSTGRES_PASSWORD: 440924Sveta
+#    ports:
+#      - "5435:5432"
