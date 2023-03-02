@@ -1,6 +1,5 @@
-import {Controller, Get, Logger} from "@nestjs/common";
-
 import { BrokerService } from "@/broker";
+import { Controller, Get, Logger } from "@nestjs/common";
 
 @Controller("auth")
 export class AuthController {
@@ -10,7 +9,7 @@ export class AuthController {
 
   @Get("login")
   async getHello(): Promise<string> {
-    this.logger.log('start /auth/login')
+    this.logger.log("start /auth/login");
     await this.brokerService.publish<{}, {}>("", {});
     return "";
   }

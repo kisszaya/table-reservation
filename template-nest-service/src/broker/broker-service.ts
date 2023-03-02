@@ -1,9 +1,9 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { RMQService } from "nestjs-rmq";
 import { AsyncLocalStorage } from "async_hooks";
-import { ASYNC_STORAGE_KEYS } from "kisszaya-table-reservation/lib/const";
 
-import { INJECT_TYPES } from "@/const";
+import { INJECT_TYPES } from "@/types";
+import { STORAGE_KEYS } from "@/const";
 
 @Injectable()
 export class BrokerService {
@@ -26,6 +26,6 @@ export class BrokerService {
   }
 
   private getTraceId() {
-    return this.async_storage.getStore()?.get(ASYNC_STORAGE_KEYS.TRACE_ID);
+    return this.async_storage.getStore()?.get(STORAGE_KEYS.TRACE_ID);
   }
 }

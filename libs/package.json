@@ -1,6 +1,6 @@
 {
   "name": "kisszaya-table-reservation",
-  "version": "0.0.10",
+  "version": "0.0.15",
   "description": "kisszaya Lib for table-reservation project",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,9 +12,20 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "18.14.1",
+    "@types/uuid": "^9.0.1",
     "typescript": "4.9.5"
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "dependencies": {
+    "@nestjs/common": "9.0.0",
+    "@nestjs/core": "9.0.0",
+    "@types/pino": "^7.0.5",
+    "nestjs-rmq": "^2.8.0",
+    "pino": "^8.11.0",
+    "pino-pretty": "^9.4.0",
+    "rxjs": "7.2.0",
+    "uuid": "^9.0.0"
+  }
 }

@@ -1,1 +1,1 @@
-export * from './env'
+export { processEnv, envWrap } from "./env";

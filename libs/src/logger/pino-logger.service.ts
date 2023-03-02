@@ -2,8 +2,7 @@ import { AsyncLocalStorage } from "async_hooks";
 import { Inject, Injectable, LoggerService } from "@nestjs/common";
 import pinoLogger from "pino";
 
-import { INJECT_TYPES } from "@/types";
-import { STORAGE_KEYS } from "@/const";
+import { ASYNC_STORAGE_KEYS, INJECT_TYPES } from "../const";
 
 const pino = pinoLogger({
   transport: {
@@ -44,6 +43,6 @@ export class PinoLoggerService implements LoggerService {
   }
 
   private getTraceId() {
-    return this.async_storage.getStore()?.get(STORAGE_KEYS.TRACE_ID);
+    return this.async_storage.getStore()?.get(ASYNC_STORAGE_KEYS.TRACE_ID);
   }
 }

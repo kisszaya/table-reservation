@@ -2,10 +2,9 @@ import { Module } from "@nestjs/common";
 import { AsyncLocalStorage } from "async_hooks";
 
 import { PinoLoggerService } from "./pino-logger.service";
-import { INJECT_TYPES } from "@/types";
+import { INJECT_TYPES } from "../const";
 
 const asyncLocalStorage = new AsyncLocalStorage();
-
 @Module({
   providers: [
     PinoLoggerService,

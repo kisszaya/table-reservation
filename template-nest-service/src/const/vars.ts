@@ -18,6 +18,6 @@ export const vars = {
 
 export const varsDefaultValues: IEnvDefaultValues<typeof vars> = {
   SETUP: {
-    PORT: "3001",
+    PORT: "3000",
   },
 };

@@ -18,7 +18,7 @@ export const getRMQConfig = (): IRMQServiceAsyncOptions => ({
           host: envParse("RMQ.HOST"),
         },
       ],
-      queueName: 'test',
+      queueName: "test",
       prefetchCount: 32,
       serviceName: "api",
     };
