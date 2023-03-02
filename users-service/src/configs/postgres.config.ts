@@ -1,6 +1,8 @@
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModuleAsyncOptions } from "@nestjs/typeorm";
 
+import { models } from "@/models";
+
 import { envWrap } from "@/utils";
 
 export const getPostgresConfig = (): TypeOrmModuleAsyncOptions => ({
@@ -16,7 +18,7 @@ export const getPostgresConfig = (): TypeOrmModuleAsyncOptions => ({
       username: envParse("POSTGRES.USER"),
       password: envParse("POSTGRES.PASSWORD"),
       database: envParse("POSTGRES.NAME"),
-      entities: [],
+      entities: models,
       synchronize: true,
     };
   },

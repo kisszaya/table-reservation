@@ -16,9 +16,10 @@ export const getRMQConfig = (): IRMQServiceAsyncOptions => ({
           login: envParse("RMQ.LOGIN"),
           password: envParse("RMQ.PASSWORD"),
           host: envParse("RMQ.HOST"),
+          // port: Number(envParse("RMQ.PORT")),
         },
       ],
-      queueName: "test",
+      queueName: envParse("RMQ.QUEUE"),
       prefetchCount: 32,
       serviceName: "api",
     };

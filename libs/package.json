@@ -1,6 +1,6 @@
 {
   "name": "kisszaya-table-reservation",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "kisszaya Lib for table-reservation project",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -22,6 +22,7 @@
     "@nestjs/common": "9.0.0",
     "@nestjs/core": "9.0.0",
     "@types/pino": "^7.0.5",
+    "class-validator": "^0.14.0",
     "nestjs-rmq": "^2.8.0",
     "pino": "^8.11.0",
     "pino-pretty": "^9.4.0",

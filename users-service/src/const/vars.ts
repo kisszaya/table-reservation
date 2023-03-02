@@ -13,6 +13,8 @@ export const vars = {
     LOGIN: "AMQP_USER",
     PASSWORD: "AMQP_PASSWORD",
     HOST: "AMQP_HOSTNAME",
+    PORT: "AMQP_PORT",
+    QUEUE: "AMQP_QUEUE",
   },
   POSTGRES: {
     USER: "POSTGRES_USER",

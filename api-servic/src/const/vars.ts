@@ -13,6 +13,7 @@ export const vars = {
     LOGIN: "AMQP_USER",
     PASSWORD: "AMQP_PASSWORD",
     HOST: "AMQP_HOSTNAME",
+    PORT: "AMQP_PORT"
   },
 };
 
