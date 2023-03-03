@@ -14,8 +14,9 @@ export namespace UsersRegister {
     @IsString()
     password: string;
 
+    @IsOptional()
     @IsString()
-    phone: string;
+    phone?: string;
 
     @IsString()
     email: string;

@@ -2,13 +2,13 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 import { USER_ROLE, USER_STATUS } from "@/const";
 
-@Entity()
-export class User {
+@Entity("users")
+export class UserModel {
   @PrimaryGeneratedColumn({
     type: "bigint",
     name: "user_id",
   })
-  id: number;
+  user_id: number;
 
   @Column({
     nullable: false,
@@ -17,6 +17,7 @@ export class User {
 
   @Column({
     nullable: false,
+    unique: true,
   })
   email: string;
 
@@ -27,8 +28,9 @@ export class User {
 
   @Column({
     nullable: false,
+    name: "password",
   })
-  password: string;
+  password_hash: string;
 
   @Column({
     nullable: false,

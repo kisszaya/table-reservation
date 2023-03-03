@@ -1,5 +1,5 @@
-import { User } from "./user.model";
+import { UserModel } from "./user.model";
 
-const models = [User];
+const models = [UserModel];
 
-export { User, models };
+export { UserModel, models };

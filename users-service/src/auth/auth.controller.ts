@@ -23,11 +23,12 @@ export class AuthController {
     data: UsersLogin.Request,
     @RMQMessage msg: Message
   ): Promise<UsersLogin.Response> {
-    this.brokerService.setTraceId(msg)
-    return {
-      accessToken: "accessToken",
-      refreshToken: "refreshToken",
-    };
+    this.brokerService.setTraceId(msg);
+    const { user_id } = await this.authService.validateUser(
+      data.email,
+      data.password
+    );
+    return this.authService.login(user_id);
   }
 
   @RMQValidate()
@@ -36,11 +37,7 @@ export class AuthController {
     data: UsersRegister.Request,
     @RMQMessage msg: Message
   ): Promise<UsersRegister.Response> {
-    this.brokerService.setTraceId(msg)
-
-    return {
-      accessToken: "accessToken",
-      refreshToken: "refreshToken",
-    };
+    this.brokerService.setTraceId(msg);
+    return this.authService.register(data);
   }
 }

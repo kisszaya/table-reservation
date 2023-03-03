@@ -9,25 +9,25 @@ import {
 import { USER_ROLE } from "kisszaya-table-reservation/lib/interfaces";
 
 export class UserRegisterDto {
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   firstName: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   lastName: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   @MinLength(6)
   password: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  phone: string;
+  phone?: string;
 
-  @IsEmail()
   @IsNotEmpty()
+  @IsEmail()
   email: string;
 
   @IsOptional()

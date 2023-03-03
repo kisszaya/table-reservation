@@ -4,15 +4,16 @@ import { JwtModule } from "@nestjs/jwt";
 
 import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
-import { User } from "@/models";
+import { UserModel } from "@/models";
 import { getJWTConfig } from "@/configs";
+import { UserRepository } from "@/repositories";
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([UserModel]),
     JwtModule.registerAsync(getJWTConfig()),
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserRepository],
   controllers: [AuthController],
 })
 export class AuthModule {}

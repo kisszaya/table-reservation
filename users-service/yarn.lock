@@ -746,6 +746,11 @@ base64-js@^1.3.1:
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
+bcryptjs@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
+  integrity sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==
+
 binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
@@ -1858,10 +1863,10 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-kisszaya-table-reservation@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.16.tgz#8b8fa9649f71b27b7abd287a8d0b10f9f70b45f1"
-  integrity sha512-uvQry1Wvx7iiZ3moaiIgcNBIES9e59sF7WtIkQAxB+cEEFmwm1UNxoyv44PfIVrsWofZgpIhwClotVH6ZTiRcg==
+kisszaya-table-reservation@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.21.tgz#a7bbfb623cfb7db12da7e7ab01d2fef22e01ead5"
+  integrity sha512-B4j+4whvxtFvbeKkAsuIX2o48Kp1v/LsPwJtRFvktK93QEbihYp/+oikGKUN7gJaQ/z3E4ZpBTGI2xMJwl29nQ==
   dependencies:
     "@nestjs/common" "9.0.0"
     "@nestjs/core" "9.0.0"

@@ -1,2 +1,20 @@
-export * from "./role.enum";
-export * from "./status.enum";
+export interface IUser {
+  user_id?: number;
+  fullName: string;
+  email: string;
+  phone?: string;
+  role: USER_ROLE;
+  status: USER_STATUS;
+  password_hash: string;
+}
+
+export enum USER_ROLE {
+  HOSTESS = "hostess",
+  ADMINISTRATOR = "administrator",
+}
+
+export enum USER_STATUS {
+  CREATED = "created",
+  REGISTERED = "registered",
+  BLOCKED = "blocked",
+}
