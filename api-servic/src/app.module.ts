@@ -5,7 +5,7 @@ import { RMQModule } from "nestjs-rmq";
 import { LoggerModule } from "kisszaya-table-reservation/lib/logger";
 
 import { getRMQConfig, getJWTConfig } from "@/configs";
-import { UsersController, AuthController } from "@/controllers";
+import { UsersController } from "@/controllers";
 
 import { BrokerService } from "@/broker";
 
@@ -19,7 +19,7 @@ import { BrokerService } from "@/broker";
     RMQModule.forRootAsync(getRMQConfig()),
     JwtModule.registerAsync(getJWTConfig()),
   ],
-  controllers: [UsersController, AuthController],
+  controllers: [UsersController],
   providers: [BrokerService],
 })
 export class AppModule {}

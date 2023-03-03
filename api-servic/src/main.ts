@@ -11,8 +11,10 @@ import { processEnv } from "@/utils";
 if (processEnv("SETUP.NODE") !== "development") {
   require("module-alias/register");
 }
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
 
   const logger = loggerMiddleware(app);
   app.use(logger);

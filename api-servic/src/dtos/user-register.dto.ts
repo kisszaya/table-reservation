@@ -7,8 +7,9 @@ import {
   MinLength,
 } from "class-validator";
 import { USER_ROLE } from "kisszaya-table-reservation/lib/interfaces";
+import { Requests } from "kisszaya-table-reservation/lib/requests";
 
-export class UserRegisterDto {
+export class UserRegisterDto implements Requests.UserRegister {
   @IsNotEmpty()
   @IsString()
   firstName: string;
@@ -32,5 +33,5 @@ export class UserRegisterDto {
 
   @IsOptional()
   @IsEnum(USER_ROLE)
-  role?: USER_ROLE;
+  role: USER_ROLE;
 }
