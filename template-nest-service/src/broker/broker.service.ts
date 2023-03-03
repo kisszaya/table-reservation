@@ -1,19 +1,13 @@
 import { ASYNC_STORAGE_KEYS } from "kisszaya-table-reservation/lib/const";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { RMQService } from "nestjs-rmq";
-import { AsyncLocalStorage } from "async_hooks";
-
-import { INJECT_TYPES } from "@/const";
+import { Injectable, Logger } from "@nestjs/common";
+import { RMQService, Message } from "nestjs-rmq";
 
 @Injectable()
 export class BrokerService {
   private readonly logger = new Logger(BrokerService.name);
+  private traceId = undefined;
 
-  constructor(
-    private readonly rmqService: RMQService,
-    @Inject(INJECT_TYPES.ASYNC_STORAGE)
-    private readonly async_storage: AsyncLocalStorage<Map<string, string>>
-  ) {}
+  constructor(private readonly rmqService: RMQService) {}
 
   public async publish<Request, Response>(topic, message: Request) {
     const traceId = this.getTraceId();
@@ -26,6 +20,15 @@ export class BrokerService {
   }
 
   private getTraceId() {
-    return this.async_storage.getStore()?.get(ASYNC_STORAGE_KEYS.TRACE_ID);
+    return this.traceId;
+  }
+
+  public setTraceId(msg: Message) {
+    const traceId = msg.properties.headers[ASYNC_STORAGE_KEYS.TRACE_ID];
+    if (!traceId) {
+      this.logger.error("traceId not in msg.properties.headers");
+      return;
+    }
+    this.traceId = traceId;
   }
 }

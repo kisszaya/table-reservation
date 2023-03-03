@@ -7,6 +7,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { getPostgresConfig, getRMQConfig } from "@/configs";
 
 import { AuthModule } from "@/auth/auth.module";
+import { BrokerModule } from "@/broker";
 
 @Module({
   imports: [
@@ -15,9 +16,11 @@ import { AuthModule } from "@/auth/auth.module";
       isGlobal: true,
     }),
     LoggerModule,
+    BrokerModule,
     RMQModule.forRootAsync(getRMQConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
     AuthModule,
   ],
+  providers: [],
 })
 export class AppModule {}

@@ -8,6 +8,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "@/app.controller";
 import { AppService } from "@/app.service";
 import { getJWTConfig, getRMQConfig, getPostgresConfig } from "@/configs";
+import { BrokerModule } from "@/broker";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { getJWTConfig, getRMQConfig, getPostgresConfig } from "@/configs";
       isGlobal: true,
     }),
     LoggerModule,
+    BrokerModule,
     RMQModule.forRootAsync(getRMQConfig()),
     JwtModule.registerAsync(getJWTConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
