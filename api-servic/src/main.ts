@@ -1,3 +1,4 @@
+import * as cookieParser from "cookie-parser";
 import { NestFactory } from "@nestjs/core";
 import { Logger } from "@nestjs/common";
 import {
@@ -14,7 +15,8 @@ if (processEnv("SETUP.NODE") !== "development") {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({ credentials: true, origin: "http://localhost:3000" });
+  app.use(cookieParser());
 
   const logger = loggerMiddleware(app);
   app.use(logger);

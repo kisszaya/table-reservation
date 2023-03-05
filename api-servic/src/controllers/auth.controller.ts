@@ -1,0 +1,129 @@
+import { Request, Response } from "express";
+import {
+  UsersLogin,
+  UsersRegister,
+  UsersUpdateRefresh,
+  UsersLogout,
+} from "kisszaya-table-reservation/lib/contracts";
+import {
+  Body,
+  Controller,
+  Logger,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from "@nestjs/common";
+
+import { BrokerService } from "@/broker";
+import { UpdateTokensDto, UserLoginDto, UserRegisterDto } from "@/dtos";
+import { JWTAuthGuard, UserId } from "@/guards";
+import { RefreshTokenService } from "@/services";
+import { InternalException } from "@/exceptions";
+
+@Controller("auth")
+export class AuthController {
+  private readonly logger = new Logger(AuthController.name);
+
+  constructor(
+    private readonly brokerService: BrokerService,
+    private readonly refreshTokenService: RefreshTokenService
+  ) {}
+
+  @Post("login")
+  async login(
+    @Body() dto: UserLoginDto,
+    @Res({ passthrough: true }) response: Response
+  ) {
+    this.logger.log("start /api/users/login");
+
+    try {
+      const { refreshToken, ...data } = await this.brokerService.publish<
+        UsersLogin.Request,
+        UsersLogin.Response
+      >(UsersLogin.topic, dto);
+
+      this.refreshTokenService.setRefreshCookie(response, refreshToken);
+
+      return data;
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new InternalException(e);
+      }
+    }
+  }
+
+  @Post("register")
+  async register(@Body() dto: UserRegisterDto) {
+    this.logger.log("start /api/users/register");
+    try {
+      return await this.brokerService.publish<
+        UsersRegister.Request,
+        UsersRegister.Response
+      >(UsersRegister.topic, dto);
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new InternalException(e);
+      }
+    }
+  }
+
+  @UseGuards(JWTAuthGuard)
+  @Post("refresh")
+  async refresh(
+    @Req() request: Request,
+    @Body() dto: UpdateTokensDto,
+    @UserId() user_id: number,
+    @Res({ passthrough: true }) response: Response
+  ) {
+    this.logger.log("start /api/users/refresh");
+
+    const { fingerprint } = dto;
+
+    const message = {
+      fingerprint,
+      user_id,
+      refreshToken: request.cookies["refresh"],
+    };
+
+    try {
+      const { refreshToken, ...data } = await this.brokerService.publish<
+        UsersUpdateRefresh.Request,
+        UsersUpdateRefresh.Response
+      >(UsersUpdateRefresh.topic, message);
+
+      this.refreshTokenService.setRefreshCookie(response, refreshToken);
+
+      return data;
+    } catch (e) {
+      throw new InternalException(e);
+    }
+  }
+
+  @UseGuards(JWTAuthGuard)
+  @Post("logout")
+  async logout(
+    @Req() request: Request,
+    @UserId() user_id: number,
+    @Res({ passthrough: true }) response: Response
+  ) {
+    const message = {
+      user_id,
+      refreshToken: request.cookies["refresh"],
+    };
+
+    try {
+      const data = await this.brokerService.publish<
+        UsersLogout.Request,
+        UsersLogout.Response
+      >(UsersLogout.topic, message);
+
+      this.refreshTokenService.removeRefreshCookie(response);
+
+      return data;
+    } catch (e) {
+      console.log("error", e);
+      throw new InternalException(e);
+    }
+  }
+}

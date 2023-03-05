@@ -27,8 +27,6 @@ export namespace UsersRegister {
   }
 
   export class Response {
-    accessToken: string;
-
-    refreshToken: string;
+    status: "success";
   }
 }

@@ -1,13 +1,15 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
+import { PassportModule } from "@nestjs/passport";
 import { RMQModule } from "nestjs-rmq";
 import { LoggerModule } from "kisszaya-table-reservation/lib/logger";
 
 import { getRMQConfig, getJWTConfig } from "@/configs";
-import { UsersController } from "@/controllers";
-
+import { UsersController, AuthController } from "@/controllers";
 import { BrokerService } from "@/broker";
+import { JwtStrategy } from "@/strategies";
+import { RefreshTokenService } from "@/services";
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { BrokerService } from "@/broker";
       isGlobal: true,
     }),
     LoggerModule,
+    PassportModule,
     RMQModule.forRootAsync(getRMQConfig()),
     JwtModule.registerAsync(getJWTConfig()),
   ],
-  controllers: [UsersController],
-  providers: [BrokerService],
+  controllers: [UsersController, AuthController],
+  providers: [BrokerService, JwtStrategy, RefreshTokenService],
 })
 export class AppModule {}

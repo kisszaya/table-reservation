@@ -10,7 +10,7 @@ export const getJWTConfig = (): JwtModuleAsyncOptions => ({
     const envParse = envWrap(configService);
 
     return {
-      secret: envParse("JWT.SECRET"),
+      secret: envParse("JWT.ACCESS_SECRET"),
     };
   },
 });

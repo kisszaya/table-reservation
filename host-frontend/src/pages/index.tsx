@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { Button } from "shared/ui";
 
-//@ts-ignore
+// @ts-ignore
 // const SampleComponent = dynamic(() => import('tableConstructor/Scheme'), {
 //     ssr: false,
 // });

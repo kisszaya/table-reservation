@@ -10,4 +10,8 @@ export class UserLoginDto implements Requests.UserLogin {
   @IsString()
   @MinLength(6)
   password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  fingerprint: string;
 }

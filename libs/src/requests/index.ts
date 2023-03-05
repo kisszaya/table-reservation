@@ -4,6 +4,7 @@ export namespace Requests {
   export interface UserLogin {
     email: string;
     password: string;
+    fingerprint: string;
   }
 
   export interface UserRegister {
@@ -14,4 +15,9 @@ export namespace Requests {
     role: USER_ROLE;
     phone?: string;
   }
+
+  export interface UpdateRefreshToken {
+    fingerprint: string;
+  }
+
 }

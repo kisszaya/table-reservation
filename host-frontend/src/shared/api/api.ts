@@ -1,5 +1,12 @@
 import axios from "axios";
 
-export const baseURL = `http://localhost:3333/api`;
+import { baseURL } from "./config";
+import { requestInterceptor, responseErrorInterceptor } from "./interceptors";
 
 export const api = axios.create({ baseURL });
+
+export const apiWithoutInterceptors = axios.create({ baseURL });
+
+api.interceptors.request.use(requestInterceptor);
+
+api.interceptors.response.use(undefined, responseErrorInterceptor);

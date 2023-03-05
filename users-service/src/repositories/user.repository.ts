@@ -11,27 +11,27 @@ export class UserRepository {
 
   constructor(
     @InjectRepository(UserModel)
-    private readonly userRepository: Repository<UserModel>
+    private readonly userModel: Repository<UserModel>
   ) {}
 
   public async createUser(user: UserEntity) {
     this.logger.log("create new user");
 
-    const newUser = this.userRepository.create(user);
+    const newUser = this.userModel.create(user);
 
-    await this.userRepository.save(newUser);
+    await this.userModel.save(newUser);
     return newUser;
   }
 
   public async findUserById(user_id: number) {
     this.logger.log("find user by id");
 
-    return this.userRepository.findOneBy({ user_id });
+    return this.userModel.findOneBy({ user_id });
   }
 
   public async findUserByEmail(email: string) {
     this.logger.log(`find user by email`);
 
-    return this.userRepository.findOneBy({ email });
+    return this.userModel.findOneBy({ email });
   }
 }

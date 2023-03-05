@@ -1,5 +1,6 @@
 import { UserModel } from "./user.model";
+import { RefreshSessionModel } from "./session.model";
 
-const models = [UserModel];
+const models = [UserModel, RefreshSessionModel];
 
-export { UserModel, models };
+export { UserModel, models, RefreshSessionModel };

@@ -3,6 +3,7 @@ import { Message, RMQMessage, RMQRoute, RMQValidate } from "nestjs-rmq";
 import {
   UsersLogin,
   UsersRegister,
+  UsersUpdateRefresh, UsersLogout
 } from "kisszaya-table-reservation/lib/contracts";
 
 import { AuthService } from "./auth.service";
@@ -24,11 +25,14 @@ export class AuthController {
     @RMQMessage msg: Message
   ): Promise<UsersLogin.Response> {
     this.brokerService.setTraceId(msg);
-    const { user_id } = await this.authService.validateUser(
+    const { user_id, role, status } = await this.authService.validateUser(
       data.email,
       data.password
     );
-    return this.authService.login(user_id);
+
+    const res = await this.authService.login(user_id, role, data.fingerprint);
+
+    return { ...res, status };
   }
 
   @RMQValidate()
@@ -39,5 +43,25 @@ export class AuthController {
   ): Promise<UsersRegister.Response> {
     this.brokerService.setTraceId(msg);
     return this.authService.register(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(UsersUpdateRefresh.topic)
+  async refresh(
+    data: UsersUpdateRefresh.Request,
+    @RMQMessage msg: Message
+  ): Promise<UsersUpdateRefresh.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.authService.refresh(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(UsersLogout.topic)
+  async logout(
+      data: UsersLogout.Request,
+      @RMQMessage msg: Message
+  ): Promise<UsersLogout.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.authService.logout(data);
   }
 }

@@ -1,17 +1,9 @@
-import {
-  UsersLogin,
-  UsersRegister,
-} from "kisszaya-table-reservation/lib/contracts";
-import {
-  Body,
-  Controller,
-  Logger,
-  Post,
-  UnauthorizedException,
-} from "@nestjs/common";
+import { UsersMeInfo } from "kisszaya-table-reservation/lib/contracts";
+import { Controller, Get, Logger, UseGuards } from "@nestjs/common";
 
 import { BrokerService } from "@/broker";
-import { UserLoginDto, UserRegisterDto } from "@/dtos";
+import { JWTAuthGuard, UserId } from "@/guards";
+import { InternalException } from "@/exceptions";
 
 @Controller("users")
 export class UsersController {
@@ -19,35 +11,18 @@ export class UsersController {
 
   constructor(private readonly brokerService: BrokerService) {}
 
-  @Post("login")
-  async login(@Body() dto: UserLoginDto) {
-    this.logger.log("start /api/users/login");
-    try {
-      return await this.brokerService.publish<
-        UsersLogin.Request,
-        UsersLogin.Response
-      >(UsersLogin.topic, dto);
-    } catch (e) {
-      if (e instanceof Error) {
-        this.logger.error(e)
-        throw new UnauthorizedException(e);
-      }
-    }
-  }
+  @UseGuards(JWTAuthGuard)
+  @Get("me")
+  async meInfo(@UserId() user_id: number) {
+    this.logger.log("start /api/users/me");
 
-  @Post("register")
-  async register(@Body() dto: UserRegisterDto) {
-    this.logger.log("start /api/users/register");
     try {
       return await this.brokerService.publish<
-        UsersRegister.Request,
-        UsersRegister.Response
-      >(UsersRegister.topic, dto);
+        UsersMeInfo.Request,
+        UsersMeInfo.Response
+      >(UsersMeInfo.topic, { user_id });
     } catch (e) {
-      if (e instanceof Error) {
-        this.logger.error(e)
-        throw new UnauthorizedException(e);
-      }
+      throw new InternalException(e);
     }
   }
 }

@@ -5,9 +5,10 @@ import { LoggerModule } from "kisszaya-table-reservation/lib/logger";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { getPostgresConfig, getRMQConfig } from "@/configs";
+import { BrokerModule } from "@/broker";
 
 import { AuthModule } from "@/auth/auth.module";
-import { BrokerModule } from "@/broker";
+import { UsersModule } from "@/users/users.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BrokerModule } from "@/broker";
     RMQModule.forRootAsync(getRMQConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
     AuthModule,
+    UsersModule,
   ],
   providers: [],
 })
