@@ -20,7 +20,7 @@
     "@nestjs/jwt": "10.0.2",
     "@nestjs/platform-express": "9.0.0",
     "bcryptjs": "^2.4.3",
-    "kisszaya-table-reservation": "^0.0.40",
+    "kisszaya-table-reservation": "^0.0.43",
     "module-alias": "2.2.2",
     "pg": "^8.9.0",
     "reflect-metadata": "0.1.13",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@nestjs/cli": "9.0.0",
+    "@nestjs/microservices": "^9.0.0",
     "@nestjs/schematics": "9.0.0",
     "@nestjs/testing": "9.0.0",
     "@nestjs/typeorm": "^9.0.1",

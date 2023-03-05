@@ -1,5 +1,6 @@
 import { Controller, Logger } from "@nestjs/common";
 import { Message, RMQMessage, RMQRoute, RMQValidate } from "nestjs-rmq";
+import { AsyncLocalStorage } from "async_hooks";
 import {
   UsersLogin,
   UsersRegister,
@@ -8,6 +9,7 @@ import {
 
 import { AuthService } from "./auth.service";
 import { BrokerService } from "@/broker";
+import {ASYNC_STORAGE_KEYS} from "kisszaya-table-reservation/lib/const";
 
 @Controller()
 export class AuthController {
@@ -25,6 +27,22 @@ export class AuthController {
     @RMQMessage msg: Message
   ): Promise<UsersLogin.Response> {
     this.brokerService.setTraceId(msg);
+
+    // @ts-ignore
+    // this.logger.setTraceId(msg.properties.headers[ASYNC_STORAGE_KEYS.TRACE_ID])
+    // const asyncStorage = app.get(INJECT_TYPES.ASYNC_STORAGE);
+    // const traceId = req.headers["x-request-id"] || uuidV4();
+    // const store = new Map().set("traceId", traceId);
+    //
+    // asyncStorage.run(store, () => {
+    //   next();
+    // });
+
+    // const asyncLocalStorage = new AsyncLocalStorage();
+    // const store = new Map().set("traceId", msg.properties.headers[ASYNC_STORAGE_KEYS.TRACE_ID]);
+
+    // asyncLocalStorage.run(store, () => console.log('meow'));
+
     const { user_id, role, status } = await this.authService.validateUser(
       data.email,
       data.password

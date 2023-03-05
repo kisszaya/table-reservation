@@ -1,5 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { Logger } from "@nestjs/common";
+import { Transport, MicroserviceOptions } from "@nestjs/microservices";
 import {
   PinoLoggerService,
   loggerMiddleware,
@@ -11,8 +12,20 @@ import { processEnv } from "@/utils";
 if (processEnv("SETUP.NODE") !== "development") {
   require("module-alias/register");
 }
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // const port = processEnv("SETUP.PORT");
+  // const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  //   AppModule,
+  //   {
+  //     transport: Transport.TCP,
+  //     options: {
+  //       port: Number(port),
+  //     },
+  //   }
+  // );
 
   const logger = loggerMiddleware(app);
   app.use(logger);

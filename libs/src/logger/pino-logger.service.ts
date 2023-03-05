@@ -12,6 +12,7 @@ const pino = pinoLogger({
 
 @Injectable()
 export class PinoLoggerService implements LoggerService {
+
   constructor(
     @Inject(INJECT_TYPES.ASYNC_STORAGE)
     private readonly async_storage: AsyncLocalStorage<Map<string, string>>
