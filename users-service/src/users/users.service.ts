@@ -21,14 +21,13 @@ export class UsersService {
       throw new UserNotExistException(`id ${user_id}`);
     }
 
-    const { email, role, status, fullName, phone } = new UserEntity(user);
+    const { email, status, fullName, phone } = new UserEntity(user);
 
     return {
       status,
       fullName,
       phone,
       email,
-      role,
     };
   }
 }

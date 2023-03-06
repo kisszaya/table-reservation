@@ -1,12 +1,10 @@
 import {
   IsEmail,
-  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
   MinLength,
 } from "class-validator";
-import { USER_ROLE } from "kisszaya-table-reservation/lib/interfaces";
 import { Requests } from "kisszaya-table-reservation/lib/requests";
 
 export class UserRegisterDto implements Requests.UserRegister {
@@ -30,8 +28,4 @@ export class UserRegisterDto implements Requests.UserRegister {
   @IsNotEmpty()
   @IsEmail()
   email: string;
-
-  @IsOptional()
-  @IsEnum(USER_ROLE)
-  role: USER_ROLE;
 }

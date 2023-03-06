@@ -10,7 +10,7 @@ import {
 export class RefreshSessionModel {
   @PrimaryGeneratedColumn({
     type: "bigint",
-    name: "session_id",
+    name: "id",
   })
   session_id: number;
 

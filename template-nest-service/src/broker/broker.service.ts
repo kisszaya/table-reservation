@@ -25,6 +25,7 @@ export class BrokerService {
 
   public setTraceId(msg: Message) {
     const traceId = msg.properties.headers[ASYNC_STORAGE_KEYS.TRACE_ID];
+    this.logger.warn(`Trace id ${traceId}`);
     if (!traceId) {
       this.logger.error("traceId not in msg.properties.headers");
       return;

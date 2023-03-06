@@ -6,18 +6,19 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-import { USER_ROLE, USER_STATUS } from "@/const";
+import { USER_STATUS } from "@/const";
 
-@Entity("users")
+@Entity("user")
 export class UserModel {
   @PrimaryGeneratedColumn({
     type: "bigint",
-    name: "user_id",
+    name: "id",
   })
   user_id: number;
 
   @Column({
     nullable: false,
+    name: 'full_name'
   })
   fullName: string;
 
@@ -44,13 +45,6 @@ export class UserModel {
     enum: USER_STATUS,
   })
   status: USER_STATUS;
-
-  @Column({
-    nullable: false,
-    default: USER_ROLE.HOSTESS,
-    enum: USER_ROLE,
-  })
-  role: USER_ROLE;
 
   @CreateDateColumn({
     type: "timestamp",

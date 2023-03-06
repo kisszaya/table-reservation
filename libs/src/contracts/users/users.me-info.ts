@@ -14,7 +14,6 @@ export namespace UsersMeInfo {
     fullName: string;
     email: string;
     phone?: string;
-    role: USER_ROLE;
     status: USER_STATUS;
   }
 }

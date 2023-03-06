@@ -1,6 +1,5 @@
 import {
   IUser,
-  USER_ROLE,
   USER_STATUS,
 } from "kisszaya-table-reservation/lib/interfaces";
 import { compare, genSalt, hash } from 'bcryptjs';
@@ -11,11 +10,9 @@ export class UserEntity implements IUser {
   email: string;
   fullName: string;
   phone?: string;
-  role: USER_ROLE;
   status: USER_STATUS;
 
   constructor(user: IUser) {
-    this.role = user.role;
     this.password_hash = user.password_hash;
     this.email = user.email;
     this.phone = user.phone;

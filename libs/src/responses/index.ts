@@ -1,9 +1,8 @@
-import { USER_ROLE, USER_STATUS } from "../interfaces";
+import { USER_STATUS } from "../interfaces";
 
 export namespace Responses {
   export interface UserLogin {
     accessToken: string;
-    role: USER_ROLE;
     status: USER_STATUS;
   }
 
@@ -19,7 +18,6 @@ export namespace Responses {
     fullName: string;
     email: string;
     phone?: string;
-    role: USER_ROLE;
     status: USER_STATUS;
   }
 

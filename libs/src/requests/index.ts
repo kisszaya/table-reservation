@@ -1,4 +1,3 @@
-import { USER_ROLE } from "../interfaces";
 
 export namespace Requests {
   export interface UserLogin {
@@ -12,7 +11,6 @@ export namespace Requests {
     lastName: string;
     password: string;
     email: string;
-    role: USER_ROLE;
     phone?: string;
   }
 

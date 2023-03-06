@@ -27,12 +27,12 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  public async login(user_id: number, role: USER_ROLE, fingerprint: string) {
+  public async login(user_id: number, fingerprint: string) {
     this.logger.log("login");
 
     const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.generateAccessToken(user_id, role),
-      await this.jwtService.generateRefreshToken(user_id, role),
+      this.jwtService.generateAccessToken(user_id),
+      await this.jwtService.generateRefreshToken(user_id),
     ]);
 
     await this.jwtService.saveRefreshSession({
@@ -44,7 +44,6 @@ export class AuthService {
     return {
       accessToken,
       refreshToken,
-      role,
     };
   }
 
@@ -53,7 +52,7 @@ export class AuthService {
   ): Promise<UsersRegister.Response> {
     this.logger.log("register");
 
-    const { firstName, lastName, password, role, phone, email } = data;
+    const { firstName, lastName, password, phone, email } = data;
 
     const oldUser = await this.userRepository.findUserByEmail(email);
     if (Boolean(oldUser)) {
@@ -63,7 +62,6 @@ export class AuthService {
     const fullName = `${firstName} ${lastName}`;
     const newUserEntity = await new UserEntity({
       fullName,
-      role,
       email,
       status: USER_STATUS.CREATED,
       password_hash: "",
@@ -92,7 +90,6 @@ export class AuthService {
 
     return {
       user_id: userEntity.user_id,
-      role: userEntity.role,
       status: userEntity.status,
     };
   }
@@ -111,8 +108,8 @@ export class AuthService {
 
     await this.jwtService.validateRefreshToken(oldRefreshToken, fingerprint);
     const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.generateAccessToken(user_id, user.role),
-      await this.jwtService.generateRefreshToken(user_id, user.role),
+      this.jwtService.generateAccessToken(user_id),
+      await this.jwtService.generateRefreshToken(user_id),
     ]);
 
     await this.jwtService.saveRefreshSession({

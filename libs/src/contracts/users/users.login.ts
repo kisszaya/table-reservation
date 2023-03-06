@@ -19,7 +19,6 @@ export namespace UsersLogin {
   export class Response {
     accessToken: string;
     refreshToken: string;
-    role: USER_ROLE;
     status: USER_STATUS;
   }
 }

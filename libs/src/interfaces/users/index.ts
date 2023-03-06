@@ -3,7 +3,6 @@ export interface IUser {
   fullName: string;
   email: string;
   phone?: string;
-  role: USER_ROLE;
   status: USER_STATUS;
   password_hash: string;
 }

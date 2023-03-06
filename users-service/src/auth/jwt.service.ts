@@ -2,7 +2,6 @@ import { JwtService as NestJwtService } from "@nestjs/jwt";
 import {
   IJWTPayload,
   IRefreshSession,
-  USER_ROLE,
 } from "kisszaya-table-reservation/lib/interfaces";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -24,7 +23,6 @@ export class JwtService {
 
   public async generateAccessToken(
     user_id: number,
-    role: USER_ROLE
   ): Promise<string> {
     this.logger.log("generate access token");
 
@@ -35,7 +33,6 @@ export class JwtService {
     const payload: IJWTPayload = {
       user_id: String(user_id),
       expiresIn: this.getExpiresInTimestamp(expiresIn).toISOString(),
-      role,
     };
 
     return this.jwtService.signAsync(payload, {
@@ -46,7 +43,6 @@ export class JwtService {
 
   public async generateRefreshToken(
     user_id: number,
-    role: USER_ROLE
   ): Promise<string> {
     this.logger.log("generate refresh token");
 
@@ -56,7 +52,6 @@ export class JwtService {
 
     const payload: IJWTPayload = {
       user_id: String(user_id),
-      role,
     };
 
     return this.jwtService.signAsync(payload, {
