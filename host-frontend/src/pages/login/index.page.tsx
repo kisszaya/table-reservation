@@ -1,7 +1,8 @@
+import { ReactElement } from "react";
 import { Anchor, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-import { FormContainer } from "widgets";
+import { FormContainer, PublicLayout } from "widgets";
 import { TextInput, PasswordInput, Button } from "shared/ui";
 import { LoginRedirect } from "./ui";
 import { useLogin } from "./lib";
@@ -32,6 +33,10 @@ const Login = () => {
       </form>
     </FormContainer>
   );
+};
+
+Login.getLayout = function getLayout(page: ReactElement) {
+  return <PublicLayout>{page}</PublicLayout>;
 };
 
 export default Login;

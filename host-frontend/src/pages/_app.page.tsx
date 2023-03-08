@@ -4,8 +4,8 @@ import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 
-import { PublicLayout } from "widgets";
 import { Providers } from "app/providers";
+import { PrivateLayout } from "widgets/private-layout";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -19,7 +19,7 @@ const App = (props: AppPropsWithLayout) => {
   const { Component, pageProps } = props;
 
   const getLayout =
-    Component.getLayout || ((page) => <PublicLayout>{page}</PublicLayout>);
+    Component.getLayout || ((page) => <PrivateLayout>{page}</PrivateLayout>);
 
   return <Providers>{getLayout(<Component {...pageProps} />)}</Providers>;
 };

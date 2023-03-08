@@ -1,3 +1,9 @@
 {
-  "test": "тест текст"
+  "test": "тест текст",
+  "landing": {
+    "title": "Automated restaurant reservation system",
+    "description": "Create a reservation system in your restaurant according to your preferences",
+    "loginButton": "Login",
+    "registerButton": "Register restaurant"
+  }
 }

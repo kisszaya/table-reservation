@@ -1,8 +1,9 @@
+import { ReactElement } from "react";
 import { Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Requests } from "kisszaya-table-reservation/lib/requests";
 
-import { FormContainer } from "widgets";
+import { FormContainer, PublicLayout } from "widgets";
 import { Button, PasswordInput, TextInput } from "shared/ui";
 import { initialValues, inputKeys } from "./const";
 import { RegisterRedirect } from "./ui";
@@ -39,6 +40,10 @@ const Register = () => {
       </form>
     </FormContainer>
   );
+};
+
+Register.getLayout = function getLayout(page: ReactElement) {
+  return <PublicLayout>{page}</PublicLayout>;
 };
 
 export default Register;

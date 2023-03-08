@@ -1,1 +1,1 @@
-export * from "./public-layout";
+export { PublicLayout } from "./ui";

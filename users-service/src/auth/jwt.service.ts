@@ -48,6 +48,7 @@ export class JwtService {
 
     const parseEnv = envWrap(this.configService);
     const expiresIn = parseEnv("JWT.REFRESH_EXPIRATION_TIME");
+    console.log('TEST 1')
     const secret = parseEnv("JWT.REFRESH_SECRET");
 
     const payload: IJWTPayload = {
