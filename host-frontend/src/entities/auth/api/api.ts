@@ -26,5 +26,8 @@ export const updateTokens = async (data: Requests.UpdateRefreshToken) => {
 };
 
 export const logout = async () => {
-  return await api.post<Responses.UserLogout>(serverRoutes.logout);
+  return await api.post<Responses.UserLogout>(serverRoutes.logout, {
+
+    withCredentials: true,
+  });
 };

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { getFingerprint } from "features/fingerprint";
 import { api, apiWithoutInterceptors } from "shared/api";
-import { PUBLIC_PATH } from "shared/config";
+import { PRIVATE_PATH, PUBLIC_PATH } from "shared/config";
 import { updateToken } from "features/authorization";
 
 import { FormValues } from "../const";
@@ -14,7 +14,6 @@ export const useLogin = () => {
 
   const login = useCallback(async (formValues: FormValues) => {
     const fingerprint = await getFingerprint();
-    console.log("fingerprint", fingerprint);
 
     const values = {
       ...formValues,
@@ -27,7 +26,7 @@ export const useLogin = () => {
       updateToken(data.accessToken);
       api.defaults.withCredentials = true;
       apiWithoutInterceptors.defaults.withCredentials = true;
-      await push(PUBLIC_PATH.LANDING);
+      await push(PRIVATE_PATH.PROFILE);
     }
   }, []);
 

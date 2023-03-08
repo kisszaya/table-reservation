@@ -10,7 +10,7 @@ import {
 
 const paths: IBuildPaths = {
     build: path.resolve(__dirname, "dist"),
-    entry: path.resolve(__dirname, "src", "index.tsx"),
+    entry: path.resolve(__dirname, "src", "index.page.tsx"),
     html: path.resolve(__dirname, "public", "index.html"),
     src: path.resolve(__dirname, "src"),
 };

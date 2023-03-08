@@ -18,7 +18,7 @@ export class RefreshTokenService {
     response.cookie("refresh", refreshToken, {
       httpOnly: true,
       expires: this.getExpiresInTimestamp(expiresIn),
-      path: "/api/auth",
+      // path: "/api/auth",
     });
   }
 

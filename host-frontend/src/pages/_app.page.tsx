@@ -2,6 +2,7 @@ import "@module-federation/nextjs-mf/src/include-defaults";
 import { ReactElement, ReactNode } from "react";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
+import { appWithTranslation } from "next-i18next";
 
 import { PublicLayout } from "widgets";
 import { Providers } from "app/providers";
@@ -23,4 +24,4 @@ const App = (props: AppPropsWithLayout) => {
   return <Providers>{getLayout(<Component {...pageProps} />)}</Providers>;
 };
 
-export default App;
+export default appWithTranslation(App);

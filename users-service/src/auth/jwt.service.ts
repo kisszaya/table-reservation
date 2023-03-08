@@ -52,6 +52,7 @@ export class JwtService {
 
     const payload: IJWTPayload = {
       user_id: String(user_id),
+      expiresIn: this.getExpiresInTimestamp(expiresIn).toISOString(),
     };
 
     return this.jwtService.signAsync(payload, {
