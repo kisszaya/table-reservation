@@ -4,7 +4,7 @@ import { ConfigService } from "@nestjs/config";
 import { Response } from "express";
 
 @Injectable()
-export class RefreshTokenService {
+export class TokenService {
   private readonly logger = new Logger();
 
   constructor(private readonly configService: ConfigService) {}
@@ -18,7 +18,18 @@ export class RefreshTokenService {
     response.cookie("refresh", refreshToken, {
       httpOnly: true,
       expires: this.getExpiresInTimestamp(expiresIn),
-      // path: "/api/auth",
+    });
+  }
+
+  public setAccessCookie(response: Response, accessToken) {
+    this.logger.log("setRefreshCookie");
+
+    const parseEnv = envWrap(this.configService);
+    const expiresIn = parseEnv("JWT.ACCESS_EXPIRATION_TIME");
+
+    response.cookie("access", accessToken, {
+      httpOnly: true,
+      expires: this.getExpiresInTimestamp(expiresIn),
     });
   }
 
@@ -26,6 +37,12 @@ export class RefreshTokenService {
     this.logger.log("removeRefreshCookie");
 
     response.clearCookie("refresh");
+  }
+
+  public removeAccessCookie(response: Response) {
+    this.logger.log("removeAccessCookie");
+
+    response.clearCookie("access");
   }
 
   private getExpiresInTimestamp(expiresIn: string) {

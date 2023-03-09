@@ -30,6 +30,7 @@
     "class-transformer": "0.5.1",
     "class-validator": "0.14.0",
     "cookie-parser": "^1.4.6",
+    "jwt-decode": "^3.1.2",
     "kisszaya-table-reservation": "^0.0.45",
     "module-alias": "^2.2.2",
     "nestjs-rmq": "2.8.0",

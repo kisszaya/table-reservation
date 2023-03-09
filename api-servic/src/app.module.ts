@@ -9,7 +9,7 @@ import { getRMQConfig, getJWTConfig } from "@/configs";
 import { UsersController, AuthController } from "@/controllers";
 import { BrokerService } from "@/broker";
 import { JwtStrategy } from "@/strategies";
-import { RefreshTokenService } from "@/services";
+import { TokenService } from "@/services";
 
 @Module({
   imports: [
@@ -23,6 +23,6 @@ import { RefreshTokenService } from "@/services";
     JwtModule.registerAsync(getJWTConfig()),
   ],
   controllers: [UsersController, AuthController],
-  providers: [BrokerService, JwtStrategy, RefreshTokenService],
+  providers: [BrokerService, JwtStrategy, TokenService],
 })
 export class AppModule {}

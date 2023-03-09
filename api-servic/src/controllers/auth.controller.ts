@@ -18,7 +18,7 @@ import {
 import { BrokerService } from "@/broker";
 import { UpdateTokensDto, UserLoginDto, UserRegisterDto } from "@/dtos";
 import { JWTAuthGuard, UserId } from "@/guards";
-import { RefreshTokenService } from "@/services";
+import { TokenService } from "@/services";
 import { InternalException } from "@/exceptions";
 
 @Controller("auth")
@@ -27,7 +27,7 @@ export class AuthController {
 
   constructor(
     private readonly brokerService: BrokerService,
-    private readonly refreshTokenService: RefreshTokenService
+    private readonly tokenService: TokenService
   ) {}
 
   @Post("login")
@@ -43,7 +43,8 @@ export class AuthController {
         UsersLogin.Response
       >(UsersLogin.topic, dto);
 
-      this.refreshTokenService.setRefreshCookie(response, refreshToken);
+      this.tokenService.setRefreshCookie(response, refreshToken);
+      this.tokenService.setAccessCookie(response, data.accessToken);
 
       return data;
     } catch (e) {
@@ -68,7 +69,6 @@ export class AuthController {
     }
   }
 
-  @UseGuards(JWTAuthGuard)
   @Post("refresh")
   async refresh(
     @Req() request: Request,
@@ -92,7 +92,8 @@ export class AuthController {
         UsersUpdateRefresh.Response
       >(UsersUpdateRefresh.topic, message);
 
-      this.refreshTokenService.setRefreshCookie(response, refreshToken);
+      this.tokenService.setRefreshCookie(response, refreshToken);
+      this.tokenService.setAccessCookie(response, data.accessToken);
 
       return data;
     } catch (e) {
@@ -118,7 +119,8 @@ export class AuthController {
         UsersLogout.Response
       >(UsersLogout.topic, message);
 
-      this.refreshTokenService.removeRefreshCookie(response);
+      this.tokenService.removeRefreshCookie(response);
+      this.tokenService.removeAccessCookie(response)
 
       return data;
     } catch (e) {

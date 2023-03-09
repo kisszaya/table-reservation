@@ -1,1 +1,1 @@
-export { RefreshTokenService } from "./refresh-token.service";
+export { TokenService } from "./token.service";
