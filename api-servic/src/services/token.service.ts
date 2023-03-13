@@ -5,7 +5,7 @@ import { Response } from "express";
 
 @Injectable()
 export class TokenService {
-  private readonly logger = new Logger();
+  private readonly logger = new Logger(TokenService.name);
 
   constructor(private readonly configService: ConfigService) {}
 
@@ -22,7 +22,7 @@ export class TokenService {
   }
 
   public setAccessCookie(response: Response, accessToken) {
-    this.logger.log("setRefreshCookie");
+    this.logger.log("setAccessCookie");
 
     const parseEnv = envWrap(this.configService);
     const expiresIn = parseEnv("JWT.ACCESS_EXPIRATION_TIME");
@@ -36,18 +36,22 @@ export class TokenService {
   public removeRefreshCookie(response: Response) {
     this.logger.log("removeRefreshCookie");
 
-    response.clearCookie("refresh");
+    response.clearCookie("refresh", {
+      path: '/', domain: 'localhost'
+    });
   }
 
   public removeAccessCookie(response: Response) {
     this.logger.log("removeAccessCookie");
 
-    response.clearCookie("access");
+    response.clearCookie("access", {
+      path: '/', domain: 'localhost'
+    });
   }
 
   private getExpiresInTimestamp(expiresIn: string) {
     const currentDate = new Date();
 
-    return new Date(currentDate.getTime() + Number(expiresIn));
+    return new Date(currentDate.getTime() + (Number(expiresIn) * 1000));
   }
 }

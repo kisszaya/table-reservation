@@ -26,6 +26,7 @@ export const vars = {
     HOST: "POSTGRES_HOST",
     PORT: "POSTGRES_PORT",
   },
+  FINGERPRINT: "DEFAULT_SERVER_FINGERPRINT"
 };
 
 export const varsDefaultValues: IEnvDefaultValues<typeof vars> = {

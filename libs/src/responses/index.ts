@@ -12,6 +12,7 @@ export namespace Responses {
 
   export interface UpdateRefreshToken {
     accessToken: string;
+    refreshToken: string;
   }
 
   export interface GetMeInfo {

@@ -8,6 +8,6 @@ export class TokenExpiredException extends HttpException {
 
 export class InvalidSessionException extends HttpException {
   constructor() {
-    super(`Token expired`, HttpStatus.BAD_REQUEST);
+    super(`Fingerprint invalid`, HttpStatus.BAD_REQUEST);
   }
 }

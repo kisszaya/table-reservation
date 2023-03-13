@@ -20,6 +20,7 @@ import { UpdateTokensDto, UserLoginDto, UserRegisterDto } from "@/dtos";
 import { JWTAuthGuard, UserId } from "@/guards";
 import { TokenService } from "@/services";
 import { InternalException } from "@/exceptions";
+import { getRefreshUserId } from "@/utils";
 
 @Controller("auth")
 export class AuthController {
@@ -73,21 +74,23 @@ export class AuthController {
   async refresh(
     @Req() request: Request,
     @Body() dto: UpdateTokensDto,
-    @UserId() user_id: number,
     @Res({ passthrough: true }) response: Response
   ) {
     this.logger.log("start /api/users/refresh");
+
+    const refreshToken = request.cookies["refresh"];
+    const user_id = getRefreshUserId(refreshToken);
 
     const { fingerprint } = dto;
 
     const message = {
       fingerprint,
       user_id,
-      refreshToken: request.cookies["refresh"],
+      refreshToken,
     };
 
     try {
-      const { refreshToken, ...data } = await this.brokerService.publish<
+      const data = await this.brokerService.publish<
         UsersUpdateRefresh.Request,
         UsersUpdateRefresh.Response
       >(UsersUpdateRefresh.topic, message);
@@ -120,7 +123,7 @@ export class AuthController {
       >(UsersLogout.topic, message);
 
       this.tokenService.removeRefreshCookie(response);
-      this.tokenService.removeAccessCookie(response)
+      this.tokenService.removeAccessCookie(response);
 
       return data;
     } catch (e) {

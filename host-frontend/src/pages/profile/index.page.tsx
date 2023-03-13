@@ -6,11 +6,13 @@ import { Responses } from "kisszaya-table-reservation/lib/responses";
 
 import { useServerAuthorization } from "features/authorization";
 import { LocaleNamespaces } from "shared/types";
-import { Profile as ProfileFC } from "./ui";
 import { serverRoutes } from "shared/api";
+import { Profile as ProfileFC } from "./ui";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { isAuthorized, redirect, access } = useServerAuthorization(context);
+  const { isAuthorized, redirect, access } = await useServerAuthorization(
+    context
+  );
 
   if (!isAuthorized) {
     return { redirect };
@@ -36,7 +38,7 @@ export interface ProfileArgs {
 }
 
 const Profile: FC<ProfileArgs> = ({ me }) => {
-  return <ProfileFC me={me}/>;
+  return <ProfileFC me={me} />;
 };
 
 export default Profile;

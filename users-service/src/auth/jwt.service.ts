@@ -3,7 +3,7 @@ import {
   IJWTPayload,
   IRefreshSession,
 } from "kisszaya-table-reservation/lib/interfaces";
-import { Injectable, Logger } from "@nestjs/common";
+import {Injectable, Logger, UnauthorizedException} from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 import { envWrap } from "@/utils";
@@ -21,9 +21,7 @@ export class JwtService {
     private readonly configService: ConfigService
   ) {}
 
-  public async generateAccessToken(
-    user_id: number,
-  ): Promise<string> {
+  public async generateAccessToken(user_id: number): Promise<string> {
     this.logger.log("generate access token");
 
     const parseEnv = envWrap(this.configService);
@@ -32,7 +30,7 @@ export class JwtService {
 
     const payload: IJWTPayload = {
       user_id: String(user_id),
-      expiresIn: this.getExpiresInTimestamp(expiresIn).toISOString(),
+      expiresIn: this.getExpiresInTimestamp(expiresIn).toUTCString(),
     };
 
     return this.jwtService.signAsync(payload, {
@@ -41,19 +39,18 @@ export class JwtService {
     });
   }
 
-  public async generateRefreshToken(
-    user_id: number,
-  ): Promise<string> {
+  public async generateRefreshToken(user_id: number): Promise<string> {
     this.logger.log("generate refresh token");
 
     const parseEnv = envWrap(this.configService);
     const expiresIn = parseEnv("JWT.REFRESH_EXPIRATION_TIME");
-    console.log('TEST 1')
     const secret = parseEnv("JWT.REFRESH_SECRET");
+
+    const exp = this.getExpiresInTimestamp(expiresIn).toUTCString()
 
     const payload: IJWTPayload = {
       user_id: String(user_id),
-      expiresIn: this.getExpiresInTimestamp(expiresIn).toISOString(),
+      expiresIn: exp,
     };
 
     return this.jwtService.signAsync(payload, {
@@ -66,13 +63,24 @@ export class JwtService {
     this.logger.log("validate refresh token");
 
     const oldSession = await this.sessionRepository.findSessionByToken(token);
+
+    if (!oldSession) {
+      throw new UnauthorizedException()
+    }
+
     await this.sessionRepository.deleteSessionByToken(token);
+
+    const parseEnv = envWrap(this.configService);
+    const defaultFingerprint = parseEnv("FINGERPRINT");
 
     if (new Date() > oldSession.expiresIn) {
       throw new TokenExpiredException();
     }
 
-    if (oldSession.fingerprint !== fingerprint) {
+    if (
+      defaultFingerprint !== fingerprint &&
+      oldSession.fingerprint !== fingerprint
+    ) {
       throw new InvalidSessionException();
     }
   }
@@ -109,8 +117,10 @@ export class JwtService {
   }
 
   private getExpiresInTimestamp(expiresIn: string) {
+    this.logger.log("get expiresIn timestamp");
+
     const currentDate = new Date();
 
-    return new Date(currentDate.getTime() + Number(expiresIn));
+    return new Date(currentDate.getTime() + (Number(expiresIn) * 1000));
   }
 }

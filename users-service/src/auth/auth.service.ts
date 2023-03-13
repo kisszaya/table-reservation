@@ -107,6 +107,7 @@ export class AuthService {
     }
 
     await this.jwtService.validateRefreshToken(oldRefreshToken, fingerprint);
+
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.generateAccessToken(user_id),
       await this.jwtService.generateRefreshToken(user_id),
