@@ -6,7 +6,7 @@ export class RestaurantEntity implements IRestaurant {
   city: string;
   name: string;
   phone: string;
-  photos: string[] = [];
+  photos?: string[] = [];
 
   constructor(restaurant: IRestaurant) {
     this.phone = restaurant.phone;

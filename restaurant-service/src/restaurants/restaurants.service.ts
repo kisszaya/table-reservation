@@ -1,6 +1,8 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { RestaurantRepository } from "@/repositories";
 import { RestaurantsCreate } from "kisszaya-table-reservation/lib/contracts";
+
+import { RestaurantRepository } from "@/repositories";
+import { RestaurantEntity } from "@/entities";
 
 @Injectable()
 export class RestaurantsService {
@@ -12,6 +14,10 @@ export class RestaurantsService {
     data: RestaurantsCreate.Request
   ): Promise<RestaurantsCreate.Response> {
     this.logger.log("create");
+
+    const restaurantEntity = new RestaurantEntity(data);
+
+    await this.restaurantRepository.createRestaurant(restaurantEntity);
 
     return {
       status: "success",

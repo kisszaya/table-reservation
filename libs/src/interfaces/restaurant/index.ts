@@ -4,5 +4,5 @@ export class IRestaurant {
   city: string;
   address: string;
   phone: string;
-  photos: string[];
+  photos?: string[];
 }
