@@ -10,6 +10,7 @@ export interface IUser {
 export enum USER_ROLE {
   HOSTESS = "hostess",
   ADMINISTRATOR = "administrator",
+  BLOCKED = 'blocked'
 }
 
 export enum USER_STATUS {

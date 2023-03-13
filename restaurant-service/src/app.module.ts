@@ -7,7 +7,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { getPostgresConfig, getRMQConfig } from "@/configs";
 import { BrokerModule } from "@/broker";
 
-import { AuthModule } from "@/auth/auth.module";
 import { RestaurantsModule } from "@/restaurants/restaurants.module";
 
 @Module({
@@ -20,7 +19,6 @@ import { RestaurantsModule } from "@/restaurants/restaurants.module";
     BrokerModule,
     RMQModule.forRootAsync(getRMQConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
-    AuthModule,
     RestaurantsModule,
   ],
   providers: [],

@@ -14,8 +14,9 @@ export class RestaurantsService {
     data: RestaurantsCreate.Request
   ): Promise<RestaurantsCreate.Response> {
     this.logger.log("create");
+    const { user_id, ...restaurantData } = data;
 
-    const restaurantEntity = new RestaurantEntity(data);
+    const restaurantEntity = new RestaurantEntity(restaurantData);
 
     await this.restaurantRepository.createRestaurant(restaurantEntity);
 

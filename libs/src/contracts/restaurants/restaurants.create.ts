@@ -15,6 +15,9 @@ export namespace RestaurantsCreate {
 
         @IsString()
         phone: string;
+
+        @IsNumber()
+        user_id: number
     }
 
     export class Response {
