@@ -25,4 +25,8 @@ export namespace Responses {
   export interface UserLogout {
     status: "success";
   }
+
+  export interface CreateRestaurant {
+    status: "success";
+  }
 }

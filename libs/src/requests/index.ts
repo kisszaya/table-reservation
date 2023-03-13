@@ -18,4 +18,10 @@ export namespace Requests {
     fingerprint: string;
   }
 
+  export interface CreateRestaurant {
+    name: string;
+    city: string;
+    address: string;
+    phone: string;
+  }
 }
