@@ -1,5 +1,8 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { RestaurantsCreate } from "kisszaya-table-reservation/lib/contracts";
+import {
+  RestaurantsCreate,
+  RestaurantsGetUser,
+} from "kisszaya-table-reservation/lib/contracts";
 
 import { RestaurantRepository } from "@/repositories";
 import { RestaurantEntity } from "@/entities";
@@ -36,5 +39,30 @@ export class RestaurantsService {
     return {
       status: "success",
     };
+  }
+
+  public async getMe(user_id: number): Promise<RestaurantsGetUser.Response> {
+    this.logger.log("getMe");
+
+    const { restaurants: restaurantRecords } =
+      await this.employeeService.getUserRestaurantIds(user_id);
+
+    const restaurants = await Promise.all(
+      restaurantRecords.map(async (el) => {
+        const restaurant = await this.restaurantRepository.findRestaurantById(
+          el.restaurant_id
+        );
+        return {
+          restaurant_id: el.restaurant_id,
+          name: restaurant.name,
+          roles: el.roles,
+          photos: restaurant.photos,
+          address: restaurant.address,
+          city: restaurant.city,
+        };
+      })
+    );
+
+    return { restaurants };
   }
 }

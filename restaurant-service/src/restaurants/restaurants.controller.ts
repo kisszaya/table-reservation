@@ -1,6 +1,9 @@
 import { Controller, Logger } from "@nestjs/common";
 import { Message, RMQMessage, RMQRoute, RMQValidate } from "nestjs-rmq";
-import { RestaurantsCreate } from "kisszaya-table-reservation/lib/contracts";
+import {
+  RestaurantsCreate,
+  RestaurantsGetUser,
+} from "kisszaya-table-reservation/lib/contracts";
 
 import { BrokerService } from "@/broker";
 import { RestaurantsService } from "@/restaurants/restaurants.service";
@@ -16,11 +19,21 @@ export class RestaurantsController {
 
   @RMQValidate()
   @RMQRoute(RestaurantsCreate.topic)
-  async meInfo(
+  async create(
     data: RestaurantsCreate.Request,
     @RMQMessage msg: Message
   ): Promise<RestaurantsCreate.Response> {
     this.brokerService.setTraceId(msg);
     return this.restaurantService.create(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(RestaurantsGetUser.topic)
+  async getMe(
+    data: RestaurantsGetUser.Request,
+    @RMQMessage msg: Message
+  ): Promise<RestaurantsGetUser.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.restaurantService.getMe(data.user_id);
   }
 }

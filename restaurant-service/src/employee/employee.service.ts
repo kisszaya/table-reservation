@@ -1,7 +1,10 @@
 import { Injectable, Logger } from "@nestjs/common";
 
 import { EmployeeRepository } from "@/repositories";
-import { IEmployee } from "kisszaya-table-reservation/lib/interfaces";
+import {
+  IEmployee,
+  USER_ROLE,
+} from "kisszaya-table-reservation/lib/interfaces";
 import { EmployeeEntity } from "@/entities";
 
 @Injectable()
@@ -20,6 +23,23 @@ export class EmployeeService {
 
     return {
       status: "success",
+    };
+  }
+
+  public async getUserRestaurantIds(
+    user_id: number
+  ): Promise<{ restaurants: { restaurant_id: number; roles: USER_ROLE[] }[] }> {
+    this.logger.log("get user restaurantIds");
+
+    const employees = await this.employeeRepository.findEmployeesByUserId(
+      user_id
+    );
+
+    return {
+      restaurants: employees.map((el) => ({
+        restaurant_id: el.restaurant_id,
+        roles: el.roles,
+      })),
     };
   }
 }

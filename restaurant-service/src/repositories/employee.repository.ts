@@ -34,4 +34,10 @@ export class EmployeeRepository {
 
     return this.employeeModel.delete({ employee_id });
   }
+
+  public async findEmployeesByUserId(user_id: number) {
+    this.logger.log("find employees by user_id");
+
+    return this.employeeModel.findBy({ user_id });
+  }
 }

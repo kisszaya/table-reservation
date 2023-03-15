@@ -1,4 +1,4 @@
-import { USER_STATUS } from "../interfaces";
+import { USER_ROLE, USER_STATUS } from "../interfaces";
 
 export namespace Responses {
   export interface UserLogin {
@@ -28,5 +28,16 @@ export namespace Responses {
 
   export interface CreateRestaurant {
     status: "success";
+  }
+
+  export interface GetUserRestaurants {
+    restaurants: {
+      restaurant_id: number;
+      name: string;
+      roles: USER_ROLE[];
+      photos: string[];
+      address: string;
+      city: string;
+    }[];
   }
 }
