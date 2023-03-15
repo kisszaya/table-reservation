@@ -27,10 +27,9 @@ export class EmployeeModel {
   })
   user_id: number;
 
-  @Column({
+  @Column("simple-enum", {
     nullable: false,
     enum: USER_ROLE,
-    array: true,
   })
   roles: USER_ROLE[];
 

@@ -34,11 +34,9 @@ export class RestaurantModel {
   })
   phone: string;
 
-  @Column({
+  @Column("simple-array", {
     nullable: false,
-    array: true,
-    type: "string",
-    default: [],
+    default: []
   })
   photos: string[];
 

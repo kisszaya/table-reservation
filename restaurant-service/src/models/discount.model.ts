@@ -24,9 +24,8 @@ export class DiscountModel {
   })
   description: string;
 
-  @Column({
+  @Column('simple-array', {
     nullable: false,
-    array: true,
     default: [],
   })
   photos: string[];

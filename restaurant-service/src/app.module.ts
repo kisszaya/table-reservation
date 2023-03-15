@@ -8,6 +8,7 @@ import { getPostgresConfig, getRMQConfig } from "@/configs";
 import { BrokerModule } from "@/broker";
 
 import { RestaurantsModule } from "@/restaurants/restaurants.module";
+import { EmployeeModule } from "@/employee/employee.module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RestaurantsModule } from "@/restaurants/restaurants.module";
     BrokerModule,
     RMQModule.forRootAsync(getRMQConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
+    EmployeeModule,
     RestaurantsModule,
   ],
   providers: [],
