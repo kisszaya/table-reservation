@@ -10,9 +10,9 @@ export class RestaurantEntity implements IRestaurant {
 
   constructor(restaurant: IRestaurant) {
     this.phone = restaurant.phone;
-    this.restaurant_id = restaurant.restaurant_id;
+    if (restaurant.restaurant_id) this.restaurant_id = restaurant.restaurant_id;
     this.name = restaurant.name;
-    this.photos = restaurant.photos;
+    if (restaurant.photos) this.photos = restaurant.photos;
     this.address = restaurant.address;
     this.city = restaurant.city;
   }

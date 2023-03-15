@@ -36,7 +36,6 @@ export class RestaurantModel {
 
   @Column("simple-array", {
     nullable: false,
-    default: []
   })
   photos: string[];
 

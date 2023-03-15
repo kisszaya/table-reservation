@@ -15,14 +15,16 @@ export class EmployeeService {
 
   public async create(
     data: Pick<IEmployee, "roles" | "restaurant_id" | "user_id">
-  ): Promise<{ status: "success" }> {
+  ): Promise<{ restaurant_id: number; roles: USER_ROLE[] }> {
     this.logger.log("create");
     const newEmployeeEntity = new EmployeeEntity(data);
 
-    await this.employeeRepository.createEmployee(newEmployeeEntity);
+    const { restaurant_id, roles } =
+      await this.employeeRepository.createEmployee(newEmployeeEntity);
 
     return {
-      status: "success",
+      restaurant_id,
+      roles,
     };
   }
 

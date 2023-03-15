@@ -27,7 +27,12 @@ export namespace Responses {
   }
 
   export interface CreateRestaurant {
-    status: "success";
+    restaurant_id: number;
+    name: string;
+    roles: USER_ROLE[];
+    photos: string[];
+    address: string;
+    city: string;
   }
 
   export interface GetUserRestaurants {

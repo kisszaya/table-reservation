@@ -1,4 +1,5 @@
 import { IsNumber, IsString } from "class-validator";
+import {USER_ROLE} from "../../interfaces";
 
 export namespace RestaurantsCreate {
     export const topic = "restaurants.create.command";
@@ -21,6 +22,11 @@ export namespace RestaurantsCreate {
     }
 
     export class Response {
-        status: "success";
+        restaurant_id: number;
+        name: string;
+        roles: USER_ROLE[];
+        photos: string[];
+        address: string;
+        city: string;
     }
 }
