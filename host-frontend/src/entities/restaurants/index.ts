@@ -1,0 +1,1 @@
+export * as restaurantsApi from "./api/api";

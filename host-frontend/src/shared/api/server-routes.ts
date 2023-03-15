@@ -1,5 +1,6 @@
 const AUTH_SERVICE = "/auth";
 const USER_SERVICE = "/users";
+const RESTAURANTS_SERVICE = "/restaurants";
 
 export const serverRoutes = {
   // auth
@@ -10,4 +11,7 @@ export const serverRoutes = {
 
   // users
   me: USER_SERVICE + "/me",
+
+  // restaurants
+  restaurants: RESTAURANTS_SERVICE
 };
