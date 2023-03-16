@@ -3,7 +3,7 @@ import { IsNumber } from "class-validator";
 import { USER_ROLE } from "../../interfaces";
 
 export namespace RestaurantsGetUser {
-  export const topic = "restaurants.get-user.command";
+  export const topic = "restaurants.getUser.command";
 
   export class Request {
     @IsNumber()

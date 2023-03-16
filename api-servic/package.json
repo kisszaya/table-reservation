@@ -31,7 +31,7 @@
     "class-validator": "0.14.0",
     "cookie-parser": "^1.4.6",
     "jwt-decode": "^3.1.2",
-    "kisszaya-table-reservation": "^0.0.56",
+    "kisszaya-table-reservation": "^0.0.58",
     "module-alias": "^2.2.2",
     "nestjs-rmq": "2.8.0",
     "passport": "^0.6.0",

@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { IRestaurantUserPreview } from "kisszaya-table-reservation/lib/interfaces";
 
-interface Args {}
+type Args = IRestaurantUserPreview;
 
-export const RestaurantCard: FC<Args> = () => {
-  return <div>Card</div>;
+export const RestaurantCard: FC<Args> = (props) => {
+  return <div>{props.name}</div>;
 };

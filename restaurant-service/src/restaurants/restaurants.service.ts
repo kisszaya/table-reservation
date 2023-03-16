@@ -26,8 +26,6 @@ export class RestaurantsService {
 
     const restaurantEntity = new RestaurantEntity(restaurantData);
 
-    console.log('restaurantEntity', restaurantEntity)
-
     const { restaurant_id, name, city, address, photos } =
       await this.restaurantRepository.createRestaurant(restaurantEntity);
 
@@ -35,6 +33,15 @@ export class RestaurantsService {
       user_id,
       restaurant_id,
       roles: [USER_ROLE.ADMINISTRATOR],
+    });
+
+    console.log("TEST CREATE", {
+      restaurant_id,
+      roles,
+      photos,
+      address,
+      city,
+      name,
     });
 
     return {
@@ -68,6 +75,8 @@ export class RestaurantsService {
         };
       })
     );
+
+    console.log("restaurants", restaurants);
 
     return { restaurants };
   }

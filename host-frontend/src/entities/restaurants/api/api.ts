@@ -6,6 +6,15 @@ import { api, serverRoutes } from "shared/api";
 export const createRestaurant = async (data: Requests.CreateRestaurant) => {
   return await api.post<Responses.CreateRestaurant>(
     serverRoutes.restaurants,
-    data
+    data,
+    {
+      withCredentials: true,
+    }
+  );
+};
+
+export const getMeRestaurants = async () => {
+  return await api.get<Responses.GetUserRestaurants>(
+    serverRoutes.meRestaurants
   );
 };

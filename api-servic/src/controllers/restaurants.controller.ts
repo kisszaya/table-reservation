@@ -21,11 +21,14 @@ export class RestaurantsController {
     this.logger.log("POST /api/restaurants");
 
     try {
-      return await this.brokerService.publish<
+      const res = await this.brokerService.publish<
         RestaurantsCreate.Request,
         RestaurantsCreate.Response
       >(RestaurantsCreate.topic, { ...dto, user_id });
+      console.log("res", res);
+      return res;
     } catch (e) {
+      console.log("err", e);
       throw new InternalException(e);
     }
   }

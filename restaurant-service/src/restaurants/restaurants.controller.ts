@@ -34,6 +34,6 @@ export class RestaurantsController {
     @RMQMessage msg: Message
   ): Promise<RestaurantsGetUser.Response> {
     this.brokerService.setTraceId(msg);
-    return this.restaurantService.getMe(data.user_id);
+    return await this.restaurantService.getMe(data.user_id);
   }
 }

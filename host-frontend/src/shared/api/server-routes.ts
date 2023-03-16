@@ -13,5 +13,6 @@ export const serverRoutes = {
   me: USER_SERVICE + "/me",
 
   // restaurants
-  restaurants: RESTAURANTS_SERVICE
+  restaurants: RESTAURANTS_SERVICE,
+  meRestaurants: RESTAURANTS_SERVICE + "/me",
 };

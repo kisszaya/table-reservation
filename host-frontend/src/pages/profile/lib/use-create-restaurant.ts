@@ -3,7 +3,7 @@ import { Requests } from "kisszaya-table-reservation/lib/requests";
 import { closeAllModals } from "@mantine/modals";
 import { TextInputProps } from "@mantine/core";
 
-import { restaurantsApi } from "entities/restaurants";
+import { restaurantsApi, restaurantsStore } from "entities/restaurants";
 
 export type FormValues = Requests.CreateRestaurant;
 
@@ -18,7 +18,8 @@ export const useCreateRestaurant = () => {
   const createRestaurant = useCallback(
     async (formValues: Requests.CreateRestaurant) => {
       const { data } = await restaurantsApi.createRestaurant(formValues);
-      if (data.status === "success") {
+      if (data) {
+        restaurantsStore.addRestaurantPreviews([data]);
         closeAllModals();
       }
     },
