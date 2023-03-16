@@ -1,1 +1,0 @@
-export * from './restaurant-card/restaurant-card'

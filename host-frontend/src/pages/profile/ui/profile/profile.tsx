@@ -2,7 +2,7 @@ import { Button, Group, Stack } from "@mantine/core";
 import { useStore } from "effector-react";
 
 import { useTranslation } from "features/locales";
-import { ProfileCard, RestaurantCard } from "widgets";
+import { ProfileCard, RestaurantReviewCard } from "widgets";
 import { Title } from "shared/ui";
 import { useLogout } from "pages/profile/lib";
 import { openCreateRestaurantModal } from "..";
@@ -16,12 +16,16 @@ export const Profile = () => {
   const meInfo = useStore(usersStore.$meInfo);
   const restaurantPreviews = useStore(restaurantsStore.$restaurantPreviews);
 
-  if (!meInfo) return null;
-
   return (
     <Group>
       <Stack>
-        <ProfileCard me={meInfo} />
+        {meInfo && (
+          <ProfileCard
+            email={meInfo.email}
+            phone={meInfo.phone}
+            fullName={meInfo.fullName}
+          />
+        )}
         <Button onClick={logout}>Logout</Button>
       </Stack>
       <Stack>
@@ -31,7 +35,10 @@ export const Profile = () => {
         </Group>
         <Stack>
           {restaurantPreviews.map((restaurant) => (
-            <RestaurantCard key={restaurant.restaurant_id} {...restaurant} />
+            <RestaurantReviewCard
+              key={restaurant.restaurant_id}
+              {...restaurant}
+            />
           ))}
         </Stack>
       </Stack>

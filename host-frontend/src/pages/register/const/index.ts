@@ -1,13 +1,12 @@
 import { TextInputProps } from "@mantine/core";
 import { Requests } from "kisszaya-table-reservation/lib/requests";
-import { USER_ROLE } from "kisszaya-table-reservation/lib/interfaces";
 
 export const initialValues: Requests.UserRegister = {
   email: "",
   lastName: "",
   firstName: "",
   password: "",
-  role: USER_ROLE.HOSTESS,
+  phone: ""
 };
 
 export const inputKeys: Record<

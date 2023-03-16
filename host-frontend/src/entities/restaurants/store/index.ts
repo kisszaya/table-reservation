@@ -1,1 +1,5 @@
-export { $restaurantPreviews, addRestaurantPreviews } from "./me-restaurants";
+export {
+  $restaurantPreviews,
+  addRestaurantPreviews,
+  setRestaurantPreviews,
+} from "./me-restaurants";

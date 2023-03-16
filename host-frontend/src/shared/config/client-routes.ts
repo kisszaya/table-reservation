@@ -1,9 +1,10 @@
-export enum PUBLIC_PATH {
-  LANDING = "/landing",
-  LOGIN = "/login",
-  REGISTER = "/register",
-}
+export const PUBLIC_PATH = {
+  LANDING: "/landing",
+  LOGIN: "/login",
+  REGISTER: "/register",
+};
 
-export enum PRIVATE_PATH {
-  PROFILE = "/profile",
-}
+export const PRIVATE_PATH = {
+  PROFILE: "/profile",
+  RESTAURANT: (id: number) => `/restaurants/${id}`,
+};

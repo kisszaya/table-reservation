@@ -1,0 +1,1 @@
+export * from './restaurant-review-card/restaurant-review-card'

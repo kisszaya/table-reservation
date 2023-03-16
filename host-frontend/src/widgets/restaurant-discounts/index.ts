@@ -1,0 +1,1 @@
+export { RestaurantDiscounts } from "./ui";

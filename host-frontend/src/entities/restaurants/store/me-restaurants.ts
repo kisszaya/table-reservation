@@ -3,9 +3,10 @@ import { IRestaurantUserPreview } from "kisszaya-table-reservation/lib/interface
 
 const addRestaurantPreviews = createEvent<IRestaurantUserPreview[]>();
 
-const $restaurantPreviews = createStore<IRestaurantUserPreview[]>([]).on(
-  addRestaurantPreviews,
-  (state, payload) => [...state, ...payload]
-);
+const setRestaurantPreviews = createEvent<IRestaurantUserPreview[]>();
 
-export { addRestaurantPreviews, $restaurantPreviews };
+const $restaurantPreviews = createStore<IRestaurantUserPreview[]>([])
+  .on(addRestaurantPreviews, (state, payload) => [...state, ...payload])
+  .on(setRestaurantPreviews, (_, payload) => payload);
+
+export { addRestaurantPreviews, $restaurantPreviews, setRestaurantPreviews };
