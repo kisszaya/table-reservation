@@ -3562,10 +3562,10 @@ jwt-decode@^3.1.2:
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
-kisszaya-table-reservation@^0.0.58:
-  version "0.0.58"
-  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.58.tgz#9047f20d6941ddc471ed1ca8ec8adad575a5abe0"
-  integrity sha512-6Pl/2DfOmGsKLY8yRPzXYNrnh930Peb/j0EYyES5L59VFmh7C+n14QhCOL/JnVyaICOOiuZrtdEIM01JUgrUNQ==
+kisszaya-table-reservation@^0.0.60:
+  version "0.0.60"
+  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.60.tgz#eb6d77f358c3bfbf6952132b0efdc6b38f5bc057"
+  integrity sha512-y6aeJC7YLj0M8jDg/BQ0P5VfqyJHVISjcpQK81M8MI+ZE+wYM7cblOS3wHpBqzxLwHxS6xGftSecFXSPaRkMBg==
   dependencies:
     "@nestjs/common" "9.0.0"
     "@nestjs/core" "9.0.0"

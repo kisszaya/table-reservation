@@ -6,6 +6,11 @@ import {
   USER_ROLE,
 } from "kisszaya-table-reservation/lib/interfaces";
 import { EmployeeEntity } from "@/entities";
+import {
+  EmployeesAdd,
+  EmployeesDelete,
+  EmployeesGetRestaurant,
+} from "kisszaya-table-reservation/lib/contracts";
 
 @Injectable()
 export class EmployeeService {
@@ -43,5 +48,29 @@ export class EmployeeService {
         roles: el.roles,
       })),
     };
+  }
+
+  public async addToRestaurant(
+    data: EmployeesAdd.Request
+  ): Promise<EmployeesAdd.Response> {
+    this.logger.log("add employee to restaurant");
+
+    return { employee_id: 1, user_id: 1, roles: [], email: '', fullName: '' };
+  }
+
+  public async deleteFromRestaurant(
+    data: EmployeesDelete.Request
+  ): Promise<EmployeesDelete.Response> {
+    this.logger.log("remove employee from restaurant");
+
+    return { employee_id: 1, user_id: 1, roles: [], email: '', fullName: '' };
+  }
+
+  public async getAllFromRestaurant(
+    data: EmployeesGetRestaurant.Request
+  ): Promise<EmployeesGetRestaurant.Response> {
+    this.logger.log("get all employees from restaurant");
+
+    return { employees: [] };
   }
 }

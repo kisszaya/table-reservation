@@ -1,3 +1,4 @@
+import { USER_ROLE } from "../interfaces";
 
 export namespace Requests {
   export interface UserLogin {
@@ -23,5 +24,14 @@ export namespace Requests {
     city: string;
     address: string;
     phone: string;
+  }
+
+  export interface AddRestaurantEmployee {
+    firstName: string;
+    lastName: string;
+    password: string;
+    email: string;
+    phone?: string;
+    roles: USER_ROLE[];
   }
 }
