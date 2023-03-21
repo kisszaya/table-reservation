@@ -1,7 +1,40 @@
 import { FC } from "react";
-import { TextInput as MantineTextInput, TextInputProps } from "@mantine/core";
+import {
+  Stack,
+  TextInput as MantineTextInput,
+  TextInputProps,
+} from "@mantine/core";
 
-type Args = TextInputProps;
+import { TEXT_INPUT_TYPE } from "./props";
+import { Text } from "shared/ui";
+
+import { useStyles } from "./styles";
+
+type Args = TextInputProps & {
+  inputType?: TEXT_INPUT_TYPE;
+};
 export const TextInput: FC<Args> = (props) => {
-  return <MantineTextInput {...props} />;
+  const {
+    inputType = TEXT_INPUT_TYPE.DEFAULT,
+    label,
+    disabled,
+    ...defaultProps
+  } = props;
+  const { classes } = useStyles();
+
+  return (
+    <Stack spacing={2} align="start" className={classes.container}>
+      {label && inputType === TEXT_INPUT_TYPE.IMMUTABLE && (
+        <Text className={classes.label} size="xs">
+          {label}
+        </Text>
+      )}
+      <MantineTextInput
+        {...defaultProps}
+        label={inputType !== TEXT_INPUT_TYPE.IMMUTABLE ? label : undefined}
+        disabled={inputType === TEXT_INPUT_TYPE.IMMUTABLE ? true : disabled}
+        className={classes.immutable}
+      />
+    </Stack>
+  );
 };

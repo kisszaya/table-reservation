@@ -3,9 +3,9 @@ import { FC } from "react";
 import { Icon } from "@tabler/icons-react";
 
 import { Text, Title } from "shared/ui";
+import { IRestaurantService } from "shared/types";
 
 import { useStyles } from "./styles";
-import { IRestaurantService } from "shared/types";
 
 type Args = Omit<IRestaurantService, "roles"> & {
   isAvailable: boolean;

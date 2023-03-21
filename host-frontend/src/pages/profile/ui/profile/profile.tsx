@@ -1,46 +1,59 @@
 import { Button, Group, Stack } from "@mantine/core";
 import { useStore } from "effector-react";
+import { IconPlus } from "@tabler/icons-react";
 
-import { useTranslation } from "features/locales";
-import { ProfileCard, RestaurantReviewCard } from "widgets";
+import { ProfileCard, RestaurantPreviewCard } from "widgets";
 import { Title } from "shared/ui";
 import { useLogout } from "pages/profile/lib";
-import { openCreateRestaurantModal } from "..";
 import { usersStore } from "entities/users";
+import { useTranslation } from "features/locales";
 import { restaurantsStore } from "entities/restaurants";
+import { useOpenCreateRestaurantModal } from "features/create-restaurant";
+
+import { useStyles } from "./styles";
 
 export const Profile = () => {
+  const { openModal } = useOpenCreateRestaurantModal();
   const { t } = useTranslation();
+  const { classes } = useStyles();
 
   const { logout } = useLogout();
   const meInfo = useStore(usersStore.$meInfo);
   const restaurantPreviews = useStore(restaurantsStore.$restaurantPreviews);
 
   return (
-    <Group>
+    <Group align="start" noWrap spacing="xl" className={classes.container}>
       <Stack>
         {meInfo && (
           <ProfileCard
+            title="Your profile"
             email={meInfo.email}
             phone={meInfo.phone}
             fullName={meInfo.fullName}
           />
         )}
-        <Button onClick={logout}>Logout</Button>
+        <Button onClick={logout} color="dark">
+          Logout
+        </Button>
       </Stack>
-      <Stack>
-        <Group>
+      <Stack className={classes.content}>
+        <Group position="apart">
           <Title>Restaurants</Title>
-          <Button onClick={openCreateRestaurantModal}>Create restaurant</Button>
+          <Button
+            onClick={openModal}
+            rightIcon={<IconPlus size={20} strokeWidth={2} color="white" />}
+          >
+            Create restaurant
+          </Button>
         </Group>
-        <Stack>
+        <Group spacing="sm" position="apart">
           {restaurantPreviews.map((restaurant) => (
-            <RestaurantReviewCard
+            <RestaurantPreviewCard
               key={restaurant.restaurant_id}
               {...restaurant}
             />
           ))}
-        </Stack>
+        </Group>
       </Stack>
     </Group>
   );

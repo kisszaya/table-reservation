@@ -13,7 +13,7 @@ export const RestaurantSettings: FC<Args> = ({ opened, close }) => {
       onClose={close}
       title="Settings"
       position="right"
-      size="lg"
+      size="xl"
     >
       RestaurantSettings
     </Drawer>

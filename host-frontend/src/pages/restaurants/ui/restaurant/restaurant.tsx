@@ -15,7 +15,10 @@ import { usersStore } from "entities/users";
 import { Button } from "shared/ui";
 import { PRIVATE_PATH } from "shared/config";
 
+import { useStyles } from "./styles";
+
 export const Restaurant = () => {
+  const { classes } = useStyles();
   const meInfo = useStore(usersStore.$meInfo);
   const {
     restaurantServices,
@@ -34,16 +37,19 @@ export const Restaurant = () => {
 
   return (
     <>
-      <Group noWrap>
-        <Stack align="start">
+      <Group noWrap align="start" className={classes.container}>
+        <Stack>
           {meInfo && (
             <ProfileCard
+              title="Restaurant card"
               email={meInfo.email}
               phone={meInfo.phone}
               fullName={meInfo.fullName}
             />
           )}
-          <Button onClick={onGoToProfile}>Go to profile</Button>
+          <Button onClick={onGoToProfile} color="dark">
+            Go to profile
+          </Button>
         </Stack>
         <Group position="apart" spacing="sm">
           {restaurantServices.map((service) => (

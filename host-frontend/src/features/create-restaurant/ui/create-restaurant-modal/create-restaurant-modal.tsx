@@ -1,12 +1,11 @@
-import { modals } from "@mantine/modals";
 import { useForm } from "@mantine/form";
 import { Stack } from "@mantine/core";
-
 import {
-  useCreateRestaurant,
   FormValues,
   initialValues,
-} from "pages/profile/lib";
+  useCreateRestaurant,
+} from "features/create-restaurant/lib";
+
 import { Button, TextInput } from "shared/ui";
 
 export const CreateRestaurantModal = () => {
@@ -28,12 +27,3 @@ export const CreateRestaurantModal = () => {
     </form>
   );
 };
-
-export const openCreateRestaurantModal = () =>
-  modals.openConfirmModal({
-    title: "Please confirm your action",
-    children: <CreateRestaurantModal />,
-    labels: { confirm: "Confirm", cancel: "Cancel" },
-    onCancel: () => console.log("Cancel"),
-    onConfirm: () => console.log("Confirmed"),
-  });

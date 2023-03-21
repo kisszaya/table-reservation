@@ -6,5 +6,7 @@ export const PUBLIC_PATH = {
 
 export const PRIVATE_PATH = {
   PROFILE: "/profile",
-  RESTAURANT: (id: number) => `/restaurants/${id}`,
+  RESTAURANT: (id: number | string) => `/restaurants/${id}`,
+  RESTAURANT_BOOKING_PANEL: (id: number | string) =>
+    `/restaurants/${id}/booking-panel`,
 };

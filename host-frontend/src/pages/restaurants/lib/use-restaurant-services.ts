@@ -6,16 +6,27 @@ import {
   IconDiscount,
 } from "@tabler/icons-react";
 import { USER_ROLE } from "kisszaya-table-reservation/lib/interfaces";
+import { useCallback } from "react";
+import { useRouter } from "next/router";
 
 import { IRestaurantService } from "shared/types";
+import { PRIVATE_PATH } from "shared/config";
 
 export const useRestaurantServices = () => {
+  const { push } = useRouter();
   const [openedSettings, { open: openSettings, close: closeSettings }] =
     useDisclosure(false);
   const [openedDiscounts, { open: openDiscounts, close: closeDiscounts }] =
     useDisclosure(false);
   const [openedEmployees, { open: openEmployees, close: closeEmployees }] =
     useDisclosure(false);
+
+  // TODO get real data
+  const restaurant_id = 6;
+
+  const redirectToBookingPanel = useCallback(async () => {
+    await push(PRIVATE_PATH.RESTAURANT_BOOKING_PANEL(restaurant_id));
+  }, []);
 
   const restaurantServices: IRestaurantService[] = [
     {
@@ -41,9 +52,9 @@ export const useRestaurantServices = () => {
     },
     {
       title: "Booking panel",
-      description: "You can open booking panel of restaurant",
+      description: "You can open booking-panel panel of restaurant",
       icon: IconCoin,
-      onClick: () => {},
+      onClick: redirectToBookingPanel,
       roles: [USER_ROLE.ADMINISTRATOR, USER_ROLE.HOSTESS],
     },
   ];
