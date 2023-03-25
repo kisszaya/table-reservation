@@ -1,5 +1,8 @@
-import { Drawer } from "@mantine/core";
-import { FC } from "react";
+import { FC, useCallback } from "react";
+
+import { Drawer } from "widgets";
+import { AddEmployeeSection, EmployeesSection } from "..";
+import { EMPLOYEES_DRAWER_NAVBAR_VALUES, useDrawerNavbar } from "../../lib";
 
 interface Args {
   opened: boolean;
@@ -7,15 +10,33 @@ interface Args {
 }
 
 export const RestaurantEmployees: FC<Args> = ({ opened, close }) => {
+  const { navbar, selectedNavbar } = useDrawerNavbar();
+
+  const getContent = useCallback(
+    (selectedNavbar: EMPLOYEES_DRAWER_NAVBAR_VALUES) => {
+      switch (selectedNavbar) {
+        case EMPLOYEES_DRAWER_NAVBAR_VALUES.ADD_EMPLOYEE:
+          return <AddEmployeeSection />;
+        case EMPLOYEES_DRAWER_NAVBAR_VALUES.EMPLOYEES:
+          return <EmployeesSection />;
+        default:
+          const _: never = selectedNavbar;
+          throw new Error("Provide component for RestaurantEmployees section");
+      }
+    },
+    []
+  );
+
   return (
     <Drawer
       opened={opened}
       onClose={close}
-      title="Employees"
+      withCloseButton={false}
       position="right"
-      size="lg"
+      size="xl"
+      navbar={navbar}
     >
-      RestaurantEmployees
+      {getContent(selectedNavbar)}
     </Drawer>
   );
 };

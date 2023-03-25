@@ -11,3 +11,4 @@ export * from "./booking-layout";
 export * from "./statistics-card";
 export * from "./reservation-card";
 export * from "./table-preview";
+export * from "./drawer";
