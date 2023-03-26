@@ -6,6 +6,7 @@ export * from "./users/users.update-refresh";
 export * from "./users/users.logout";
 export * from "./users/users.verify";
 export * from "./users/users.info";
+export * from "./users/users.info-by-id";
 
 // restaurants
 export * from "./restaurants/restaurants.create";

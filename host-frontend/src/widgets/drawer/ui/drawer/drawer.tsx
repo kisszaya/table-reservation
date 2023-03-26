@@ -20,9 +20,9 @@ export const Drawer: FC<Args> = (props) => {
     <MantineDrawer padding={0} {...defaultProps}>
       {!navbar && children}
       {navbar && (
-        <Group align="start">
+        <Group align="start" noWrap>
           <DrawerNavbar {...navbar} />
-          <Stack m="md">{children}</Stack>
+          <Stack m="md" style={{width: '100%'}}>{children}</Stack>
         </Group>
       )}
     </MantineDrawer>

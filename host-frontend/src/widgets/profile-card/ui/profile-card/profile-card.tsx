@@ -11,10 +11,11 @@ interface Args {
   phone?: string;
   role?: string;
   title: string;
+  restaurantName?: string;
 }
 
 export const ProfileCard: FC<Args> = (props) => {
-  const { role, phone, email, fullName, title } = props;
+  const { role, phone, email, fullName, title, restaurantName } = props;
   const { classes } = useStyles();
 
   return (
@@ -43,6 +44,14 @@ export const ProfileCard: FC<Args> = (props) => {
           value={email}
           disabled
         />
+        {restaurantName && (
+          <TextInput
+            inputType={TEXT_INPUT_TYPE.IMMUTABLE}
+            label="Restaurant name"
+            value={restaurantName}
+            disabled
+          />
+        )}
         {phone && (
           <TextInput
             inputType={TEXT_INPUT_TYPE.IMMUTABLE}

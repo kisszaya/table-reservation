@@ -14,12 +14,14 @@ import {
 import { usersStore } from "entities/users";
 import { Button } from "shared/ui";
 import { PRIVATE_PATH } from "shared/config";
+import { restaurantsLib } from "entities/restaurants";
 
 import { useStyles } from "./styles";
 
 export const Restaurant = () => {
   const { classes } = useStyles();
   const meInfo = useStore(usersStore.$meInfo);
+  const { restaurantInfo } = restaurantsLib.useRestaurantInfo();
   const {
     restaurantServices,
     openedSettings,
@@ -43,8 +45,8 @@ export const Restaurant = () => {
             <ProfileCard
               title="Restaurant card"
               email={meInfo.email}
-              phone={meInfo.phone}
               fullName={meInfo.fullName}
+              restaurantName={restaurantInfo?.name}
             />
           )}
           <Button onClick={onGoToProfile} color="dark">

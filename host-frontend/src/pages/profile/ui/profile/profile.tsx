@@ -12,6 +12,8 @@ import { useOpenCreateRestaurantModal } from "features/create-restaurant";
 
 import { useStyles } from "./styles";
 
+const { restaurants } = restaurantsStore;
+
 export const Profile = () => {
   const { openModal } = useOpenCreateRestaurantModal();
   const { t } = useTranslation();
@@ -19,7 +21,7 @@ export const Profile = () => {
 
   const { logout } = useLogout();
   const meInfo = useStore(usersStore.$meInfo);
-  const restaurantPreviews = useStore(restaurantsStore.$restaurantPreviews);
+  const restaurantPreviews = useStore(restaurants.stores.$restaurants);
 
   return (
     <Group align="start" noWrap spacing="xl" className={classes.container}>
@@ -47,7 +49,7 @@ export const Profile = () => {
           </Button>
         </Group>
         <Group spacing="sm" position="apart">
-          {restaurantPreviews.map((restaurant) => (
+          {Object.values(restaurantPreviews).map((restaurant) => (
             <RestaurantPreviewCard
               key={restaurant.restaurant_id}
               {...restaurant}

@@ -19,7 +19,7 @@ export const useCreateRestaurant = () => {
     async (formValues: Requests.CreateRestaurant) => {
       const { data } = await restaurantsApi.createRestaurant(formValues);
       if (data) {
-        restaurantsStore.addRestaurantPreviews([data]);
+        restaurantsStore.restaurants.events.addRestaurant(data);
         closeAllModals();
       }
     },

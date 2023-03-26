@@ -1,6 +1,6 @@
 {
   "name": "kisszaya-table-reservation",
-  "version": "0.0.60",
+  "version": "0.0.65",
   "description": "kisszaya Lib for table-reservation project",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

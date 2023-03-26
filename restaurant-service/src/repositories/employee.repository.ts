@@ -40,4 +40,19 @@ export class EmployeeRepository {
 
     return this.employeeModel.findBy({ user_id });
   }
+
+  public async findEmployeesByRestaurantId(restaurant_id: number) {
+    this.logger.log("find employees by restaurant_id");
+
+    return this.employeeModel.findBy({ restaurant_id });
+  }
+
+  public async findEmployeeByRestaurantIdAndUserId(
+    restaurant_id: number,
+    user_id: number
+  ) {
+    this.logger.log("find employees by user_id and restaurant_id");
+
+    return this.employeeModel.findOneBy({ restaurant_id, user_id });
+  }
 }

@@ -27,9 +27,9 @@ export namespace Requests {
   }
 
   export interface AddRestaurantEmployee {
-    firstName: string;
-    lastName: string;
-    password: string;
+    firstName?: string;
+    lastName?: string;
+    password?: string;
     email: string;
     phone?: string;
     roles: USER_ROLE[];

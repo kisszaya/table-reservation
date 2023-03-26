@@ -7,13 +7,16 @@ export namespace EmployeesAdd {
 
   export class Request {
     @IsString()
-    firstName: string;
+    @IsOptional()
+    firstName?: string;
 
     @IsString()
-    lastName: string;
+    @IsOptional()
+    lastName?: string;
 
     @IsString()
-    password: string;
+    @IsOptional()
+    password?: string;
 
     @IsOptional()
     @IsString()

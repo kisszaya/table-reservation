@@ -56,7 +56,7 @@ const Profile: FC<ProfileArgs> = (props) => {
   }, [me]);
 
   useEffect(() => {
-    restaurantsStore.setRestaurantPreviews(restaurants);
+    restaurantsStore.restaurants.events.setRestaurants(restaurants);
   }, [restaurants]);
 
   return <ProfileFC />;

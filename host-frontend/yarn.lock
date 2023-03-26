@@ -2742,10 +2742,10 @@ keygrip@~1.1.0:
   dependencies:
     tsscmp "1.0.6"
 
-kisszaya-table-reservation@^0.0.57:
-  version "0.0.57"
-  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.57.tgz#0d11d6313a6dcdde572d90e458325d257116fa0a"
-  integrity sha512-BaUXfId+l1IIwgtuDTVn5qW4m+naeG4wrn+/86rVDpq9cLPB/orZEeJDt8r2NUwhvooQXO5NIik4JtIckSqVzg==
+kisszaya-table-reservation@^0.0.62:
+  version "0.0.62"
+  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.62.tgz#27e5c9400976f0e5033435f29cd333d84f874a89"
+  integrity sha512-/kVQE4c7xj1uLmSme9h+/oNExd5MHw6JrPnKlLLXPwOIBT+KSnEGptMW+9Ujfvn1HGjyU6z/ZY6ckLT5PpsRXg==
   dependencies:
     "@nestjs/common" "9.0.0"
     "@nestjs/core" "9.0.0"

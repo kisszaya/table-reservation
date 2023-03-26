@@ -12,18 +12,18 @@ import { Requests } from "kisszaya-table-reservation/lib/requests";
 export class RestaurantEmployeeAddDto
   implements Requests.AddRestaurantEmployee
 {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  firstName: string;
+  firstName?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  lastName: string;
+  lastName?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(6)
-  password: string;
+  password?: string;
 
   @IsOptional()
   @IsString()

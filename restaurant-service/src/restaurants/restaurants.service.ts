@@ -1,6 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import {
   RestaurantsCreate,
+  RestaurantsGetById,
   RestaurantsGetUser,
 } from "kisszaya-table-reservation/lib/contracts";
 
@@ -8,6 +9,11 @@ import { RestaurantRepository } from "@/repositories";
 import { RestaurantEntity } from "@/entities";
 import { EmployeeService } from "@/employee/employee.service";
 import { USER_ROLE } from "kisszaya-table-reservation/lib/interfaces";
+import {
+  RestaurantBlockedForUserException,
+  RestaurantNotFoundException,
+  RestaurantNotFoundForUserException,
+} from "@/exceptions";
 
 @Injectable()
 export class RestaurantsService {
@@ -79,5 +85,41 @@ export class RestaurantsService {
     console.log("restaurants", restaurants);
 
     return { restaurants };
+  }
+
+  public async getById(
+    data: RestaurantsGetById.Request
+  ): Promise<RestaurantsGetById.Response> {
+    const { restaurant_id, user_id } = data;
+
+    const employeeRecord = await this.employeeService.findRecord(
+      restaurant_id,
+      user_id
+    );
+
+    if (!employeeRecord) {
+      throw new RestaurantNotFoundForUserException();
+    }
+
+    if (employeeRecord.roles.includes(USER_ROLE.BLOCKED)) {
+      throw new RestaurantBlockedForUserException();
+    }
+
+    const restaurant = await this.restaurantRepository.findRestaurantById(
+      restaurant_id
+    );
+
+    if (!restaurant) {
+      throw new RestaurantNotFoundException(restaurant_id);
+    }
+
+    return {
+      restaurant_id,
+      roles: employeeRecord.roles,
+      photos: restaurant.photos,
+      address: restaurant.address,
+      city: restaurant.city,
+      name: restaurant.name,
+    };
   }
 }

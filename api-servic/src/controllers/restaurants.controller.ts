@@ -2,14 +2,10 @@ import {
   RestaurantsCreate,
   RestaurantsGetUser,
   RestaurantsGetById,
-  EmployeesGetRestaurant,
-  EmployeesAdd,
-  EmployeesDelete,
 } from "kisszaya-table-reservation/lib/contracts";
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Logger,
   Param,
@@ -20,7 +16,7 @@ import {
 import { BrokerService } from "@/broker";
 import { JWTAuthGuard, UserId } from "@/guards";
 import { InternalException } from "@/exceptions";
-import { RestaurantCreateDto, RestaurantEmployeeAddDto } from "@/dtos";
+import { RestaurantCreateDto } from "@/dtos";
 
 @Controller("restaurants")
 export class RestaurantsController {
@@ -76,75 +72,6 @@ export class RestaurantsController {
       >(RestaurantsGetById.topic, {
         user_id,
         restaurant_id: Number(restaurant_id),
-      });
-    } catch (e) {
-      throw new InternalException(e);
-    }
-  }
-
-  @UseGuards(JWTAuthGuard)
-  @Get("/:restaurantId/employees")
-  async getRestaurantEmployees(
-    @Param("restaurantId") restaurant_id: string,
-    @UserId() user_id: number
-  ) {
-    this.logger.log(`GET /api/restaurants/${restaurant_id}/employees`);
-
-    try {
-      return await this.brokerService.publish<
-        EmployeesGetRestaurant.Request,
-        EmployeesGetRestaurant.Response
-      >(EmployeesGetRestaurant.topic, {
-        user_id,
-        restaurant_id: Number(user_id),
-      });
-    } catch (e) {
-      throw new InternalException(e);
-    }
-  }
-
-  @UseGuards(JWTAuthGuard)
-  @Post("/:restaurantId/employees")
-  async addRestaurantEmployee(
-    @Param("restaurantId") restaurant_id: string,
-    @UserId() user_id: number,
-    @Body() dto: RestaurantEmployeeAddDto
-  ) {
-    this.logger.log(`POST /api/restaurants/${restaurant_id}/employees`);
-
-    try {
-      return await this.brokerService.publish<
-        EmployeesAdd.Request,
-        EmployeesAdd.Response
-      >(EmployeesAdd.topic, {
-        user_id,
-        restaurant_id: Number(restaurant_id),
-        ...dto,
-      });
-    } catch (e) {
-      throw new InternalException(e);
-    }
-  }
-
-  @UseGuards(JWTAuthGuard)
-  @Delete("/:restaurantId/employees/:employeeId")
-  async deleteRestaurantEmployee(
-    @Param("restaurantId") restaurant_id: string,
-    @Param("employeeId") employee_id: string,
-    @UserId() user_id: number
-  ) {
-    this.logger.log(
-      `DELETE /api/restaurants/${restaurant_id}/employees/${employee_id}`
-    );
-
-    try {
-      return await this.brokerService.publish<
-        EmployeesDelete.Request,
-        EmployeesDelete.Response
-      >(EmployeesDelete.topic, {
-        user_id,
-        restaurant_id: Number(restaurant_id),
-        employee_id: Number(employee_id),
       });
     } catch (e) {
       throw new InternalException(e);
