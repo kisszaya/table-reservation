@@ -10,7 +10,7 @@ import {
 
 const paths: IBuildPaths = {
     build: path.resolve(__dirname, "dist"),
-    entry: path.resolve(__dirname, "src", "index.page.tsx"),
+    entry: path.resolve(__dirname, "src", "index.tsx"),
     html: path.resolve(__dirname, "public", "index.html"),
     src: path.resolve(__dirname, "src"),
 };
@@ -19,7 +19,7 @@ const moduleFederation: IModuleFederationOptions = {
     name: 'tableConstructor',
     filename: 'remoteEntry.js',
     exposes: {
-        "./Scheme": "./src/components/scheme"
+        "./Scheme": "./src/pages/scheme"
     }
 }
 

@@ -6,3 +6,4 @@ export { BookingsListFooter } from "./bookings-list-footer/bookings-list-footer"
 export { BookingsListHeader } from "./bookings-list-header/bookings-list-header";
 export { BookingDates } from "./booking-dates/booking-dates";
 export { BookingTables } from "./booking-tables/booking-tables";
+export { Scheme } from "./scheme/scheme";
