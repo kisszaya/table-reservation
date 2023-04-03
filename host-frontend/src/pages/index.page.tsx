@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { Button } from "shared/ui";
 
 // @ts-ignore
-// const SampleComponent = dynamic(() => import('tableConstructor/Scheme'), {
+// consts SampleComponent = dynamic(() => import('tableConstructor/Scheme'), {
 //     ssr: false,
 // });
 

@@ -16,8 +16,8 @@ if (processEnv("SETUP.NODE") !== "development") {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // const port = processEnv("SETUP.PORT");
-  // const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  // consts port = processEnv("SETUP.PORT");
+  // consts app = await NestFactory.createMicroservice<MicroserviceOptions>(
   //   AppModule,
   //   {
   //     transport: Transport.TCP,

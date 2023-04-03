@@ -1,0 +1,9 @@
+export const CANVAS_SETTINGS = {
+  HEIGHT: 400,
+  WIDTH: 600,
+  DEFAULT_SCALE: 2
+};
+
+export const ZOOM = {
+  SCROLL_SENSITIVITY: 500
+}

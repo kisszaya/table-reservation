@@ -1,7 +1,13 @@
 import { MainCanvas } from "../ui/main";
 
+import { CanvasProvider } from "entities/canvas";
+
 const Scheme = () => {
-  return <MainCanvas canvasHeight={400} canvasWidth={600} />;
+  return (
+    <CanvasProvider>
+      <MainCanvas />
+    </CanvasProvider>
+  );
 };
 
 export default Scheme;
