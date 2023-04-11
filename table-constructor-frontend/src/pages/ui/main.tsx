@@ -3,13 +3,15 @@ import * as React from "react";
 
 import { useCanvas } from "entities/canvas";
 import { diffPoints, scalePoint } from "features/point-handlers";
-import { useInitCanvas } from "features/canvas-init";
-import { useCanvasMousePosition } from "features/canvas-mouse-position";
-import { useMoveCanvas } from "features/canvas-move";
-import { useResetCanvasPosition } from "features/canvas-reset-position";
-import { useZoomCanvas } from "features/canvas-zoom";
 
-import { CANVAS_SETTINGS } from "shared/consts";
+import { CANVAS_SETTINGS, WORKING_AREA_SETTINGS } from "shared/consts";
+import {
+  useCanvasMousePosition,
+  useInitCanvas,
+  useMoveCanvas,
+  useResetCanvasPosition,
+  useZoomCanvas,
+} from "features/canvas-settings";
 
 // adjust to device to avoid blur
 const { devicePixelRatio: ratio = 1 } = window;
@@ -28,7 +30,9 @@ export function MainCanvas() {
     setLastOffsetRef,
     lastOffsetRef,
     setViewportTopLeft,
-    viewportTopLeft, setIsResetRef, mousePosition
+    viewportTopLeft,
+    setIsResetRef,
+    mousePosition,
   } = useCanvas();
 
   // update last offset
@@ -54,61 +58,63 @@ export function MainCanvas() {
     if (ctx) {
       const squareSize = 20;
 
-      // clear canvas but maintain transform
+      // clear canvas-settings but maintain transform
       const storedTransform = ctx.getTransform();
       ctx.canvas.width = ctx.canvas.width;
-      console.log('TEST storedTransform')
+      console.log("TEST storedTransform");
       ctx.setTransform(storedTransform);
 
       ctx.fillRect(
-        CANVAS_SETTINGS.WIDTH / 2 - squareSize / 2,
-        CANVAS_SETTINGS.HEIGHT / 2 - squareSize / 2,
+        WORKING_AREA_SETTINGS.WIDTH / 2 - squareSize / 2,
+        WORKING_AREA_SETTINGS.HEIGHT / 2 - squareSize / 2,
         squareSize,
         squareSize
       );
       ctx.arc(viewportTopLeft.x, viewportTopLeft.y, 5, 0, 2 * Math.PI);
-      ctx.fillStyle = "red";
       ctx.fill();
 
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(0, CANVAS_SETTINGS.HEIGHT);
-      ctx.stroke();
+      for (let i = 0; i <= WORKING_AREA_SETTINGS.WIDTH; i = i + 5) {
+        ctx.strokeStyle = "gray";
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, WORKING_AREA_SETTINGS.HEIGHT);
+        ctx.stroke();
+      }
 
-      ctx.beginPath();
-      ctx.moveTo(CANVAS_SETTINGS.WIDTH, CANVAS_SETTINGS.HEIGHT);
-      ctx.lineTo(CANVAS_SETTINGS.WIDTH, 0);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(CANVAS_SETTINGS.WIDTH, 0);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(CANVAS_SETTINGS.WIDTH, CANVAS_SETTINGS.HEIGHT);
-      ctx.lineTo(0, CANVAS_SETTINGS.HEIGHT);
-      ctx.stroke();
-
+      for (let i = 0; i <= WORKING_AREA_SETTINGS.HEIGHT; i = i + 5) {
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(WORKING_AREA_SETTINGS.WIDTH, i);
+        ctx.stroke();
+      }
     }
   }, [ctx, scale, offset, viewportTopLeft]);
 
   return (
-    <div>
-      <button onClick={() => ctx && reset(ctx)}>Reset</button>
-      <pre>scale: {scale}</pre>
-      <pre>offset: {JSON.stringify(offset)}</pre>
-      <pre>viewportTopLeft: {JSON.stringify(viewportTopLeft)}</pre>
-      <pre>mousePosition: {JSON.stringify(mousePosition)}</pre>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        background: "gray",
+      }}
+    >
+      <div>
+        <button onClick={() => ctx && reset(ctx)}>Reset</button>
+        <pre>scale: {scale}</pre>
+        <pre>offset: {JSON.stringify(offset)}</pre>
+        <pre>viewportTopLeft: {JSON.stringify(viewportTopLeft)}</pre>
+        <pre>mousePosition: {JSON.stringify(mousePosition)}</pre>
+      </div>
       <canvas
         onMouseDown={startMouseDown}
         ref={canvasRef}
         width={CANVAS_SETTINGS.WIDTH * ratio}
         height={CANVAS_SETTINGS.HEIGHT * ratio}
         style={{
-          border: "2px solid #000",
           width: `${CANVAS_SETTINGS.WIDTH}px`,
           height: `${CANVAS_SETTINGS.HEIGHT}px`,
+          background: "white",
         }}
       ></canvas>
     </div>

@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 
 import { useCanvas } from "entities/canvas";
-import { useResetCanvasPosition } from "features/canvas-reset-position";
+import { useResetCanvasPosition } from "..";
 
 export const useInitCanvas = () => {
   const { canvasRef } = useCanvas();

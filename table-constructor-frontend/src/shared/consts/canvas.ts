@@ -1,9 +1,14 @@
-export const CANVAS_SETTINGS = {
-  HEIGHT: 400,
-  WIDTH: 600,
-  DEFAULT_SCALE: 2
+export const WORKING_AREA_SETTINGS = {
+  HEIGHT: 800,
+  WIDTH: 800,
+  DEFAULT_SCALE: 1,
 };
 
-export const ZOOM = {
-  SCROLL_SENSITIVITY: 500
-}
+export const CANVAS_SETTINGS = {
+  HEIGHT: 800,
+  WIDTH: 800,
+};
+
+export const ZOOM_SETTINGS = {
+  SCROLL_SENSITIVITY: 500,
+};

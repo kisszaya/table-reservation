@@ -2,7 +2,7 @@ import { FC, ReactNode, useCallback, useMemo, useRef, useState } from "react";
 
 import { CanvasContext, ICanvasContext } from "../../lib";
 import { IPoint } from "shared/types";
-import { CANVAS_SETTINGS, DEFAULT_POINT_COORDINATES } from "shared/consts";
+import { WORKING_AREA_SETTINGS, DEFAULT_POINT_COORDINATES } from "shared/consts";
 
 interface Args {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface Args {
 export const CanvasProvider: FC<Args> = ({ children }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
-  const [scale, setScale] = useState<number>(CANVAS_SETTINGS.DEFAULT_SCALE);
+  const [scale, setScale] = useState<number>(WORKING_AREA_SETTINGS.DEFAULT_SCALE);
   const [offset, setOffset] = useState<IPoint>(DEFAULT_POINT_COORDINATES);
   const [mousePosition, setMousePosition] = useState<IPoint>(
     DEFAULT_POINT_COORDINATES
@@ -82,7 +82,6 @@ export const CanvasProvider: FC<Args> = ({ children }) => {
       changeCanvasScale,
       offset,
       setOffset,
-      // changeOffset,
       mousePosition,
       changeMousePosition,
       viewportTopLeft,

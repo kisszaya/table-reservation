@@ -1,6 +1,8 @@
 import React from "react";
 import Scheme from "../pages/scheme/scheme";
 
+import './styles.scss'
+
 export const App = () => {
   return (
     <div>

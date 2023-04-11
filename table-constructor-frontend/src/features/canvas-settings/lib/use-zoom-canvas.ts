@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useCanvas } from "entities/canvas";
 import { addPoints } from "features/point-handlers";
 
-import { ZOOM } from "shared/consts";
+import { ZOOM_SETTINGS } from "shared/consts";
 
 export const useZoomCanvas = () => {
   const {
@@ -26,7 +26,7 @@ export const useZoomCanvas = () => {
     function handleWheel(event: WheelEvent) {
       event.preventDefault();
       if (ctx) {
-        const zoom = 1 - event.deltaY / ZOOM.SCROLL_SENSITIVITY;
+        const zoom = 1 - event.deltaY / ZOOM_SETTINGS.SCROLL_SENSITIVITY;
         const viewportTopLeftDelta = {
           x: (mousePosition.x / scale) * (1 - 1 / zoom),
           y: (mousePosition.y / scale) * (1 - 1 / zoom),
@@ -40,9 +40,16 @@ export const useZoomCanvas = () => {
         ctx.scale(zoom, zoom);
         ctx.translate(-newViewportTopLeft.x, -newViewportTopLeft.y);
 
-        setViewportTopLeft(newViewportTopLeft);
-        setScale(scale * zoom);
-        setIsResetRef(false);
+        try {
+          setViewportTopLeft(newViewportTopLeft);
+          setScale(scale * zoom);
+          setIsResetRef(false);
+        } catch (e) {
+          if (e instanceof Error) {
+
+          }
+        }
+
       }
     }
 
