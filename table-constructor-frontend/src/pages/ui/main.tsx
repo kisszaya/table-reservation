@@ -12,6 +12,8 @@ import {
   useResetCanvasPosition,
   useZoomCanvas,
 } from "features/canvas-settings";
+import { showCanvasGrid } from "features/canvas-grid";
+import { openCreateShapeModal } from "../../widgets";
 
 // adjust to device to avoid blur
 const { devicePixelRatio: ratio = 1 } = window;
@@ -61,7 +63,6 @@ export function MainCanvas() {
       // clear canvas-settings but maintain transform
       const storedTransform = ctx.getTransform();
       ctx.canvas.width = ctx.canvas.width;
-      console.log("TEST storedTransform");
       ctx.setTransform(storedTransform);
 
       ctx.fillRect(
@@ -73,20 +74,7 @@ export function MainCanvas() {
       ctx.arc(viewportTopLeft.x, viewportTopLeft.y, 5, 0, 2 * Math.PI);
       ctx.fill();
 
-      for (let i = 0; i <= WORKING_AREA_SETTINGS.WIDTH; i = i + 5) {
-        ctx.strokeStyle = "gray";
-        ctx.beginPath();
-        ctx.moveTo(i, 0);
-        ctx.lineTo(i, WORKING_AREA_SETTINGS.HEIGHT);
-        ctx.stroke();
-      }
-
-      for (let i = 0; i <= WORKING_AREA_SETTINGS.HEIGHT; i = i + 5) {
-        ctx.beginPath();
-        ctx.moveTo(0, i);
-        ctx.lineTo(WORKING_AREA_SETTINGS.WIDTH, i);
-        ctx.stroke();
-      }
+      showCanvasGrid(ctx);
     }
   }, [ctx, scale, offset, viewportTopLeft]);
 
@@ -100,6 +88,7 @@ export function MainCanvas() {
       }}
     >
       <div>
+        <button onClick={openCreateShapeModal}>Add table</button>
         <button onClick={() => ctx && reset(ctx)}>Reset</button>
         <pre>scale: {scale}</pre>
         <pre>offset: {JSON.stringify(offset)}</pre>

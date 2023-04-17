@@ -4,6 +4,11 @@ export const WORKING_AREA_SETTINGS = {
   DEFAULT_SCALE: 1,
 };
 
+export const CANVAS_GRID_SETTINGS = {
+  COLOR: "gray",
+  FREQUENCY: 5,
+};
+
 export const CANVAS_SETTINGS = {
   HEIGHT: 800,
   WIDTH: 800,
