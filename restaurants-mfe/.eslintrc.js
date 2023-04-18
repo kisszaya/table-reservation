@@ -1,7 +1,8 @@
 module.exports = {
     env: {
         browser: true,
-        es2021: true
+        es2021: true,
+        jest: true
     },
     extends: [
         'plugin:react/recommended',
@@ -17,11 +18,16 @@ module.exports = {
     plugins: ['react', 'i18next'],
     rules: {
         'react/jsx-indent': [2, 4],
+        'max-len': ['error', { ignoreComments: true }],
         '@typescript-eslint/indent': 'off',
         'object-curly-spacing': ['error', 'always'],
         'i18next/no-literal-string': [2, { markupOnly: true }],
         'react/jsx-indent-props': [2, 4],
-        indent: [2, 4, { ignoredNodes: ['ConditionalExpression'], SwitchCase: 1 }],
+        indent: [2, 4,
+            {
+                ignoredNodes: ['ConditionalExpression'], SwitchCase: 1
+            }
+        ],
         '@typescript-eslint/explicit-function-return-type': 'off',
         'react/react-in-jsx-scope': 'off',
         '@typescript-eslint/no-empty-interface': 'warn',

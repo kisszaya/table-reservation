@@ -1,10 +1,10 @@
-import { createRef, useEffect, useRef } from "react";
+import React, { createRef, useEffect, useRef } from "react";
 import { Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { ShapeCanvas, TableControl } from "..";
-import { DEFAULT_SHAPE_CONSTRUCTOR } from "shared/consts";
-import { TABLE_VARIANT } from "shared/types";
+import {DEFAULT_POINT_COORDINATES, DEFAULT_SHAPE_CONSTRUCTOR} from "shared/consts";
+import {IPoint, TABLE_VARIANT} from "shared/types";
 
 export interface TableFormValues {
   tableWidth: number;
@@ -20,6 +20,7 @@ const initialTableValues: TableFormValues = {
 
 export const CreateShapeModal = () => {
   const canvasRef = createRef<HTMLCanvasElement>();
+  const mousePosition = useRef<IPoint>(DEFAULT_POINT_COORDINATES);
   const ctx = useRef<CanvasRenderingContext2D | null>(null);
 
   const tableForm = useForm<TableFormValues>({
@@ -46,29 +47,43 @@ export const CreateShapeModal = () => {
     if (context) {
       context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      // add vertical lines
-      for (let x = 1; x < tableWidth + 2; x++) {
-        context.beginPath();
-        context.setLineDash([5, 5]);
+      const lastTableWidth = tableWidth + 2;
+      const lastTableHeight = tableHeight + 2;
 
-        context.moveTo(x * DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT, 0);
-        context.lineTo(x * DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT, canvasHeight);
-        context.stroke();
+      for (let x = 1; x <= lastTableWidth; x++) {
+        if (x !== lastTableWidth) {
+          // add vertical line
+          context.beginPath();
+          context.setLineDash([5, 5]);
+
+          context.moveTo(x * DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT, 0);
+          context.lineTo(
+            x * DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT,
+            canvasHeight
+          );
+          context.stroke();
+        }
 
         const plusSize = DEFAULT_SHAPE_CONSTRUCTOR.PLUS_SIZE;
         const widthUnit = DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT;
         const heightUnit = DEFAULT_SHAPE_CONSTRUCTOR.HEIGHT_UNIT;
 
-        for (let y = 1; y < tableHeight + 2; y++) {
-          // add horizontal lines
-          if (x === 1) {
+        for (let y = 1; y <= lastTableHeight; y++) {
+          if (x === 1 && y !== lastTableWidth) {
+            // add horizontal line
             context.beginPath();
             context.setLineDash([5, 5]);
             context.moveTo(0, y * heightUnit);
             context.lineTo(canvasWidth, y * heightUnit);
             context.stroke();
           }
-          if (x === 1 || x === tableWidth + 1) {
+
+          if (
+            x === 1 ||
+            x === lastTableWidth ||
+            y === 1 ||
+            y === lastTableHeight
+          ) {
             // add plus horizontal line
             context.beginPath();
             context.setLineDash([]);
@@ -86,12 +101,12 @@ export const CreateShapeModal = () => {
             context.beginPath();
             context.setLineDash([]);
             context.moveTo(
-                (x - 1) * widthUnit + widthUnit / 2 - plusSize / 2,
-                (y - 1) * heightUnit + heightUnit / 2
+              (x - 1) * widthUnit + widthUnit / 2 - plusSize / 2,
+              (y - 1) * heightUnit + heightUnit / 2
             );
             context.lineTo(
-                (x - 1) * widthUnit + widthUnit / 2 + plusSize / 2,
-                (y - 1) * heightUnit + heightUnit / 2
+              (x - 1) * widthUnit + widthUnit / 2 + plusSize / 2,
+              (y - 1) * heightUnit + heightUnit / 2
             );
             context.stroke();
           }
@@ -133,6 +148,10 @@ export const CreateShapeModal = () => {
       }
     }
   }, [canvasWidth, canvasHeight, tableVariant]);
+
+  const onMouseMove = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+
+  }
 
   return (
     <Stack align="center">
