@@ -36,6 +36,7 @@ module.exports = {
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-misused-promises': 'off',
+        'sort-imports': ['error'],
         'import/order': [
             'error',
             {
