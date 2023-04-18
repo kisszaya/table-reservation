@@ -1,0 +1,17 @@
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    height: var(--navbar-height);
+    background: var(--bg-secondary);
+}
+
+.switchers,
+.links {
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+}

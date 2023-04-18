@@ -1,0 +1,14 @@
+@import "./reset";
+@import "./variables/global";
+@import "./themes/dark";
+@import "./themes/light";
+
+.app {
+    font: var(--font-md);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+
+    // Dimensions
+    --navbar-height: 50px
+}
