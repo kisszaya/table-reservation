@@ -1,3 +1,7 @@
-export const AddSeatModal = () => {
-  return <div>Add seat modal</div>;
+import { FC } from "react";
+
+import { IAddSeatModalProps } from "../../types";
+
+export const AddSeatModal: FC<IAddSeatModalProps> = (props) => {
+  return <div>{JSON.stringify(props)}</div>;
 };

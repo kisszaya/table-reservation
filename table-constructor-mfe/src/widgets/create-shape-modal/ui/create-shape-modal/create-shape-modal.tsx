@@ -149,10 +149,6 @@ export const CreateShapeModal = () => {
     }
   }, [canvasWidth, canvasHeight, tableVariant]);
 
-  const onMouseMove = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
-
-  }
-
   return (
     <Stack align="center">
       <ShapeCanvas

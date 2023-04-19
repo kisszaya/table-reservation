@@ -4,6 +4,6 @@ import { CreateShapeModal } from "../ui";
 export const openCreateShapeModal = () =>
   modals.open({
     title: "Add table",
-      size: 'lg',
+    size: "lg",
     children: <CreateShapeModal />,
   });
