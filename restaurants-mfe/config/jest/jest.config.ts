@@ -1,3 +1,5 @@
+import path from 'path'
+
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
  * https://jestjs.io/docs/configuration
@@ -13,11 +15,22 @@ export default {
     // The directory where Jest should store its cached dependency information
     // cacheDirectory: "/private/var/folders/bg/5c3znp755150kkhwslw8wp1r0000gn/T/jest_dx",
 
+    modulePaths: [
+        '<rootDir>src'
+    ],
+
     // Automatically clear mock calls, instances, contexts and results before every test
     clearMocks: true,
 
     // The test environment that will be used for testing
     testEnvironment: 'jsdom',
+    setupFilesAfterEnv: ['<rootDir>config/jest/jest-setup.ts'],
+
+    // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
+    moduleNameMapper: {
+        '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+        '\\.svg': path.resolve(__dirname, 'jest-empty-component.tsx')
+    },
 
     // An array of regexp pattern strings used to skip coverage collection
     coveragePathIgnorePatterns: [
@@ -26,7 +39,7 @@ export default {
 
     // An array of directory names to be searched recursively up from the requiring module's location
     moduleDirectories: [
-        'node_modules'
+        'node_modules', '<rootDir>src'
     ],
 
     // An array of file extensions your modules use
@@ -97,9 +110,6 @@ export default {
 
     // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
     // maxWorkers: "50%",
-
-    // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-    // moduleNameMapper: {},
 
     // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
     // modulePathIgnorePatterns: [],

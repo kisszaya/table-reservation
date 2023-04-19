@@ -9,7 +9,6 @@ module.exports = {
         'standard-with-typescript',
         'plugin:i18next/recommended'
     ],
-    overrides: [],
     parserOptions: {
         ecmaVersion: 'latest',
         project: ['./tsconfig.json'],
@@ -21,7 +20,13 @@ module.exports = {
         'max-len': ['error', { ignoreComments: true, code: 100 }],
         '@typescript-eslint/indent': 'off',
         'object-curly-spacing': ['error', 'always'],
-        'i18next/no-literal-string': [2, { markupOnly: true }],
+        'i18next/no-literal-string': [2,
+            {
+                markupOnly: true,
+                ignoreAttribute: ['data-testid'
+                ]
+            }
+        ],
         'react/jsx-indent-props': [2, 4],
         indent: [2, 4,
             {
@@ -49,5 +54,13 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    overrides: [
+        {
+            files: ['**/src/**/*.test.{ts,tsx}'],
+            rules: {
+                'i18next/no-literal-string': 'off'
+            }
+        }
+    ]
 }
