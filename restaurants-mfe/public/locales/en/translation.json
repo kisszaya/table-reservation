@@ -2,5 +2,9 @@
   "navigation": {
     "restaurants": "Restaurants",
     "reserves": "Reserves"
+  },
+  "errorBoundary": {
+    "title": "An unexpected error occurred",
+    "refreshButtonText": "Reload page"
   }
 }

@@ -18,7 +18,7 @@ module.exports = {
     plugins: ['react', 'i18next'],
     rules: {
         'react/jsx-indent': [2, 4],
-        'max-len': ['error', { ignoreComments: true }],
+        'max-len': ['error', { ignoreComments: true, code: 100 }],
         '@typescript-eslint/indent': 'off',
         'object-curly-spacing': ['error', 'always'],
         'i18next/no-literal-string': [2, { markupOnly: true }],
@@ -36,7 +36,6 @@ module.exports = {
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-misused-promises': 'off',
-        'sort-imports': ['error'],
         'import/order': [
             'error',
             {
