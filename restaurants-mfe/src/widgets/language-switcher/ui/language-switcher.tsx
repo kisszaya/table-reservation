@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { type FC, useCallback } from 'react'
 
 import { Button, BUTTON_VARIANT } from 'shared/ui'
 
@@ -6,7 +6,11 @@ import { IconTranslate } from 'shared/assets'
 import { useDefaultTranslation } from 'shared/lib'
 import { LANGUAGES } from 'shared/const'
 
-export const LanguageSwitcher = () => {
+interface Props {
+
+}
+
+export const LanguageSwitcher: FC<Props> = (props) => {
     const { i18n } = useDefaultTranslation()
 
     const onChangeLanguage = useCallback(async () => {

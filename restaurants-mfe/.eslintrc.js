@@ -4,7 +4,12 @@ module.exports = {
         es2021: true,
         jest: true
     },
-    extends: ['plugin:react/recommended', 'standard-with-typescript', 'plugin:i18next/recommended', 'plugin:storybook/recommended'],
+    extends: [
+        'plugin:react/recommended',
+        'standard-with-typescript',
+        'plugin:i18next/recommended',
+        'plugin:storybook/recommended'
+    ],
     parserOptions: {
         ecmaVersion: 'latest',
         project: ['./tsconfig.json'],
@@ -42,7 +47,7 @@ module.exports = {
         '@typescript-eslint/consistent-type-assertions': 'off'
     },
     overrides: [{
-        files: ['**/src/**/*.test.{ts,tsx}'],
+        files: ['**/src/**/*.test.{ts,tsx}', '**/src/**/*.stories.{ts,tsx}'],
         rules: {
             'i18next/no-literal-string': 'off'
         }

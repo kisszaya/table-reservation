@@ -13,7 +13,7 @@ export const Button: FC<PropsWithChildren<Props>> = (props) => {
     const {
         children,
         className,
-        variant = BUTTON_VARIANT.CLEAR,
+        variant = BUTTON_VARIANT.DEFAULT,
         ...otherProps
     } = props
 
