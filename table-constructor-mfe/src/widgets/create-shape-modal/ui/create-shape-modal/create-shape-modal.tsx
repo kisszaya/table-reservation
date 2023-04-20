@@ -1,162 +1,63 @@
-import React, { createRef, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Stack } from "@mantine/core";
-import { useForm } from "@mantine/form";
 
 import { ShapeCanvas, TableControl } from "..";
-import {DEFAULT_POINT_COORDINATES, DEFAULT_SHAPE_CONSTRUCTOR} from "shared/consts";
-import {IPoint, TABLE_VARIANT} from "shared/types";
-
-export interface TableFormValues {
-  tableWidth: number;
-  tableHeight: number;
-  tableVariant: TABLE_VARIANT;
-}
-
-const initialTableValues: TableFormValues = {
-  tableHeight: DEFAULT_SHAPE_CONSTRUCTOR.TABLE.height,
-  tableWidth: DEFAULT_SHAPE_CONSTRUCTOR.TABLE.width,
-  tableVariant: DEFAULT_SHAPE_CONSTRUCTOR.TABLE.variant,
-};
+import { DEFAULT_SHAPE_CONSTRUCTOR } from "shared/consts";
+import {
+  ShapeCanvas as ShapeCanvasCls,
+  Shape,
+  IShapeCanvas,
+} from "entities/shapes";
+import { Table } from "entities/tables";
 
 export const CreateShapeModal = () => {
-  const canvasRef = createRef<HTMLCanvasElement>();
-  const mousePosition = useRef<IPoint>(DEFAULT_POINT_COORDINATES);
-  const ctx = useRef<CanvasRenderingContext2D | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const tableForm = useForm<TableFormValues>({
-    initialValues: initialTableValues,
-  });
-
-  const tableHeight = tableForm.values.tableHeight;
-  const tableWidth = tableForm.values.tableWidth;
-  const tableVariant = tableForm.values.tableVariant;
-
-  const canvasHeight =
-    (tableHeight + 2) * DEFAULT_SHAPE_CONSTRUCTOR.HEIGHT_UNIT;
-  const canvasWidth = (tableWidth + 2) * DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT;
+  const [canvas, setCanvas] = useState<ShapeCanvasCls | null>();
 
   useEffect(() => {
-    const context = canvasRef.current?.getContext("2d");
-    if (context) {
-      ctx.current = context;
+    if (canvasRef.current) {
+      const defaultShapeCanvas: IShapeCanvas = {
+        shape: new Shape({
+          title: "",
+          number: 0,
+          personsCount: 0,
+          description: "",
+          seats: [],
+          table: new Table({ ...DEFAULT_SHAPE_CONSTRUCTOR.TABLE }),
+        }),
+        plusSize: DEFAULT_SHAPE_CONSTRUCTOR.PLUS_SIZE,
+        widthUnit: DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT,
+        heightUnit: DEFAULT_SHAPE_CONSTRUCTOR.HEIGHT_UNIT,
+        tableIndent: DEFAULT_SHAPE_CONSTRUCTOR.TABLE_INDENT,
+        canvas: canvasRef.current,
+      };
+
+      setCanvas(new ShapeCanvasCls(defaultShapeCanvas));
     }
-  }, []);
+  }, [canvasRef]);
+
+  console.log("TEST w", canvas?.shape.table.width);
 
   useEffect(() => {
-    const context = ctx.current;
-    if (context) {
-      context.clearRect(0, 0, canvasWidth, canvasHeight);
-
-      const lastTableWidth = tableWidth + 2;
-      const lastTableHeight = tableHeight + 2;
-
-      for (let x = 1; x <= lastTableWidth; x++) {
-        if (x !== lastTableWidth) {
-          // add vertical line
-          context.beginPath();
-          context.setLineDash([5, 5]);
-
-          context.moveTo(x * DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT, 0);
-          context.lineTo(
-            x * DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT,
-            canvasHeight
-          );
-          context.stroke();
-        }
-
-        const plusSize = DEFAULT_SHAPE_CONSTRUCTOR.PLUS_SIZE;
-        const widthUnit = DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT;
-        const heightUnit = DEFAULT_SHAPE_CONSTRUCTOR.HEIGHT_UNIT;
-
-        for (let y = 1; y <= lastTableHeight; y++) {
-          if (x === 1 && y !== lastTableWidth) {
-            // add horizontal line
-            context.beginPath();
-            context.setLineDash([5, 5]);
-            context.moveTo(0, y * heightUnit);
-            context.lineTo(canvasWidth, y * heightUnit);
-            context.stroke();
-          }
-
-          if (
-            x === 1 ||
-            x === lastTableWidth ||
-            y === 1 ||
-            y === lastTableHeight
-          ) {
-            // add plus horizontal line
-            context.beginPath();
-            context.setLineDash([]);
-            context.moveTo(
-              (x - 1) * widthUnit + widthUnit / 2,
-              (y - 1) * heightUnit + heightUnit / 2 - plusSize / 2
-            );
-            context.lineTo(
-              (x - 1) * widthUnit + widthUnit / 2,
-              (y - 1) * heightUnit + heightUnit / 2 + plusSize / 2
-            );
-            context.stroke();
-
-            // add plus vertical line
-            context.beginPath();
-            context.setLineDash([]);
-            context.moveTo(
-              (x - 1) * widthUnit + widthUnit / 2 - plusSize / 2,
-              (y - 1) * heightUnit + heightUnit / 2
-            );
-            context.lineTo(
-              (x - 1) * widthUnit + widthUnit / 2 + plusSize / 2,
-              (y - 1) * heightUnit + heightUnit / 2
-            );
-            context.stroke();
-          }
-        }
-      }
-
-      const indent = DEFAULT_SHAPE_CONSTRUCTOR.TABLE_INDENT;
-
-      switch (tableVariant) {
-        case TABLE_VARIANT.SQUARE:
-          context.beginPath();
-          context.setLineDash([]);
-          context.rect(
-            DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT - indent,
-            DEFAULT_SHAPE_CONSTRUCTOR.HEIGHT_UNIT - indent,
-            DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT * tableWidth + indent * 2,
-            DEFAULT_SHAPE_CONSTRUCTOR.HEIGHT_UNIT * tableHeight + indent * 2
-          );
-          context.fill();
-          context.stroke();
-          break;
-        case TABLE_VARIANT.ROUND:
-          context.beginPath();
-          context.ellipse(
-            canvasWidth / 2,
-            canvasHeight / 2,
-            (DEFAULT_SHAPE_CONSTRUCTOR.WIDTH_UNIT * tableWidth + indent * 2) /
-              2,
-            (DEFAULT_SHAPE_CONSTRUCTOR.HEIGHT_UNIT * tableHeight + indent * 2) /
-              2,
-            0,
-            0,
-            2 * Math.PI
-          );
-
-          context.fill();
-          context.stroke();
-          break;
-      }
-    }
-  }, [canvasWidth, canvasHeight, tableVariant]);
+    console.log("TEST meow");
+    canvas?.setCanvasWidth();
+    canvas?.setCanvasHeight();
+    canvas?.draw();
+  }, [
+    canvas?.shape.table.width,
+    canvas?.shape.table.height,
+    canvas?.shape.table.variant,
+  ]);
 
   return (
     <Stack align="center">
       <ShapeCanvas
-        canvasHeight={canvasHeight}
-        canvasWidth={canvasWidth}
+        canvasHeight={canvas?.canvasHeight ?? 100}
+        canvasWidth={canvas?.canvasWidth ?? 100}
         ref={canvasRef}
       />
-      <TableControl tableForm={tableForm} />
+      <TableControl table={canvas?.shape.table} />
     </Stack>
   );
 };

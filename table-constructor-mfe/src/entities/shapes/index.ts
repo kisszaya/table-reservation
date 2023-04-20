@@ -1,1 +1,1 @@
-export { Shape, ShapeCanvas } from "./lib";
+export { Shape, ShapeCanvas, IShapeCanvas } from "./lib";

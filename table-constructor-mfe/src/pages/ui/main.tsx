@@ -13,7 +13,7 @@ import {
   useZoomCanvas,
 } from "features/canvas-settings";
 import { showCanvasGrid } from "features/canvas-grid";
-import { openCreateShapeModal } from "../../widgets";
+import { openCreateShapeModal } from "widgets";
 
 // adjust to device to avoid blur
 const { devicePixelRatio: ratio = 1 } = window;

@@ -1,1 +1,1 @@
-export * from "./seat-class";
+export * from "./seat.class";

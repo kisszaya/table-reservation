@@ -10,8 +10,15 @@ export class Table implements ITable {
     this.width = props.width;
     this.variant = props.variant;
   }
-
   set setVariant(variant: TABLE_VARIANT) {
     this.variant = variant;
+  }
+
+  set setHeight(height: number) {
+    this.height = height;
+  }
+
+  public setWidth(width: number) {
+    this.width = width;
   }
 }

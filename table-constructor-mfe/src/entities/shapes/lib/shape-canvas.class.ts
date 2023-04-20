@@ -2,11 +2,9 @@ import { Shape } from "./shape.class";
 import { TABLE_VARIANT } from "shared/types";
 import { DEFAULT_SHAPE_CONSTRUCTOR } from "shared/consts";
 
-interface IShapeCanvas {
+export interface IShapeCanvas {
   shape: Shape;
   canvas: HTMLCanvasElement;
-  canvasHeight: number;
-  canvasWidth: number;
   heightUnit: number;
   widthUnit: number;
   plusSize: number;
@@ -39,7 +37,42 @@ export class ShapeCanvas implements IShapeCanvas {
     this.tableIndent = props.tableIndent;
   }
 
-  public drawVerticalLine(x: number) {
+  public setCanvasHeight() {
+    this.canvasHeight = (this.shape.table.height + 2) * this.heightUnit;
+  }
+
+  public setCanvasWidth() {
+    this.canvasWidth = (this.shape.table.width + 2) * this.widthUnit;
+  }
+
+  public draw() {
+    const lastTableWidth = this.shape.table.width + 2;
+    const lastTableHeight = this.shape.table.height + 2;
+    for (let x = 1; x <= lastTableWidth; x++) {
+      if (x !== lastTableWidth) {
+        this.drawVerticalLine(x);
+      }
+
+      for (let y = 1; y <= lastTableHeight; y++) {
+        if (x === 1 && y !== lastTableWidth) {
+          this.drawHorizontalLine(y);
+        }
+
+        if (
+          x === 1 ||
+          x === lastTableWidth ||
+          y === 1 ||
+          y === lastTableHeight
+        ) {
+          this.drawPlus(x, y);
+        }
+      }
+    }
+
+    this.drawTable();
+  }
+
+  private drawVerticalLine(x: number) {
     this.ctx.beginPath();
     this.ctx.setLineDash([5, 5]);
 
@@ -48,7 +81,7 @@ export class ShapeCanvas implements IShapeCanvas {
     this.ctx.stroke();
   }
 
-  public drawHorizontalLine(y: number) {
+  private drawHorizontalLine(y: number) {
     this.ctx.beginPath();
     this.ctx.setLineDash([5, 5]);
     this.ctx.moveTo(0, y * this.heightUnit);
@@ -56,7 +89,7 @@ export class ShapeCanvas implements IShapeCanvas {
     this.ctx.stroke();
   }
 
-  public drawPlus(x: number, y: number) {
+  private drawPlus(x: number, y: number) {
     // add plus horizontal line
     this.ctx.beginPath();
     this.ctx.setLineDash([]);
@@ -84,7 +117,7 @@ export class ShapeCanvas implements IShapeCanvas {
     this.ctx.stroke();
   }
 
-  public drawTable() {
+  private drawTable() {
     const tableWidth = this.shape.table.width;
     const tableHeight = this.shape.table.height;
 
