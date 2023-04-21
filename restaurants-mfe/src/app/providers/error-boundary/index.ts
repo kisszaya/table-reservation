@@ -1,0 +1,2 @@
+
+export { withErrorBoundary } from './ui'

@@ -1,14 +1,7 @@
-import { type FC, type PropsWithChildren } from 'react'
+import compose from 'compose-function'
 
-import { BrowserProvider } from './browser-provider'
-import { ErrorBoundary } from './error-boundary'
+import { withErrorBoundary } from './error-boundary'
+import { withBrowserProvider } from './routing'
+import { withThemeProvider } from './theme'
 
-export const Providers: FC<PropsWithChildren> = ({ children }) => {
-    return (
-        <BrowserProvider>
-            <ErrorBoundary>
-                {children}
-            </ErrorBoundary>
-        </BrowserProvider>
-    )
-}
+export const withProviders = compose(withBrowserProvider, withThemeProvider, withErrorBoundary)

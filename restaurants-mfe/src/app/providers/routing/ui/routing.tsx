@@ -1,8 +1,8 @@
 import { type FC, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { type IRoutes } from 'features/routing'
 import { PageLoader } from 'widgets/page-loader'
+import { type IRoutes } from '../types'
 
 interface Props {
   routes: IRoutes<string>
