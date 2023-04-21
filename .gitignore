@@ -1,7 +1,11 @@
 dist
 node_modules
+!restaurants-mfe/node_modules
 .next
 .env
 .idea
 
 /libs/lib
+
+restaurants-mfe/node_modules/*
+!restaurants-mfe/node_modules/@loki
