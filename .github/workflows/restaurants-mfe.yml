@@ -1,0 +1,32 @@
+name: Restaurants-mfe
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Go to /restaurants-mfe folder
+        run: cd ./restaurants-mfe
+      - name: Install modules
+        run: npm install
+      - name: Build production project
+        run: npm run build:prod
+      - name: Linting typescript
+        run: npm run lint:ts
+      - name: Linting scss
+        run: npm run lint:scss
+      - name: Testing unit
+        run: npm run test:unit
