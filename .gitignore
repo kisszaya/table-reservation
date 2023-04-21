@@ -4,6 +4,7 @@ node_modules
 .next
 .env
 .idea
+storybook-static
 
 /libs/lib
 
