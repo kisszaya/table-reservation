@@ -8,7 +8,8 @@ module.exports = {
         'plugin:react/recommended',
         'standard-with-typescript',
         'plugin:i18next/recommended',
-        'plugin:storybook/recommended'
+        'plugin:storybook/recommended',
+        'plugin:react-hooks/recommended'
     ],
     parserOptions: {
         ecmaVersion: 'latest',
@@ -45,10 +46,12 @@ module.exports = {
             groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index']
         }],
         '@typescript-eslint/consistent-type-assertions': 'off',
-        'react/display-name': 'off'
+        'react/display-name': 'off',
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn'
     },
     overrides: [{
-        files: ['**/src/**/*.test.{ts,tsx}', '**/src/**/*.stories.{ts,tsx}'],
+        files: ['**/src/**/*.{test,stories}.{ts,tsx}'],
         rules: {
             'i18next/no-literal-string': 'off'
         }

@@ -6,6 +6,12 @@ export const useRestaurantsTranslation = () => {
     return { t, i18n }
 }
 
+export const useReservesForbiddenTranslation = () => {
+    const { t, i18n } = useTranslation('reserves-forbidden')
+
+    return { t, i18n }
+}
+
 export const useReservesTranslation = () => {
     const { t, i18n } = useTranslation('reserves')
 

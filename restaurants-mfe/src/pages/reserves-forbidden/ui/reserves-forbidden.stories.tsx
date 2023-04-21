@@ -3,14 +3,14 @@ import { type ComponentStory, type Meta } from '@storybook/react'
 
 import { ThemeDecorator } from 'shared/config/storybook'
 import { THEME_VARIANT } from 'features/theme-provider'
-import { Navbar } from './navbar'
+import ReservesForbidden from './reserves-forbidden'
 
 export default {
-    title: 'widgets/navbar',
-    component: Navbar
-} as Meta<typeof Navbar>
+    title: 'pages/reserves-forbidden',
+    component: ReservesForbidden
+} as Meta<typeof ReservesForbidden>
 
-const Template: ComponentStory<typeof Navbar> = (args) => <Navbar {...args} />
+const Template: ComponentStory<typeof ReservesForbidden> = () => <ReservesForbidden />
 
 export const Light = Template.bind({})
 Light.args = {}

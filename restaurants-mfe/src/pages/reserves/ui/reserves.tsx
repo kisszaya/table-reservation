@@ -1,7 +1,8 @@
 
 const Reserves = () => {
     return (
-        <div/>
+        <div>
+        </div>
     )
 }
 

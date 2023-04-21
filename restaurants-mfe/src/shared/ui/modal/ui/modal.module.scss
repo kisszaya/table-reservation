@@ -1,0 +1,41 @@
+
+.container {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.content {
+    background: var(--bg-primary);
+    width: 100px;
+    height: 100px;
+    transition: 0.2s transform;
+    transform: scale(0.5);
+}
+
+.opened {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: var(--modal-z-index);
+
+    .content {
+        transform: scale(1);
+    }
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closing {
+    .content {
+        transform: scale(0);
+    }
+}

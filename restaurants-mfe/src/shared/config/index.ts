@@ -1,1 +1,3 @@
-export { PUBLIC_PATH, PUBLIC_CLIENT_PATHS } from './client-routes'
+export {
+    PUBLIC_PATH, PUBLIC_CLIENT_PATHS, PRIVATE_CLIENT_PATHS, PRIVATE_PATH
+} from './client-routes'

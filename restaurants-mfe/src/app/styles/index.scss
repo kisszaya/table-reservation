@@ -3,12 +3,18 @@
 @import "./themes/dark";
 @import "./themes/light";
 
-.app {
+body {
     font: var(--font-md);
-    background: var(--bg-primary);
     color: var(--text-primary);
-    min-height: 100vh;
+}
 
+.app {
+    background: var(--bg-primary);
+    min-height: 100vh;
+    
     // Dimensions
-    --navbar-height: 50px
+    --navbar-height: 50px;
+
+    // z-indexes
+    --modal-z-index: 10;
 }

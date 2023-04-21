@@ -19,7 +19,7 @@ export const useTheme = (): ReturnedValue => {
       theme === THEME_VARIANT.DARK ? THEME_VARIANT.LIGHT : THEME_VARIANT.DARK
         setTheme(newTheme)
         setInLocalStorage(LOCAL_STORAGE_THEME_KEY, newTheme)
-    }, [theme])
+    }, [setTheme, theme])
 
     return {
         theme,

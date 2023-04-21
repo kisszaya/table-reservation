@@ -1,9 +1,17 @@
 
 .app.dark {
+    // bg colors
     --bg-primary: #1F2224;
     --bg-secondary: #2A2E30;
+    --inverted-bg-primary: #FFF;
+    --inverted-bg-secondary: #e3dede;
+
+    // text colors
     --text-primary: #FFF;
     --text-secondary: rgb(255 255 255 / 75%);
     --inverted-text-primary: #181B1D;
     --inverted-text-secondary: #1F2224;
+    
+    // overlay colors
+    --overlay-primary: rgb(255 255 255 / 60%);
 }
