@@ -12,7 +12,7 @@ export const plugins = (
 ): webpack.WebpackPluginInstance[] => {
     const { paths, isDev } = options
 
-    return [
+    const plugins = [
         new HTMLWebpackPlugin({ template: paths.html }),
         new webpack.ProgressPlugin(),
         new MiniCssExtractPlugin({
@@ -21,10 +21,15 @@ export const plugins = (
         }),
         new webpack.DefinePlugin({
             __IS_DEV__: JSON.stringify(isDev)
-        }),
-        new ReactRefreshPlugin(),
-        new BundleAnalyzerPlugin({
-            openAnalyzer: false
         })
     ]
+
+    if (isDev) {
+        plugins.push(new ReactRefreshPlugin())
+        plugins.push(new BundleAnalyzerPlugin({
+            openAnalyzer: false
+        }))
+    }
+
+    return plugins
 }
