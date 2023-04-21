@@ -18,15 +18,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Go to /restaurants-mfe folder
-        run: cd ./restaurants-mfe
       - name: Install modules
-        run: npm install
+        run: cd ./restaurants-mfe && npm install
       - name: Build production project
-        run: npm run build:prod
+        run: cd ./restaurants-mfe && npm run build:prod
       - name: Linting typescript
-        run: npm run lint:ts
+        run: cd ./restaurants-mfe && npm run lint:ts
       - name: Linting scss
-        run: npm run lint:scss
+        run: cd ./restaurants-mfe && npm run lint:scss
       - name: Testing unit
-        run: npm run test:unit
+        run: cd ./restaurants-mfe && npm run test:unit
