@@ -10,3 +10,5 @@ storybook-static
 
 restaurants-mfe/node_modules/*
 !restaurants-mfe/node_modules/@loki
+/restaurants-mfe/.loki/report.html
+/restaurants-mfe/.loki/report.json

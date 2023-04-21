@@ -23,10 +23,13 @@ jobs:
       - name: Build production project
         run: cd ./restaurants-mfe && yarn run build:prod
       - name: Linting typescript
+        if: always()
         run: cd ./restaurants-mfe && yarn run lint:ts
       - name: Linting scss
+        if: always()
         run: cd ./restaurants-mfe && yarn run lint:scss
       - name: Testing unit
+        if: always()
         run: cd ./restaurants-mfe && yarn run test:unit
 #      - name: Build storybook
 #        run: cd ./restaurants-mfe && yarn run storybook:build
