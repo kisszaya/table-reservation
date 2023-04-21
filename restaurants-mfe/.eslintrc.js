@@ -44,7 +44,8 @@ module.exports = {
         'import/order': ['error', {
             groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index']
         }],
-        '@typescript-eslint/consistent-type-assertions': 'off'
+        '@typescript-eslint/consistent-type-assertions': 'off',
+        'react/display-name': 'off'
     },
     overrides: [{
         files: ['**/src/**/*.test.{ts,tsx}', '**/src/**/*.stories.{ts,tsx}'],

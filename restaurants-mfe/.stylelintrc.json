@@ -2,6 +2,6 @@
   "extends": "stylelint-config-standard-scss",
   "rules": {
     "indentation": [4],
-    "keyframe-block-no-duplicate-selectors": "off"
+    "keyframe-block-no-duplicate-selectors": null
   }
 }
