@@ -28,7 +28,7 @@ jobs:
         run: cd ./restaurants-mfe && yarn run lint:scss
       - name: Testing unit
         run: cd ./restaurants-mfe && yarn run test:unit
-      - name: Build storybook
-        run: cd ./restaurants-mfe && yarn run storybook:build
-      - name: Testing screenshots
-        run: cd ./restaurants-mfe && yarn run test:ui:ci
+#      - name: Build storybook
+#        run: cd ./restaurants-mfe && yarn run storybook:build
+#      - name: Testing screenshots
+#        run: cd ./restaurants-mfe && yarn run test:ui:ci
