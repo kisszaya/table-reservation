@@ -5,6 +5,7 @@ import path from 'path'
 import { type IBuildPaths } from '../build/types/config'
 import { cssLoader } from '../build/loaders/css-loader'
 import { svgLoader } from '../build/loaders/svg-loader'
+import { fileLoader } from '../build/loaders/file-loader'
 
 export default ({ config }: { config: webpack.Configuration }) => {
     const paths: IBuildPaths = {
@@ -27,6 +28,7 @@ export default ({ config }: { config: webpack.Configuration }) => {
 
     config.module.rules.push(cssLoader(true))
     config.module.rules.push(svgLoader())
+    config.module.rules.push(fileLoader())
 
     return config
 }
