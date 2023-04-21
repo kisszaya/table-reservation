@@ -15,16 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install modules
-        run: cd ./restaurants-mfe && npm install
+        run: cd ./restaurants-mfe && yarn install
       - name: Build production project
-        run: cd ./restaurants-mfe && npm run build:prod
+        run: cd ./restaurants-mfe && yarn run build:prod
       - name: Linting typescript
-        run: cd ./restaurants-mfe && npm run lint:ts
+        run: cd ./restaurants-mfe && yarn run lint:ts
       - name: Linting scss
-        run: cd ./restaurants-mfe && npm run lint:scss
+        run: cd ./restaurants-mfe && yarn run lint:scss
       - name: Testing unit
-        run: cd ./restaurants-mfe && npm run test:unit
+        run: cd ./restaurants-mfe && yarn run test:unit
