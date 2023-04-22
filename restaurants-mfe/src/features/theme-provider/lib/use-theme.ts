@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 
 import { setInLocalStorage } from 'shared/lib'
 import { THEME_VARIANT, LOCAL_STORAGE_THEME_KEY } from '../const'
@@ -14,10 +14,15 @@ export const useTheme = (): ReturnedValue => {
 
     const { theme, setTheme } = values
 
+    useEffect(() => {
+        document.body.className = theme
+    }, [])
+
     const toggleTheme = useCallback(() => {
         const newTheme =
-      theme === THEME_VARIANT.DARK ? THEME_VARIANT.LIGHT : THEME_VARIANT.DARK
+            theme === THEME_VARIANT.DARK ? THEME_VARIANT.LIGHT : THEME_VARIANT.DARK
         setTheme(newTheme)
+        document.body.className = newTheme
         setInLocalStorage(LOCAL_STORAGE_THEME_KEY, newTheme)
     }, [setTheme, theme])
 
