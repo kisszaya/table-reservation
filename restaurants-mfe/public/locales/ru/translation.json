@@ -6,5 +6,7 @@
   "errorBoundary": {
     "title": "Произошла непредвиденная ошибка",
     "refreshButtonText": "Обновить страницу"
-  }
+  },
+  "increment": "Увеличить",
+  "decrement": "Уменьшить"
 }

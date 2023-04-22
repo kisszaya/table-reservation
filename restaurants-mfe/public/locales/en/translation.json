@@ -6,5 +6,7 @@
   "errorBoundary": {
     "title": "An unexpected error occurred",
     "refreshButtonText": "Reload page"
-  }
+  },
+  "increment": "increment",
+  "decrement": "decrement"
 }

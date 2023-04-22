@@ -7,7 +7,7 @@ export const useRestaurantsTranslation = () => {
 }
 
 export const useReservesForbiddenTranslation = () => {
-    const { t, i18n } = useTranslation('reserves-forbidden')
+    const { t, i18n } = useTranslation('reservesForbidden')
 
     return { t, i18n }
 }
@@ -19,7 +19,7 @@ export const useReservesTranslation = () => {
 }
 
 export const useDefaultTranslation = () => {
-    const { t, i18n } = useTranslation()
+    const { t, i18n } = useTranslation('translation')
 
     return { t, i18n }
 }
