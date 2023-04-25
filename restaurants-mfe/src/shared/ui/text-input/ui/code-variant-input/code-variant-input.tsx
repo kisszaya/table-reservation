@@ -37,7 +37,7 @@ export const CodeVariantInput: FC<ITextInputVariantProps> = (props) => {
     return (
         <div className={styles.container}>
             <p className={styles.placeholder}>{`${placeholder}>`}</p>
-            <div className={styles.caretContainer}>
+            <div className={styles['caret-container']}>
                 <input
                     className={styles.input}
                     ref={inputRef}

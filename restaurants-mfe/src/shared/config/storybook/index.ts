@@ -1,3 +1,6 @@
 export * from './style-decorator'
 export * from './theme-decorator'
 export * from './router-decorator'
+export * from './store-decorator'
+export * from './translation-decorator'
+export * from './modal-decorator'

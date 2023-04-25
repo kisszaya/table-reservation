@@ -3,14 +3,16 @@ import { type FC } from 'react'
 import { ThemeSwitcher } from 'widgets/theme-switcher'
 import { LanguageSwitcher } from 'widgets/language-switcher'
 import { PUBLIC_PATH } from 'shared/config'
-import { Link } from 'shared/ui'
+import { Button, Link } from 'shared/ui'
 import { useDefaultTranslation } from 'shared/lib'
+import { useLoginByPhoneModal } from 'features/auth-by-phone'
 
 import styles from './navbar.module.scss'
 
 interface Props {}
 
 export const Navbar: FC<Props> = (props) => {
+    const { open } = useLoginByPhoneModal()
     const { t } = useDefaultTranslation()
 
     return (
@@ -27,6 +29,10 @@ export const Navbar: FC<Props> = (props) => {
                     </Link>
                 ))}
             </div>
+
+            <Button onClick={open}>
+                {t('auth.loginBtn')}
+            </Button>
         </div>
     )
 }

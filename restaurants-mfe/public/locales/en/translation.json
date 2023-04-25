@@ -8,5 +8,13 @@
     "refreshButtonText": "Reload page"
   },
   "increment": "increment",
-  "decrement": "decrement"
+  "decrement": "decrement",
+  "auth": {
+    "loginBtn": "Login",
+    "signupBtn": "Signup",
+    "logoutBtn": "Logout",
+    "loginForm": {
+      "loginBtn": "Login"
+    }
+  }
 }

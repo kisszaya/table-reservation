@@ -1,4 +1,4 @@
-import type webpack from 'webpack'
+import webpack from 'webpack'
 import { type RuleSetRule } from 'webpack'
 import path from 'path'
 
@@ -29,6 +29,15 @@ export default ({ config }: { config: webpack.Configuration }) => {
     config.module.rules.push(cssLoader(true))
     config.module.rules.push(svgLoader())
     config.module.rules.push(fileLoader())
+
+    config.plugins.push(new webpack.DefinePlugin({
+        __IS_DEV__: true
+    }))
+
+    config.resolve.modules = [
+        path.resolve(__dirname, '../../src'),
+        'node_modules'
+    ]
 
     return config
 }

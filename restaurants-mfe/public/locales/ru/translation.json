@@ -8,5 +8,13 @@
     "refreshButtonText": "Обновить страницу"
   },
   "increment": "Увеличить",
-  "decrement": "Уменьшить"
+  "decrement": "Уменьшить",
+  "auth": {
+    "loginBtn": "Войти",
+    "signupBtn": "Зарегистрироваться",
+    "logoutBtn": "Выйти",
+    "loginForm": {
+      "loginBtn": "Войти"
+    }
+  }
 }

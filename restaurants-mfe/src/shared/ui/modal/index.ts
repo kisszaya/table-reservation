@@ -1,1 +1,2 @@
-export { Modal } from './ui/modal'
+export { ModalProvider, Modal } from './ui'
+export { useModal } from './lib'
