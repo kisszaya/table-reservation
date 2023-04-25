@@ -1,5 +1,3 @@
-import { type DeepPartial } from '@reduxjs/toolkit'
-
 import { loginByPhoneReducer, loginByPhoneActions } from './login-by-phone-slice'
 import { type ILoginByPhoneSchema } from '..'
 

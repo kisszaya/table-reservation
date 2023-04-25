@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { type ComponentStory, type Meta } from '@storybook/react'
-import { type DeepPartial } from '@reduxjs/toolkit'
 
 import { ModalDecorator, StoreDecorator } from 'shared/config/storybook'
 import { type IStateSchema } from 'app/providers/store'

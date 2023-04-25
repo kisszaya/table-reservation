@@ -11,7 +11,7 @@ import { Modal } from '..'
 import { type IModalContext, ModalContext } from '../../lib'
 
 export const ModalProvider: FC<PropsWithChildren> = (props) => {
-    const [component, setComponent] = useState(null)
+    const [component, setComponent] = useState<ReactNode | null>(null)
     const { children } = props
 
     const close = useCallback(() => {

@@ -1,4 +1,3 @@
-import { type DeepPartial } from '@reduxjs/toolkit'
 import { type IStateSchema } from 'app/providers/store'
 
 import { selectLoginByPhoneError } from './select-login-by-phone-error'

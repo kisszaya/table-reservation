@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { createReduxStore } from '../config'
 
 export const withReduxStore = (component: () => ReactNode) => () => {
+    // const navigate = useNavigate()
     const store = createReduxStore()
 
     return (

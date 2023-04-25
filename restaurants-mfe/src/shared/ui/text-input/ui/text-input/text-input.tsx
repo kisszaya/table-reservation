@@ -9,7 +9,7 @@ export const TextInput = memo((props: ITextInputProps) => {
 
     const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         onChange?.(event?.target.value)
-    }, [])
+    }, [onChange])
 
     switch (variant) {
         case TEXT_INPUT_VARIANT.CODE:

@@ -20,7 +20,9 @@ export const testComponentRender = (
         route = '/', initialState
     } = options
 
-    const store = createReduxStore(initialState as IStateSchema)
+    const store = createReduxStore({
+        initialState: initialState as IStateSchema
+    })
 
     return render(
         <StoreProvider store={store}>

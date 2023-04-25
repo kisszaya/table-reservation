@@ -10,7 +10,7 @@ import { type IBuildOptions } from './types/config'
 export const plugins = (
     options: IBuildOptions
 ): webpack.WebpackPluginInstance[] => {
-    const { paths, isDev } = options
+    const { paths, isDev, apiUrl } = options
 
     const plugins = [
         new HTMLWebpackPlugin({ template: paths.html }),
@@ -20,7 +20,8 @@ export const plugins = (
             chunkFilename: 'css/[name].[contenthash:8].css'
         }),
         new webpack.DefinePlugin({
-            __IS_DEV__: JSON.stringify(isDev)
+            __IS_DEV__: JSON.stringify(isDev),
+            __API__: JSON.stringify(apiUrl)
         })
     ]
 

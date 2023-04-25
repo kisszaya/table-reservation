@@ -3,8 +3,11 @@ export const getFromLocalStorage = <ReturnedType>(
     defaultValue?: ReturnedType
 ) => {
     const res = localStorage.getItem(key)
+    if (!res && !defaultValue) {
+        return undefined
+    }
     if (!res) {
-        return defaultValue || undefined
+        return defaultValue
     }
 
     return (

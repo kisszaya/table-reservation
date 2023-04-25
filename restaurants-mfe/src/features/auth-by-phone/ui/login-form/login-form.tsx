@@ -42,7 +42,7 @@ const LoginForm = memo((props: LoginFormProps) => {
         if (result.meta.requestStatus === 'fulfilled') {
             closeModal()
         }
-    }, [dispatch, phone])
+    }, [closeModal, dispatch, phone])
 
     return (
         <DynamicModuleLoader reducers={asyncReducers}>

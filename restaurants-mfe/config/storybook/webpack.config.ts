@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import webpack from 'webpack'
 import { type RuleSetRule } from 'webpack'
 import path from 'path'
@@ -31,7 +33,8 @@ export default ({ config }: { config: webpack.Configuration }) => {
     config.module.rules.push(fileLoader())
 
     config.plugins.push(new webpack.DefinePlugin({
-        __IS_DEV__: true
+        __IS_DEV__: true,
+        __API__: ''
     }))
 
     config.resolve.modules = [

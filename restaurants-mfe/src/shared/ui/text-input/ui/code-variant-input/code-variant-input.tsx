@@ -12,13 +12,13 @@ export const CodeVariantInput: FC<ITextInputVariantProps> = (props) => {
 
     useEffect(() => {
         if (autofocus) {
-            inputRef?.current.focus()
+            inputRef.current?.focus()
             setIsFocused(true)
         }
     }, [autofocus])
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        onChange(event)
+        onChange?.(event)
         setCaretPosition(event.target.value.length)
     }
 
@@ -36,7 +36,7 @@ export const CodeVariantInput: FC<ITextInputVariantProps> = (props) => {
 
     return (
         <div className={styles.container}>
-            <p className={styles.placeholder}>{`${placeholder}>`}</p>
+            <p className={styles.placeholder}>{`${placeholder ?? ''}>`}</p>
             <div className={styles['caret-container']}>
                 <input
                     className={styles.input}
