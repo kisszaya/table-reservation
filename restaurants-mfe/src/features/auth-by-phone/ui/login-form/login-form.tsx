@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { type FC, useCallback, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { type FC, useCallback } from 'react'
 
 import { Button, TextInput, useModal } from 'shared/ui'
-import { selectUserAuthData } from 'entities/user'
 
 import { DynamicModuleLoader, type IReducersList } from 'shared/lib/ui'
 import { useDefaultTranslation } from 'shared/lib'
+import { useAppDispatch } from 'shared/lib/hooks'
 import {
     loginByPhone,
     loginByPhoneActions,
@@ -24,30 +24,24 @@ const asyncReducers: IReducersList = {
 }
 
 const LoginForm: FC<LoginFormProps> = (props) => {
-    const { close } = useModal()
+    const { close: closeModal } = useModal()
     const { t } = useDefaultTranslation()
 
     // store
     const phone = useSelector(selectLoginByPhonePhone)
     const isLoading = useSelector(selectLoginByPhoneLoading)
     const error = useSelector(selectLoginByPhoneError)
-    const userData = useSelector(selectUserAuthData)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onChangePhone = useCallback((value: string) => {
         dispatch(loginByPhoneActions.setPhone(value))
     }, [dispatch])
 
-    useEffect(() => {
-        if (userData) {
-            close()
+    const onSubmit = async () => {
+        const result = await dispatch(loginByPhone({ phone }))
+        if (result.meta.requestStatus === 'fulfilled') {
+            closeModal()
         }
-    }, [close, userData])
-
-    const onSubmit = () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        dispatch(loginByPhone({ phone }))
     }
 
     return (
