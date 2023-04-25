@@ -1,11 +1,11 @@
-import { type FC } from 'react'
+import { memo } from 'react'
 import './loader.scss'
 
 interface Props {
 
 }
 
-export const Loader: FC<Props> = (props) => {
+export const Loader = memo((props: Props) => {
     return (
         <div className="lds-ellipsis">
             <div />
@@ -14,4 +14,4 @@ export const Loader: FC<Props> = (props) => {
             <div />
         </div>
     )
-}
+})

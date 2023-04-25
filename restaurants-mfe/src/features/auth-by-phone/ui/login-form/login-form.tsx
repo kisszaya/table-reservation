@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { type FC, useCallback } from 'react'
+import { memo, useCallback } from 'react'
 
 import { Button, TextInput, useModal } from 'shared/ui'
 
@@ -23,7 +23,7 @@ const asyncReducers: IReducersList = {
     loginByPhone: loginByPhoneReducer
 }
 
-const LoginForm: FC<LoginFormProps> = (props) => {
+const LoginForm = memo((props: LoginFormProps) => {
     const { close: closeModal } = useModal()
     const { t } = useDefaultTranslation()
 
@@ -37,12 +37,12 @@ const LoginForm: FC<LoginFormProps> = (props) => {
         dispatch(loginByPhoneActions.setPhone(value))
     }, [dispatch])
 
-    const onSubmit = async () => {
+    const onSubmit = useCallback(async () => {
         const result = await dispatch(loginByPhone({ phone }))
         if (result.meta.requestStatus === 'fulfilled') {
             closeModal()
         }
-    }
+    }, [dispatch, phone])
 
     return (
         <DynamicModuleLoader reducers={asyncReducers}>
@@ -55,6 +55,6 @@ const LoginForm: FC<LoginFormProps> = (props) => {
             </div>
         </DynamicModuleLoader>
     )
-}
+})
 
 export default LoginForm

@@ -10,7 +10,7 @@ export default {
     component: LanguageSwitcher
 } as Meta<typeof LanguageSwitcher>
 
-const Template: ComponentStory<typeof LanguageSwitcher> = (args) => <LanguageSwitcher {...args} />
+const Template: ComponentStory<typeof LanguageSwitcher> = () => <LanguageSwitcher />
 
 export const Light = Template.bind({})
 Light.args = {}
