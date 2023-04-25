@@ -5,7 +5,12 @@ import { TEXT_INPUT_VARIANT } from '../..'
 import { CodeVariantInput, DefaultVariantInput } from '..'
 
 export const TextInput = memo((props: ITextInputProps) => {
-    const { onChange, variant = TEXT_INPUT_VARIANT.DEFAULT, ...otherProps } = props
+    const {
+        onChange,
+        variant = TEXT_INPUT_VARIANT.DEFAULT,
+        readonly = false,
+        ...otherProps
+    } = props
 
     const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         onChange?.(event?.target.value)
@@ -13,8 +18,16 @@ export const TextInput = memo((props: ITextInputProps) => {
 
     switch (variant) {
         case TEXT_INPUT_VARIANT.CODE:
-            return <CodeVariantInput {...otherProps} onChange={onChangeHandler}/>
+            return <CodeVariantInput
+                {...otherProps}
+                onChange={onChangeHandler}
+                readonly={readonly}
+            />
         default:
-            return <DefaultVariantInput {...otherProps} onChange={onChangeHandler}/>
+            return <DefaultVariantInput
+                {...otherProps}
+                onChange={onChangeHandler}
+                readonly={readonly}
+            />
     }
 })

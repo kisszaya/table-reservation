@@ -49,7 +49,8 @@ module.exports = {
         'react/display-name': 'off',
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
-        '@typescript-eslint/no-dynamic-delete': 'off'
+        '@typescript-eslint/no-dynamic-delete': 'off',
+        'no-case-declarations': 'warn'
     },
     overrides: [{
         files: ['**/src/**/*.{test,stories}.{ts,tsx}'],

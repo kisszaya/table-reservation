@@ -5,7 +5,13 @@ import styles from './code-variant-input.module.scss'
 import { type ITextInputVariantProps } from '../../types'
 
 export const CodeVariantInput: FC<ITextInputVariantProps> = (props) => {
-    const { autofocus = false, placeholder, onChange, ...otherProps } = props
+    const {
+        autofocus = false,
+        placeholder,
+        onChange,
+        readonly,
+        ...otherProps
+    } = props
     const [isFocused, setIsFocused] = useState(false)
     const [caretPosition, setCaretPosition] = useState(0)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -38,7 +44,7 @@ export const CodeVariantInput: FC<ITextInputVariantProps> = (props) => {
         <div className={styles.container}>
             <p className={styles.placeholder}>{`${placeholder ?? ''}>`}</p>
             <div className={styles['caret-container']}>
-                <input
+                <input disabled={readonly}
                     className={styles.input}
                     ref={inputRef}
                     onFocus={onFocus}
