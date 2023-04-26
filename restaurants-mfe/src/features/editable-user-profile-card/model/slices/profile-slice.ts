@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 import { type IProfile } from 'entities/profile'
+import { type VALIDATION_ERROR } from 'shared/const'
 import { userProfileInitialState } from './initial-state'
 import { fetchProfileData, type IUserProfileSchema, updateProfileData } from '..'
 
@@ -44,11 +45,11 @@ export const userProfileSlice = createSlice({
             })
             .addCase(updateProfileData.pending, (state) => {
                 state.isLoading = true
-                state.error = null
+                state.validationErrors = null
             })
             .addCase(updateProfileData.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.payload as string
+                state.validationErrors = action.payload as VALIDATION_ERROR[]
             })
     }
 })

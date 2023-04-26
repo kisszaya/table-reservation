@@ -1,2 +1,2 @@
 export type { IProfile } from './types'
-export { ProfileCard, type IProfileCardEditableProps } from './ui'
+export { ProfileCard } from './ui'

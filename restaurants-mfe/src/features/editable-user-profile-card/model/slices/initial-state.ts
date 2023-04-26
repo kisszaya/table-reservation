@@ -9,6 +9,7 @@ export const userProfileInitialState: IUserProfileSchema = {
     data: userProfileDataInitialState,
     editable: false,
     isLoading: false,
+    validationErrors: null,
     error: null,
     form: userProfileDataInitialState
 }

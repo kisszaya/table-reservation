@@ -1,0 +1,15 @@
+import { i18n } from 'shared/config'
+
+export enum USER_PROFILE_ERROR {
+    SERVER_ERROR = 'SERVER_ERROR',
+    INCORRECT_USER_DATA = 'INCORRECT_USER_DATA',
+    INCORRECT_PHONE = 'INCORRECT_PHONE',
+    INCORRECT_EMAIL = 'INCORRECT_PHONE'
+}
+
+export const userProfileErrorsTexts: Record<USER_PROFILE_ERROR, string> = {
+    [USER_PROFILE_ERROR.SERVER_ERROR]: i18n.t(''),
+    [USER_PROFILE_ERROR.INCORRECT_PHONE]: i18n.t(''),
+    [USER_PROFILE_ERROR.INCORRECT_USER_DATA]: i18n.t(''),
+    [USER_PROFILE_ERROR.SERVER_ERROR]: i18n.t('')
+}

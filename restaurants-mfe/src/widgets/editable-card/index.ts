@@ -1,6 +1,8 @@
 export type {
     IEditableCardProps,
-    IEditableCardField
+    IEditableCardField,
+    IEditableCardBasicProps,
+    IEditableCardEditableProps
 } from './types'
 export { EDITABLE_CARD_FIELD_VARIANT } from './const'
-export { EditableCard } from './ui/editable-card'
+export { EditableCard } from './ui'

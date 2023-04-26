@@ -1,0 +1,9 @@
+{
+  "validationErrors": {
+    "incorrectPhone": "Некорректный телефон",
+    "serverError": "Серверная ошибка",
+    "emptyPhone": "Пустой телефон",
+    "emptyEmail": "Пустая почта",
+    "incorrectEmail": "Некорректная почта"
+  }
+}

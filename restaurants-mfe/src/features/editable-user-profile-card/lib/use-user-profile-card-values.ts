@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux'
 
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useAppDispatch } from 'shared/lib/hooks'
-import { type IProfileCardEditableProps } from 'entities/profile'
+import { type IEditableCardEditableProps } from 'widgets/editable-card'
 import {
     selectProfileDataEditable,
     selectProfileDataEmail,
     selectProfileDataFullName,
-    selectProfileDataPhone, updateProfileData,
+    selectProfileDataPhone, selectProfileDataValidationErrors, updateProfileData,
     userProfileActions
 } from '../model'
 
@@ -18,6 +18,7 @@ export const useUserProfileCardValues = () => {
     const phone = useSelector(selectProfileDataPhone)
     const email = useSelector(selectProfileDataEmail)
     const editableValue = useSelector(selectProfileDataEditable)
+    const validationErrors = useSelector(selectProfileDataValidationErrors)
 
     const onChangeFullName = useCallback((fullName: string) => {
         dispatch(userProfileActions.updateProfileData({ fullName }))
@@ -43,7 +44,7 @@ export const useUserProfileCardValues = () => {
         dispatch(updateProfileData())
     }, [dispatch])
 
-    const editable: IProfileCardEditableProps = {
+    const editable: IEditableCardEditableProps = useMemo(() => ({
         title: '',
         editable: editableValue,
         edit: {
@@ -58,7 +59,16 @@ export const useUserProfileCardValues = () => {
             onSave,
             btnText: 'Save'
         }
-    }
+    }), [editableValue, onCancel, onEdit, onSave])
 
-    return { phone, email, fullName, onChangeFullName, onChangePhone, onChangeEmail, editable }
+    return {
+        phone,
+        email,
+        fullName,
+        onChangeFullName,
+        onChangePhone,
+        onChangeEmail,
+        editable,
+        validationErrors
+    }
 }

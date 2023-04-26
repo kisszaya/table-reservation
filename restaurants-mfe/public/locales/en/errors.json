@@ -1,0 +1,9 @@
+{
+  "validationErrors": {
+    "incorrectPhone": "Incorrect phone",
+    "serverError": "Server error",
+    "emptyPhone": "Empty phone",
+    "emptyEmail": "Empty email",
+    "incorrectEmail": "Incorrect email"
+  }
+}
