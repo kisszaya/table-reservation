@@ -10,7 +10,7 @@ import { type IBuildOptions } from './types/config'
 export const plugins = (
     options: IBuildOptions
 ): webpack.WebpackPluginInstance[] => {
-    const { paths, isDev, apiUrl } = options
+    const { paths, isDev, apiUrl, project } = options
 
     const plugins = [
         new HTMLWebpackPlugin({ template: paths.html }),
@@ -21,7 +21,8 @@ export const plugins = (
         }),
         new webpack.DefinePlugin({
             __IS_DEV__: JSON.stringify(isDev),
-            __API__: JSON.stringify(apiUrl)
+            __API__: JSON.stringify(apiUrl),
+            __PROJECT__: JSON.stringify(project)
         })
     ]
 

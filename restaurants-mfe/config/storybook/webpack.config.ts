@@ -4,7 +4,7 @@ import webpack from 'webpack'
 import { type RuleSetRule } from 'webpack'
 import path from 'path'
 
-import { type IBuildPaths } from '../build/types/config'
+import { type IBuildPaths, PROJECT_VARIANT } from '../build/types/config'
 import { cssLoader } from '../build/loaders/css-loader'
 import { svgLoader } from '../build/loaders/svg-loader'
 import { fileLoader } from '../build/loaders/file-loader'
@@ -34,7 +34,8 @@ export default ({ config }: { config: webpack.Configuration }) => {
 
     config.plugins.push(new webpack.DefinePlugin({
         __IS_DEV__: true,
-        __API__: ''
+        __API__: '',
+        __PROJECT__: PROJECT_VARIANT.STORYBOOK
     }))
 
     config.resolve.modules = [

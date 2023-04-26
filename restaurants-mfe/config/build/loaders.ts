@@ -4,9 +4,12 @@ import { type IBuildOptions } from './types/config'
 import { cssLoader } from './loaders/css-loader'
 import { svgLoader as buildSvgLoader } from './loaders/svg-loader'
 import { fileLoader as buildFileLoader } from './loaders/file-loader'
+import { buildBabelLoader } from './loaders/babel-loader'
 
 export const loaders = (options: IBuildOptions): webpack.RuleSetRule[] => {
     const { isDev } = options
+
+    const babelLoader = buildBabelLoader(options)
 
     const typescriptLoader = {
         test: /\.tsx?$/,
@@ -20,5 +23,5 @@ export const loaders = (options: IBuildOptions): webpack.RuleSetRule[] => {
 
     const fileLoader = buildFileLoader()
 
-    return [fileLoader, svgLoader, typescriptLoader, scssLoader]
+    return [babelLoader, fileLoader, svgLoader, typescriptLoader, scssLoader]
 }

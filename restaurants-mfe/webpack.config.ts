@@ -5,7 +5,8 @@ import { buildWebpackConfig } from './config/build/webpack-config'
 import {
     BUILD_MODE,
     type IBuildEnv,
-    type IBuildPaths
+    type IBuildPaths,
+    PROJECT_VARIANT
 } from './config/build/types/config'
 
 const paths: IBuildPaths = {
@@ -27,7 +28,8 @@ export default (env: IBuildEnv) => {
         mode,
         isDev,
         port,
-        apiUrl
+        apiUrl,
+        project: PROJECT_VARIANT.FRONTEND
     })
 
     return config

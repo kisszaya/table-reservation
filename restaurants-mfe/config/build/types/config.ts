@@ -3,6 +3,12 @@ export enum BUILD_MODE {
   DEV = 'development',
 }
 
+export enum PROJECT_VARIANT {
+  FRONTEND = 'frontend',
+  STORYBOOK = 'storybook',
+  JEST = 'jest'
+}
+
 export interface IBuildPaths {
   entry: string
   build: string
@@ -22,4 +28,5 @@ export interface IBuildOptions {
   isDev: boolean
   port: number
   apiUrl: string
+  project: PROJECT_VARIANT
 }

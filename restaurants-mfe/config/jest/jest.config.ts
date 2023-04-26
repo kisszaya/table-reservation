@@ -1,4 +1,5 @@
 import path from 'path'
+import { PROJECT_VARIANT } from '../build/types/config'
 
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
@@ -18,7 +19,8 @@ export default {
     // A set of global variables that need to be available in all test environments
     globals: {
         __IS_DEV__: true,
-        __API__: ''
+        __API__: '',
+        __PROJECT__: PROJECT_VARIANT.JEST
     },
 
     modulePaths: [

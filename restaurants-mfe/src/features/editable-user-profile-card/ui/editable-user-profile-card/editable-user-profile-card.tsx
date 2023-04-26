@@ -1,6 +1,8 @@
 import { DynamicModuleLoader, type IReducersList } from 'shared/lib/ui'
 import { ProfileCard } from 'entities/profile'
-import { userProfileReducer } from '../../model'
+import { useEffect } from 'react'
+import { useAppDispatch } from 'shared/lib/hooks'
+import { fetchProfileData, userProfileReducer } from '../../model'
 import { useUserProfileCardValues } from '../../lib'
 
 const asyncReducers: IReducersList = {
@@ -8,7 +10,14 @@ const asyncReducers: IReducersList = {
 }
 
 export const EditableUserProfileCard = () => {
+    const dispatch = useAppDispatch()
     const values = useUserProfileCardValues()
+
+    useEffect(() => {
+        if (__PROJECT__ !== 'storybook') {
+            dispatch(fetchProfileData())
+        }
+    }, [dispatch])
 
     return <DynamicModuleLoader reducers={asyncReducers}>
         <ProfileCard {...values}/>
