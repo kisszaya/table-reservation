@@ -5,16 +5,20 @@ import { IRestaurantServices } from "../../types";
 import { $restaurantInfo } from "../../model";
 import { RestaurantServiceCard } from "..";
 
+import { useStyles } from "./styles";
+
 interface Props {
   services: IRestaurantServices;
 }
 
 export const RestaurantServices = (props: Props) => {
   const { services } = props;
+  const { classes } = useStyles();
+
   const { roles } = useAuthStore($restaurantInfo);
 
   return (
-    <Group position="apart" spacing="sm">
+    <Group position="apart" spacing="sm" className={classes.container}>
       {services.map((service) => (
         <RestaurantServiceCard
           key={service.title}
