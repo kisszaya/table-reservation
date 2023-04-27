@@ -1,30 +1,17 @@
-import {
-  Drawer as MantineDrawer,
-  DrawerProps,
-  Group,
-  Stack,
-} from "@mantine/core";
+import { Drawer as MantineDrawer } from "@mantine/core";
 import { FC } from "react";
 
-import { IDrawerNavbar } from "shared/types";
-import { DrawerNavbar } from "..";
+import { DrawerWithNavbar } from "..";
+import { IDrawerProps } from "../../types";
 
-type Args = DrawerProps & {
-  navbar?: IDrawerNavbar;
-};
-
-export const Drawer: FC<Args> = (props) => {
-  const { navbar, children, ...defaultProps } = props;
+export const Drawer: FC<IDrawerProps> = (props) => {
+  if ("navbar" in props) {
+    return <DrawerWithNavbar {...props} />;
+  }
 
   return (
-    <MantineDrawer padding={0} {...defaultProps}>
-      {!navbar && children}
-      {navbar && (
-        <Group align="start" noWrap>
-          <DrawerNavbar {...navbar} />
-          <Stack m="md" style={{width: '100%'}}>{children}</Stack>
-        </Group>
-      )}
+    <MantineDrawer padding={0} {...props}>
+      {props.children}
     </MantineDrawer>
   );
 };

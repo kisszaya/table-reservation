@@ -2,8 +2,8 @@ import { IJWTPayload } from "kisszaya-table-reservation/lib/interfaces";
 import { InternalAxiosRequestConfig } from "axios";
 import decodeJwt from "jwt-decode";
 
-import { getTokenFromBearer, updateToken } from "features/authorization";
-import { getFingerprint } from "features/fingerprint";
+import { getTokenFromBearer, updateToken } from "shared/lib/auth";
+import { generateFingerprint } from "shared/lib";
 import { authApi } from "entities/auth";
 
 export const requestInterceptor = async (
@@ -19,7 +19,7 @@ export const requestInterceptor = async (
   if (!expiresIn) return config;
   if (new Date() < new Date(expiresIn)) return config;
 
-  const fingerprint = await getFingerprint();
+  const fingerprint = await generateFingerprint();
   const { data } = await authApi.updateTokens({ fingerprint });
   if (data.accessToken) {
     updateToken(data.accessToken);

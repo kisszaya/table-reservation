@@ -1,11 +1,9 @@
-import { FC } from "react";
-
-import { IArgsWithChildren } from "shared/types";
+import { FC, PropsWithChildren } from "react";
 
 import { MantineProvider } from "./mantine-provider";
 import { ModalsProvider } from "./modals-provider";
 
-export const Providers: FC<IArgsWithChildren> = ({ children }) => {
+export const Providers: FC<PropsWithChildren> = ({ children }) => {
   return (
     <MantineProvider>
       <ModalsProvider>{children}</ModalsProvider>

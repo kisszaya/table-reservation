@@ -3,38 +3,35 @@ import { FC, useEffect } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Responses } from "kisszaya-table-reservation/lib/responses";
 
-import { LocaleNamespaces } from "shared/types";
-import { Restaurant as RestaurantFC } from "../ui";
-import { updateToken, useServerAuthorization } from "features/authorization";
-import { usersServerSideApi, usersStore } from "entities/users";
+import { LOCAL_NAMESPACES } from "shared/types";
+import { meEvents, meServerApi, meStore } from "entities/me";
 import {
-  restaurantsServerSideApi,
-  restaurantsStore,
-} from "entities/restaurants";
-import {query} from "express";
+  restaurantEvents,
+  restaurantServerApi,
+  restaurantStore,
+} from "entities/restaurant";
+import { serverAuthorization, updateToken } from "shared/lib/auth";
+import { DynamicPageLoader } from "shared/lib/ui";
+
+import { Restaurant as RestaurantFC } from "../ui";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { isAuthorized, redirect, access } = await useServerAuthorization(
-    context
-  );
+  const { isAuthorized, redirect, access } = await serverAuthorization(context);
 
   if (!isAuthorized) {
     return { redirect };
   }
 
-
-  const { data: me } = await usersServerSideApi.meInfo(access as string);
-  const { data: restaurant } = await restaurantsServerSideApi.getRestaurantById(
-    {
-      accessToken: access as string,
-      restaurant_id: Number(context.query.id),
-    }
-  );
+  const { data: me } = await meServerApi.getMeInfo(access as string);
+  const { data: restaurant } = await restaurantServerApi.getRestaurantById({
+    accessToken: access as string,
+    restaurant_id: Number(context.query.id),
+  });
 
   return {
     props: {
       ...(await serverSideTranslations(context.locale as string, [
-        LocaleNamespaces.COMMON,
+        LOCAL_NAMESPACES.COMMON,
       ])),
       me,
       restaurant,
@@ -57,14 +54,20 @@ const Restaurant: FC<RestaurantArgs> = (props) => {
   }, [accessToken]);
 
   useEffect(() => {
-    usersStore.changeMeInfo(me);
+    meEvents.changeMeInfo(me);
   }, [me]);
 
   useEffect(() => {
-    restaurantsStore.restaurants.events.addRestaurant(restaurant);
+    restaurantEvents.setRestaurantInfo(restaurant);
   }, [restaurant]);
 
-  return <RestaurantFC />;
+  return (
+    <DynamicPageLoader store={meStore.$meInfo}>
+      <DynamicPageLoader store={restaurantStore.$restaurantInfo}>
+        <RestaurantFC />
+      </DynamicPageLoader>
+    </DynamicPageLoader>
+  );
 };
 
 export default Restaurant;

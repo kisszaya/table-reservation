@@ -1,72 +1,42 @@
 import { Group, Stack } from "@mantine/core";
-import { useStore } from "effector-react";
-import { useRouter } from "next/router";
-import { useCallback } from "react";
 
-import { useRestaurantServices } from "pages/restaurants/lib";
-import {
-  ProfileCard,
-  RestaurantDiscounts,
-  RestaurantEmployees,
-  RestaurantServiceCard,
-  RestaurantSettings,
-} from "widgets";
-import { usersStore } from "entities/users";
 import { Button } from "shared/ui";
-import { PRIVATE_PATH } from "shared/config";
-import { restaurantsLib } from "entities/restaurants";
+import { RestaurantProfileCard, RestaurantServices } from "entities/restaurant";
+import { SettingsDrawer } from "entities/restaurant-settings";
+import { DiscountsDrawer } from "entities/restaurant-discounts";
+import { EmployeesDrawer } from "entities/restaurant-employees";
 
+import { useRestaurantLib } from "../../lib";
 import { useStyles } from "./styles";
 
 export const Restaurant = () => {
   const { classes } = useStyles();
-  const meInfo = useStore(usersStore.$meInfo);
-  const { restaurantInfo } = restaurantsLib.useRestaurantInfo();
   const {
-    restaurantServices,
+    services,
     openedSettings,
     closeSettings,
     closeDiscounts,
     closeEmployees,
     openedEmployees,
     openedDiscounts,
-  } = useRestaurantServices();
-  const { push } = useRouter();
-
-  const onGoToProfile = useCallback(async () => {
-    await push(PRIVATE_PATH.PROFILE);
-  }, []);
+    redirectToProfile,
+  } = useRestaurantLib();
 
   return (
     <>
       <Group noWrap align="start" className={classes.container}>
         <Stack>
-          {meInfo && (
-            <ProfileCard
-              title="Restaurant card"
-              email={meInfo.email}
-              fullName={meInfo.fullName}
-              restaurantName={restaurantInfo?.name}
-            />
-          )}
-          <Button onClick={onGoToProfile} color="dark">
+          <RestaurantProfileCard />
+          <Button onClick={redirectToProfile} color="dark">
             Go to profile
           </Button>
         </Stack>
-        <Group position="apart" spacing="sm">
-          {restaurantServices.map((service) => (
-            <RestaurantServiceCard
-              key={service.title}
-              isAvailable={true}
-              {...service}
-            />
-          ))}
-        </Group>
+        <RestaurantServices services={services} />
       </Group>
 
-      <RestaurantSettings opened={openedSettings} close={closeSettings} />
-      <RestaurantDiscounts opened={openedDiscounts} close={closeDiscounts} />
-      <RestaurantEmployees opened={openedEmployees} close={closeEmployees} />
+      <SettingsDrawer opened={openedSettings} close={closeSettings} />
+      <DiscountsDrawer opened={openedDiscounts} close={closeDiscounts} />
+      <EmployeesDrawer opened={openedEmployees} close={closeEmployees} />
     </>
   );
 };

@@ -3,33 +3,29 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetServerSideProps } from "next";
 import { Responses } from "kisszaya-table-reservation/lib/responses";
 
-import { updateToken, useServerAuthorization } from "features/authorization";
-import { LocaleNamespaces } from "shared/types";
-import { Profile as ProfileFC } from "./ui";
-import { usersServerSideApi, usersStore } from "entities/users";
-import {
-  restaurantsServerSideApi,
-  restaurantsStore,
-} from "entities/restaurants";
+import { LOCAL_NAMESPACES } from "shared/types";
+import { updateToken, serverAuthorization } from "shared/lib/auth";
+import { meServerApi, meEvents, meStore } from "entities/me";
+import { DynamicPageLoader } from "shared/lib/ui";
+
+import { Profile as ProfileFC } from "./ui/profile";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { isAuthorized, redirect, access } = await useServerAuthorization(
-    context
-  );
+  const { isAuthorized, redirect, access } = await serverAuthorization(context);
 
   if (!isAuthorized) {
     return { redirect };
   }
 
-  const { data: me } = await usersServerSideApi.meInfo(access as string);
+  const { data: me } = await meServerApi.getMeInfo(access as string);
   const {
     data: { restaurants },
-  } = await restaurantsServerSideApi.getMeRestaurants(access as string);
+  } = await meServerApi.getMeRestaurants(access as string);
 
   return {
     props: {
       ...(await serverSideTranslations(context.locale as string, [
-        LocaleNamespaces.COMMON,
+        LOCAL_NAMESPACES.COMMON,
       ])),
       me,
       accessToken: access,
@@ -52,14 +48,20 @@ const Profile: FC<ProfileArgs> = (props) => {
   }, [accessToken]);
 
   useEffect(() => {
-    usersStore.changeMeInfo(me);
+    meEvents.changeMeInfo(me);
   }, [me]);
 
   useEffect(() => {
-    restaurantsStore.restaurants.events.setRestaurants(restaurants);
+    meEvents.setRestaurants(restaurants);
   }, [restaurants]);
 
-  return <ProfileFC />;
+  return (
+    <DynamicPageLoader store={meStore.$meInfo}>
+      <DynamicPageLoader store={meStore.$restaurants}>
+        <ProfileFC />
+      </DynamicPageLoader>
+    </DynamicPageLoader>
+  );
 };
 
 export default Profile;

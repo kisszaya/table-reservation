@@ -1,9 +1,7 @@
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 import { MantineProvider as Mantine } from "@mantine/core";
 
-import { IArgsWithChildren } from "shared/types";
-
-export const MantineProvider: FC<IArgsWithChildren> = ({ children }) => {
+export const MantineProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Mantine
       withGlobalStyles

@@ -1,1 +1,1 @@
-export * from "./use-is-true";
+export { generateFingerprint } from "./generate-fingerprint";

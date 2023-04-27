@@ -1,1 +1,1 @@
-export { useRestaurantServices } from "./use-restaurant-services";
+export { useRestaurantLib } from "./use-restaurant-lib";

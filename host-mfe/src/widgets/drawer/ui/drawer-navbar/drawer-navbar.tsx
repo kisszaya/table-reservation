@@ -1,35 +1,38 @@
 import { Navbar } from "@mantine/core";
 import { FC, useMemo } from "react";
 
-import { IDrawerNavbar } from "shared/types";
 import { Text } from "shared/ui";
+import { IDrawerNavbar } from "../../types";
 
 import { useStyles } from "./styles";
 
-type Args = IDrawerNavbar;
+type Props = Omit<IDrawerNavbar, "defaultLink"> & {
+  activeLink: string;
+  setActiveLink: (link: string) => void;
+};
 
-export const DrawerNavbar: FC<Args> = (props) => {
-  const { changeActiveValue, activeValue, navbarItems, title } = props;
+export const DrawerNavbar: FC<Props> = (props) => {
+  const { title, links, activeLink, setActiveLink } = props;
   const { classes, cx } = useStyles();
 
-  const links = useMemo(
+  const linksElement = useMemo(
     () =>
-      navbarItems.map(({ icon: Icon, label, value }) => (
+      links.map(({ icon: Icon, label, value }) => (
         <div
           className={cx(classes.link, {
-            [classes.linkActive]: value === activeValue,
+            [classes.linkActive]: value === activeLink,
           })}
           key={value}
           onClick={(event) => {
             event.preventDefault();
-            changeActiveValue(value);
+            setActiveLink(value);
           }}
         >
           <Icon className={classes.linkIcon} stroke={1.5} />
           <span>{label}</span>
         </div>
       )),
-    [activeValue]
+    [activeLink, cx, links]
   );
 
   return (
@@ -48,7 +51,7 @@ export const DrawerNavbar: FC<Args> = (props) => {
         </Navbar.Section>
       )}
       <Navbar.Section grow mt="xl">
-        {links}
+        {linksElement}
       </Navbar.Section>
     </Navbar>
   );
