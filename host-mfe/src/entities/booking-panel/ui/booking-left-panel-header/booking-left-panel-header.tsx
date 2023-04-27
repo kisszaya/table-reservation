@@ -6,17 +6,18 @@ import { useRouter } from "next/router";
 import { Button, Title } from "shared/ui";
 import { PRIVATE_PATH } from "shared/config";
 import { TimeFilterPopover } from "widgets/time-filter-popover";
+import { useAuthStore } from "shared/lib/hooks";
+import { restaurantStore } from "entities/restaurant";
 
 export const BookingLeftPanelHeader: FC = () => {
-  const [date, setDate] = useState<Date | null>(new Date());
   const { push } = useRouter();
+  const { restaurant_id } = useAuthStore(restaurantStore.$restaurantInfo);
 
-  // TODO get real data
-  const restaurant_id = 6;
+  const [date, setDate] = useState<Date | null>(new Date());
 
   const onRestaurantsMainPageRedirect = useCallback(async () => {
     await push(PRIVATE_PATH.RESTAURANT(restaurant_id));
-  }, [push]);
+  }, [push, restaurant_id]);
 
   return (
     <Group noWrap position="apart" align="center">
