@@ -1,16 +1,16 @@
 import { TextInputProps } from "@mantine/core";
 import { IAddEmployeeProps, IFormValues } from "../types";
 
+type Props = IAddEmployeeProps & { disabled: boolean };
+
 export const useFormInputKeys = ({
   userInfo,
-}: IAddEmployeeProps): Record<
-  keyof Omit<IFormValues, "roles">,
-  TextInputProps
-> => ({
+  disabled,
+}: Props): Record<keyof Omit<IFormValues, "roles">, TextInputProps> => ({
   password: {
     placeholder: "password",
     required: true,
-    disabled: "password" in userInfo,
+    disabled: "password" in userInfo || disabled,
   },
   email: {
     placeholder: "email",
@@ -21,16 +21,16 @@ export const useFormInputKeys = ({
   phone: {
     placeholder: "phone",
     required: true,
-    disabled: "phone" in userInfo,
+    disabled: "phone" in userInfo || disabled,
   },
   lastName: {
     placeholder: "last name",
     required: true,
-    disabled: "fullName" in userInfo,
+    disabled: "fullName" in userInfo || disabled,
   },
   firstName: {
     placeholder: "first name",
     required: true,
-    disabled: "fullName" in userInfo,
+    disabled: "fullName" in userInfo || disabled,
   },
 });

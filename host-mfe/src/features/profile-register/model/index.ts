@@ -1,4 +1,4 @@
 export * from "./store";
 export * from "./services";
-export * from "./requests";
+export * from "./api";
 export * from "./types";

@@ -10,6 +10,7 @@ import {
   UsersController,
   AuthController,
   RestaurantsController,
+  EmployeesController,
 } from "@/controllers";
 import { BrokerService } from "@/broker";
 import { JwtStrategy } from "@/strategies";
@@ -26,7 +27,12 @@ import { TokenService } from "@/services";
     RMQModule.forRootAsync(getRMQConfig()),
     JwtModule.registerAsync(getJWTConfig()),
   ],
-  controllers: [UsersController, AuthController, RestaurantsController],
+  controllers: [
+    UsersController,
+    AuthController,
+    RestaurantsController,
+    EmployeesController,
+  ],
   providers: [BrokerService, JwtStrategy, TokenService],
 })
 export class AppModule {}

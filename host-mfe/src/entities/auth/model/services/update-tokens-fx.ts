@@ -1,6 +1,6 @@
 import { generateFingerprint } from "shared/lib";
 
-import { updateTokens } from "../requests";
+import { updateTokens } from "../api";
 import { setAccessToken } from "../events";
 
 export const updateTokensFx = async () => {
@@ -11,4 +11,6 @@ export const updateTokensFx = async () => {
   if (data.accessToken) {
     setAccessToken(data.accessToken);
   }
+
+  return { data };
 };

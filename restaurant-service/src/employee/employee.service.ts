@@ -15,6 +15,7 @@ import {
   UsersRegister,
 } from "kisszaya-table-reservation/lib/contracts";
 import {
+  EmployeeWithEmailAlreadyExistException,
   RestaurantNotFoundForUserException,
   UserDontHaveAccessException,
 } from "@/exceptions";
@@ -82,13 +83,16 @@ export class EmployeeService {
       restaurant_id,
     });
 
-    let user = await this.brokerService.publish<
-      UsersInfo.Request,
-      UsersInfo.Response
-    >(UsersInfo.topic, { email: userData.email });
+    let user;
 
-    // if user dont exist
-    if (!user) {
+    try {
+      user = await this.brokerService.publish<
+        UsersInfo.Request,
+        UsersInfo.Response
+      >(UsersInfo.topic, { email: userData.email });
+    } catch (e) {
+      // if user dont exist
+
       const { email, lastName, firstName, password, phone } = userData;
 
       if (!email || !firstName || !lastName || !password) {
@@ -108,6 +112,11 @@ export class EmployeeService {
         UsersInfo.Request,
         UsersInfo.Response
       >(UsersInfo.topic, { email: userData.email });
+    }
+
+    const userRecord = await this.findRecord(restaurant_id, user.user_id);
+    if (userRecord) {
+      throw new EmployeeWithEmailAlreadyExistException(user.email);
     }
 
     const employeeEntity = new EmployeeEntity({
@@ -185,10 +194,16 @@ export class EmployeeService {
     const employeesRecords =
       await this.employeeRepository.findEmployeesByRestaurantId(restaurant_id);
 
+    const filteredEmployeeRecords = employeesRecords.filter(
+      (e) => e.user_id.toString() !== user_id.toString()
+    );
+
     const { users } = await this.brokerService.publish<
       UsersByIdInfo.Request,
       UsersByIdInfo.Response
-    >(UsersByIdInfo.topic, { userIds: employeesRecords.map((e) => e.user_id) });
+    >(UsersByIdInfo.topic, {
+      userIds: filteredEmployeeRecords.map((e) => e.user_id),
+    });
 
     const employees = users.map((user) => {
       const employeeRecord = employeesRecords.find(

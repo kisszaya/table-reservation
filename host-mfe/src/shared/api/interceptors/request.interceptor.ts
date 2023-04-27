@@ -4,7 +4,7 @@ import decodeJwt from "jwt-decode";
 
 import { getTokenFromBearer, updateToken } from "shared/lib/auth";
 import { generateFingerprint } from "shared/lib";
-import { authApi } from "entities/auth";
+import { authEvents } from "entities/auth";
 
 export const requestInterceptor = async (
   config: InternalAxiosRequestConfig
@@ -19,8 +19,7 @@ export const requestInterceptor = async (
   if (!expiresIn) return config;
   if (new Date() < new Date(expiresIn)) return config;
 
-  const fingerprint = await generateFingerprint();
-  const { data } = await authApi.updateTokens({ fingerprint });
+  const { data } = await authEvents.updateTokensFx();
   if (data.accessToken) {
     updateToken(data.accessToken);
   }

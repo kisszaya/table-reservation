@@ -20,8 +20,8 @@ import { InternalException } from "@/exceptions";
 import { RestaurantEmployeeAddDto } from "@/dtos";
 
 @Controller("restaurants")
-export class RestaurantsController {
-  private readonly logger = new Logger(RestaurantsController.name);
+export class EmployeesController {
+  private readonly logger = new Logger(EmployeesController.name);
 
   constructor(private readonly brokerService: BrokerService) {}
 
@@ -54,6 +54,7 @@ export class RestaurantsController {
     @Body() dto: RestaurantEmployeeAddDto
   ) {
     this.logger.log(`POST /api/restaurants/${restaurant_id}/employees`);
+    console.log("TEST meow", user_id, dto, restaurant_id);
 
     try {
       return await this.brokerService.publish<

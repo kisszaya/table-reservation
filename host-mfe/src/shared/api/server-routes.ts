@@ -22,7 +22,7 @@ export const serverRoutes = {
 
   // employees
   employees: (restaurant_id: string | number) =>
-    RESTAURANTS_SERVICE + `${restaurant_id}` + EMPLOYEES,
+    RESTAURANTS_SERVICE + `/${restaurant_id}` + EMPLOYEES,
   employee: (restaurant_id: string | number, employee_id: string | number) =>
     RESTAURANTS_SERVICE + `/${restaurant_id}` + EMPLOYEES + `/${employee_id}`,
 };

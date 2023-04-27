@@ -21,10 +21,8 @@ $usersInfo.on(findUserByEmailFx.done, (state, payload) => ({
 
 const $usersInfoStatus = createStore<USER_INFO_STATUS>(USER_INFO_STATUS.IDLE);
 const $usersInfoIsLoading = findUserByEmailFx.pending;
-$usersInfoStatus.on(
-  [resetUsersInfoStatus, findUserByEmailFx.done],
-  () => USER_INFO_STATUS.IDLE
-);
+$usersInfoStatus.on(resetUsersInfoStatus, () => USER_INFO_STATUS.IDLE);
+$usersInfoStatus.on(findUserByEmailFx.done, () => USER_INFO_STATUS.FOUND);
 $usersInfoStatus.on(findUserByEmailFx.fail, () => USER_INFO_STATUS.NOT_FOUND);
 
 /*** Exports ***/

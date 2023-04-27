@@ -18,7 +18,10 @@ export const AddEmployee = () => {
 
   const foundUser = users[email];
 
-  const showForm = foundUser || status === USER_INFO_STATUS.NOT_FOUND;
+  const showForm = [
+    USER_INFO_STATUS.NOT_FOUND,
+    USER_INFO_STATUS.FOUND,
+  ].includes(status);
 
   return (
     <Card withBorder style={{ width: "100%" }}>
