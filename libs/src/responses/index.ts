@@ -1,7 +1,9 @@
 import {
   IRestaurantEmployee,
   IRestaurantUserPreview,
+  IWorkingTime,
   USER_STATUS,
+  WEEKDAY,
 } from "../interfaces";
 
 export namespace Responses {
@@ -53,4 +55,22 @@ export namespace Responses {
   export type AddRestaurantEmployee = IRestaurantEmployee;
 
   export type DeleteRestaurantEmployee = IRestaurantEmployee;
+
+  export type ChangeRestaurantInfo = IRestaurantUserPreview;
+
+  export interface GetRestaurantWorkingTime {
+    workingTime: {
+      [key in WEEKDAY]?: IWorkingTime;
+    };
+  }
+
+  export interface ChangeRestaurantWorkingTime {
+    workingTime: {
+      [key in WEEKDAY]?: IWorkingTime;
+    };
+  }
+
+  export interface DeleteWorkingTime {
+    weekday: WEEKDAY;
+  }
 }

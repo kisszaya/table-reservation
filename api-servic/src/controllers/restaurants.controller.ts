@@ -2,6 +2,7 @@ import {
   RestaurantsCreate,
   RestaurantsGetUser,
   RestaurantsGetById,
+  RestaurantsChange,
 } from "kisszaya-table-reservation/lib/contracts";
 import {
   Body,
@@ -9,6 +10,7 @@ import {
   Get,
   Logger,
   Param,
+  Patch,
   Post,
   UseGuards,
 } from "@nestjs/common";
@@ -16,7 +18,7 @@ import {
 import { BrokerService } from "@/broker";
 import { JWTAuthGuard, UserId } from "@/guards";
 import { InternalException } from "@/exceptions";
-import { RestaurantCreateDto } from "@/dtos";
+import { RestaurantChangeDto, RestaurantCreateDto } from "@/dtos";
 
 @Controller("restaurants")
 export class RestaurantsController {
@@ -34,6 +36,32 @@ export class RestaurantsController {
         RestaurantsCreate.Request,
         RestaurantsCreate.Response
       >(RestaurantsCreate.topic, { ...dto, user_id });
+      console.log("res", res);
+      return res;
+    } catch (e) {
+      console.log("err", e);
+      throw new InternalException(e);
+    }
+  }
+
+  @UseGuards(JWTAuthGuard)
+  @Patch("/:restaurantId")
+  async changeRestaurantInfo(
+    @UserId() user_id: number,
+    @Param("restaurantId") restaurant_id: string,
+    @Body() dto: RestaurantChangeDto
+  ) {
+    this.logger.log("Patch /api/restaurants/:restaurantId");
+
+    try {
+      const res = await this.brokerService.publish<
+        RestaurantsChange.Request,
+        RestaurantsChange.Response
+      >(RestaurantsChange.topic, {
+        restaurant: dto,
+        user_id,
+        restaurant_id: Number(restaurant_id),
+      });
       console.log("res", res);
       return res;
     } catch (e) {

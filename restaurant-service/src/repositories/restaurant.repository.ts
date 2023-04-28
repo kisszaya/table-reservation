@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { RestaurantModel } from "@/models";
-import {RestaurantEntity} from "@/entities";
+import { RestaurantEntity } from "@/entities";
 
 @Injectable()
 export class RestaurantRepository {
@@ -21,6 +21,26 @@ export class RestaurantRepository {
 
     await this.restaurantModel.save(newRestaurant);
     return newRestaurant;
+  }
+
+  public async updateRestaurant(
+    restaurant_id: number,
+    restaurant: {
+      name?: string;
+      city?: string;
+      address?: string;
+      photos?: string[];
+    }
+  ) {
+    this.logger.log("updateRestaurant");
+
+    const res = await this.restaurantModel.update(
+      {
+        restaurant_id,
+      },
+      restaurant
+    );
+    console.log("TEST updateRestaurant", res);
   }
 
   public async findRestaurantById(restaurant_id: number) {

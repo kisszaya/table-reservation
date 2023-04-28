@@ -1,6 +1,7 @@
 import { Seat } from "entities/seats";
 import { Table } from "entities/tables";
 import { IShape } from "shared/types";
+import { ShapeCanvas } from "./shape-canvas.class";
 
 type ShapeType = IShape & {
   table: Table;

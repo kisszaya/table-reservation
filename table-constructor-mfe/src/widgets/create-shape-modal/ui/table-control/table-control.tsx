@@ -1,12 +1,13 @@
-import { Group, NativeSelect, NumberInput } from "@mantine/core";
-import { Table } from "entities/tables";
+import { Group, NumberInput } from "@mantine/core";
 import { FC } from "react";
+import { ShapeCanvas as ShapeCanvasCls } from "entities/shapes";
 
 // import { TableFormValues } from "..";
 // import { TABLE_VARIANT } from "shared/types";
 
 interface Args {
-  table?: Table;
+  canvas?: ShapeCanvasCls | null;
+  setCanvas: (c: ShapeCanvasCls) => void;
 }
 //
 // const tableVariantData = [
@@ -21,15 +22,17 @@ interface Args {
 // ];
 
 export const TableControl: FC<Args> = (props) => {
-  const { table } = props;
+  const { canvas, setCanvas } = props;
 
   return (
     <Group>
       <NumberInput
-        value={table?.width ?? 3}
+        value={canvas?.shape.table?.width ?? 3}
         onChange={(value) => {
-          console.log("TEST width value", value);
-          table?.setWidth(Number(value));
+          canvas?.shape.table?.setWidth(Number(value));
+          canvas?.setCanvasWidth();
+          canvas?.setCanvasHeight();
+          canvas?.draw();
         }}
         label="width"
       />

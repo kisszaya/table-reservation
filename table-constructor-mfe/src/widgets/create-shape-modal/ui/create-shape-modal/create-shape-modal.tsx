@@ -37,10 +37,7 @@ export const CreateShapeModal = () => {
     }
   }, [canvasRef]);
 
-  console.log("TEST w", canvas?.shape.table.width);
-
   useEffect(() => {
-    console.log("TEST meow");
     canvas?.setCanvasWidth();
     canvas?.setCanvasHeight();
     canvas?.draw();
@@ -57,7 +54,7 @@ export const CreateShapeModal = () => {
         canvasWidth={canvas?.canvasWidth ?? 100}
         ref={canvasRef}
       />
-      <TableControl table={canvas?.shape.table} />
+      <TableControl canvas={canvas} setCanvas={setCanvas} />
     </Stack>
   );
 };

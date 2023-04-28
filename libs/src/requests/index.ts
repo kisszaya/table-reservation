@@ -1,4 +1,4 @@
-import { USER_ROLE } from "../interfaces";
+import { IWorkingTime, USER_ROLE } from "../interfaces";
 
 export namespace Requests {
   export interface UserLogin {
@@ -33,5 +33,16 @@ export namespace Requests {
     email: string;
     phone?: string;
     roles: USER_ROLE[];
+  }
+
+  export interface ChangeRestaurantInfo {
+    name?: string;
+    city?: string;
+    address?: string;
+    photos?: string[];
+  }
+
+  export interface ChangeRestaurantWorkingTime {
+    workingTimes: IWorkingTime[];
   }
 }

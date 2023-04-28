@@ -12,8 +12,14 @@ export * from "./users/users.info-by-id";
 export * from "./restaurants/restaurants.create";
 export * from "./restaurants/restaurants.get-user";
 export * from "./restaurants/restaurants.get-by-id";
+export * from "./restaurants/restaurants.change";
 
 //employees
 export * from "./employees/employees.get-restaurant";
 export * from "./employees/employees.add";
 export * from "./employees/employees.delete";
+
+// working-time
+export * from "./working-time/working-time.get";
+export * from "./working-time/working-time.change";
+export * from "./working-time/working-time.delete";

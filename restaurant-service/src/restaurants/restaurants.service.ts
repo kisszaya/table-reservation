@@ -1,5 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import {
+  RestaurantsChange,
   RestaurantsCreate,
   RestaurantsGetById,
   RestaurantsGetUser,
@@ -82,9 +83,40 @@ export class RestaurantsService {
       })
     );
 
-    console.log("restaurants", restaurants);
-
     return { restaurants };
+  }
+
+  public async change(
+    data: RestaurantsChange.Request
+  ): Promise<RestaurantsChange.Response> {
+    const { restaurant_id, user_id, restaurant } = data;
+
+    const employeeRecord = await this.employeeService.findRecord(
+      restaurant_id,
+      user_id
+    );
+
+    if (!employeeRecord) {
+      throw new RestaurantNotFoundForUserException();
+    }
+
+    if (employeeRecord.roles.includes(USER_ROLE.BLOCKED)) {
+      throw new RestaurantBlockedForUserException();
+    }
+
+    await this.restaurantRepository.updateRestaurant(restaurant_id, restaurant);
+
+    const updatedRestaurant =
+      await this.restaurantRepository.findRestaurantById(restaurant_id);
+
+    return {
+      restaurant_id,
+      roles: employeeRecord.roles,
+      photos: updatedRestaurant.photos,
+      address: updatedRestaurant.address,
+      city: updatedRestaurant.city,
+      name: updatedRestaurant.name,
+    };
   }
 
   public async getById(
