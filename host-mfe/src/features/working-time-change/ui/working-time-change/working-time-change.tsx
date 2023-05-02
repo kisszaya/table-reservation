@@ -1,14 +1,30 @@
-import { WEEKDAY } from "kisszaya-table-reservation/lib/interfaces";
 import { Stack } from "@mantine/core";
 
+import { IWorkingTime } from "entities/restaurant-settings";
+import { Button } from "shared/ui";
 import { WorkingTimeLine } from "..";
 
-export const WorkingTimeChange = () => {
+import { useWorkingTimeInputs } from "../../lib";
+import { changeWorkingTime } from "../../model";
+
+interface Props {
+  workingTime: IWorkingTime;
+}
+
+export const WorkingTimeChange = (props: Props) => {
+  const { workingTime } = props;
+  const inputs = useWorkingTimeInputs(workingTime);
+
+  const onSubmit = () => {
+    changeWorkingTime();
+  };
+
   return (
     <Stack spacing="xs">
-      <WorkingTimeLine weekday={WEEKDAY.MONDAY} />
-      <WorkingTimeLine weekday={WEEKDAY.FRIDAY} />
-      <WorkingTimeLine weekday={WEEKDAY.TUESDAY} />
+      {inputs.map((input) => (
+        <WorkingTimeLine {...input} key={input.weekday} />
+      ))}
+      <Button onClick={onSubmit}>Save</Button>
     </Stack>
   );
 };

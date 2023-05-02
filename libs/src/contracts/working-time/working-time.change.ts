@@ -14,7 +14,7 @@ export namespace WorkingTimeChange {
     user_id: number;
 
     @IsNumber()
-    workingTimes: Requests.ChangeRestaurantWorkingTime["workingTimes"];
+    workingTime: Requests.ChangeRestaurantWorkingTime["workingTime"];
   }
 
   export class Response implements Responses.ChangeRestaurantWorkingTime {

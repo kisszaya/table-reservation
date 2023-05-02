@@ -1,4 +1,4 @@
-import { IWorkingTime, USER_ROLE } from "../interfaces";
+import { IWorkingTime, USER_ROLE, WEEKDAY } from "../interfaces";
 
 export namespace Requests {
   export interface UserLogin {
@@ -43,6 +43,8 @@ export namespace Requests {
   }
 
   export interface ChangeRestaurantWorkingTime {
-    workingTimes: IWorkingTime[];
+    workingTime: {
+      [key in WEEKDAY]?: IWorkingTime;
+    };
   }
 }

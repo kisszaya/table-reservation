@@ -1,21 +1,38 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Group, Switch } from "@mantine/core";
-import { WEEKDAY } from "kisszaya-table-reservation/lib/interfaces";
+import { Store, Event } from "effector";
+import {
+  IWorkingTime,
+  WEEKDAY,
+} from "kisszaya-table-reservation/lib/interfaces";
 
-import { TimeInputRange, useTimeInputRangeValues } from "shared/ui";
+import { ITimeInput, TimeInputRange, useTimeInputRangeValues } from "shared/ui";
 
 import { useStyles } from "./styles";
 
 interface Props {
   weekday: WEEKDAY;
+  initWorkingTime: IWorkingTime | null;
+  storeFrom: Store<ITimeInput>;
+  storeTo: Store<ITimeInput>;
+  eventFrom: Event<ITimeInput>;
+  eventTo: Event<ITimeInput>;
 }
 
-export const WorkingTimeLine = (props: Props) => {
+export const WorkingTimeLine = memo((props: Props) => {
   const { classes } = useStyles();
-  const { weekday } = props;
+  const { weekday, initWorkingTime, storeTo, storeFrom, eventFrom, eventTo } =
+    props;
 
-  const [checked, setChecked] = useState(false);
-  const values = useTimeInputRangeValues(null, null);
+  const [checked, setChecked] = useState(!!initWorkingTime);
+  const values = useTimeInputRangeValues({
+    eventFrom,
+    eventTo,
+    storeFrom,
+    storeTo,
+    firstInputInitial: initWorkingTime?.time_from,
+    secondInputInitial: initWorkingTime?.time_to,
+  });
 
   return (
     <Group className={classes.container} position="apart" align="center">
@@ -27,4 +44,4 @@ export const WorkingTimeLine = (props: Props) => {
       <TimeInputRange {...values} disabled={!checked} />
     </Group>
   );
-};
+});

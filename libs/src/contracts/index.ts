@@ -22,4 +22,3 @@ export * from "./employees/employees.delete";
 // working-time
 export * from "./working-time/working-time.get";
 export * from "./working-time/working-time.change";
-export * from "./working-time/working-time.delete";

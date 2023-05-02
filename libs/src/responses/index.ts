@@ -69,8 +69,4 @@ export namespace Responses {
       [key in WEEKDAY]?: IWorkingTime;
     };
   }
-
-  export interface DeleteWorkingTime {
-    weekday: WEEKDAY;
-  }
 }

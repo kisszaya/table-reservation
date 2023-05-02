@@ -1,27 +1,50 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
+import { Event, Store } from "effector";
+import { useStore } from "effector-react";
 
 import { ITimeInput, ITimeInputRangeProps } from "../types";
+import { convertTimeToHoursAndMinutes } from "../../../lib";
+
+interface Props {
+  storeFrom: Store<ITimeInput>;
+  storeTo: Store<ITimeInput>;
+  eventFrom: Event<ITimeInput>;
+  eventTo: Event<ITimeInput>;
+  firstInputInitial: number | undefined;
+  secondInputInitial: number | undefined;
+}
 
 export const useTimeInputRangeValues = (
-  firstInputInitial: ITimeInput,
-  secondInputInitial: ITimeInput
+  props: Props
 ): Omit<ITimeInputRangeProps, "disabled"> => {
-  const [firstInput, setFirstInput] = useState<ITimeInput>(firstInputInitial);
-  const [secondInput, setSecondInput] =
-    useState<ITimeInput>(secondInputInitial);
+  const {
+    storeTo,
+    storeFrom,
+    eventFrom,
+    eventTo,
+    secondInputInitial,
+    firstInputInitial,
+  } = props;
+  const fromInput = useStore(storeFrom);
+  const toInput = useStore(storeTo);
+
+  useEffect(() => {
+    eventFrom(convertTimeToHoursAndMinutes(firstInputInitial));
+    eventTo(convertTimeToHoursAndMinutes(secondInputInitial));
+  }, [firstInputInitial, secondInputInitial]);
 
   const values = useMemo(
     () => ({
       firstInput: {
-        value: firstInput,
-        setValue: setFirstInput,
+        value: fromInput,
+        setValue: eventFrom,
       },
       secondInput: {
-        value: secondInput,
-        setValue: setSecondInput,
+        value: toInput,
+        setValue: eventTo,
       },
     }),
-    [firstInput, secondInput]
+    [eventFrom, eventTo, fromInput, toInput]
   );
 
   return values;
