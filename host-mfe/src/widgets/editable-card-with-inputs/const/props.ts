@@ -1,3 +1,0 @@
-export enum EDITABLE_CARD_WITH_INPUTS_FIELD_VARIANT {
-  TEXT = "text",
-}

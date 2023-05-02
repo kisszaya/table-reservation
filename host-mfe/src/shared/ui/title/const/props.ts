@@ -1,0 +1,3 @@
+export enum TITLE_VARIANT {
+  DRAWER_TITLE = "DRAWER_TITLE",
+}

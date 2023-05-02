@@ -1,7 +1,10 @@
+import { WEEKDAY } from "kisszaya-table-reservation/lib/interfaces";
+
 const AUTH_SERVICE = "/auth";
 const USER_SERVICE = "/users";
 const RESTAURANTS_SERVICE = "/restaurants";
 const EMPLOYEES = "/employees";
+const WORKING_TIME = "/working-time";
 
 export const serverRoutes = {
   // auth
@@ -25,4 +28,10 @@ export const serverRoutes = {
     RESTAURANTS_SERVICE + `/${restaurant_id}` + EMPLOYEES,
   employee: (restaurant_id: string | number, employee_id: string | number) =>
     RESTAURANTS_SERVICE + `/${restaurant_id}` + EMPLOYEES + `/${employee_id}`,
+
+  // working-time
+  workingTimes: (restaurant_id: string | number) =>
+    RESTAURANTS_SERVICE + `/${restaurant_id}` + WORKING_TIME,
+  workingTime: (restaurant_id: string | number, weekday: WEEKDAY) =>
+    RESTAURANTS_SERVICE + `/${restaurant_id}` + WORKING_TIME + `/${WEEKDAY}`,
 };

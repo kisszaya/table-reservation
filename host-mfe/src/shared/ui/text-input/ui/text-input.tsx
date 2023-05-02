@@ -5,8 +5,8 @@ import {
   TextInputProps,
 } from "@mantine/core";
 
-import { TEXT_INPUT_TYPE } from "./props";
-import { Text } from "shared/ui";
+import { TEXT_INPUT_TYPE } from "../const/props";
+import { Text } from "../../index";
 
 import { useStyles } from "./styles";
 
