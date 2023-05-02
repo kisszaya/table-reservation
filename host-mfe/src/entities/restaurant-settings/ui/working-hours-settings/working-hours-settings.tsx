@@ -24,7 +24,7 @@ export const WorkingHoursSettings = () => {
 
   return (
     <Stack>
-      <Title variant={TITLE_VARIANT.DRAWER_TITLE}>Working hours settings</Title>
+      <Title variant={TITLE_VARIANT.DRAWER_TITLE}>Время работы ресторана</Title>
       <WorkingTimeChange workingTime={workingTime} />
     </Stack>
   );
