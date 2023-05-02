@@ -10,7 +10,7 @@ interface Props {
 
 export const changeWorkingTime = async (props: Props) => {
   const { restaurant_id, data } = props;
-  return await api.patch<Responses.ChangeRestaurantWorkingTime>(
+  return await api.put<Responses.ChangeRestaurantWorkingTime>(
     serverRoutes.workingTimes(restaurant_id),
     data
   );

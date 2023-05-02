@@ -9,6 +9,7 @@ import {
 import { ITimeInput, TimeInputRange, useTimeInputRangeValues } from "shared/ui";
 
 import { useStyles } from "./styles";
+import { WEEKDAY_TEXTS } from "../../const";
 
 interface Props {
   weekday: WEEKDAY;
@@ -34,12 +35,22 @@ export const WorkingTimeLine = memo((props: Props) => {
     secondInputInitial: initWorkingTime?.time_to,
   });
 
+  const onChangeChecked = () => {
+    if (checked) {
+      setChecked(false);
+      values.firstInput.setValue(null);
+      values.secondInput.setValue(null);
+    } else {
+      setChecked(true);
+    }
+  };
+
   return (
     <Group className={classes.container} position="apart" align="center">
       <Switch
-        label={weekday}
+        label={WEEKDAY_TEXTS[weekday]}
         checked={checked}
-        onChange={(event) => setChecked(event.currentTarget.checked)}
+        onChange={onChangeChecked}
       />
       <TimeInputRange {...values} disabled={!checked} />
     </Group>

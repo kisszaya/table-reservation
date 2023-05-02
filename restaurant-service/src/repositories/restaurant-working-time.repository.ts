@@ -37,13 +37,21 @@ export class RestaurantWorkingTimeRepository {
     });
   }
 
-  public async deleteRestaurantWorkingTimeById(
-    restaurant_working_time_id: number
+  public async findAllRestaurantWorkingTimeByRestaurantId(
+    restaurant_id: number
   ) {
-    this.logger.log("delete restaurant-working-time by id");
+    this.logger.log("find restaurant-working-time by restaurant_id");
+
+    return this.restaurantWorkingTimeModel.findBy({
+      restaurant_id,
+    });
+  }
+
+  public async deleteRestaurantWorkingTimeById(restaurant_id: number) {
+    this.logger.log("delete restaurant-working-time by restaurant_id");
 
     return this.restaurantWorkingTimeModel.delete({
-      restaurant_working_time_id,
+      restaurant_id,
     });
   }
 }

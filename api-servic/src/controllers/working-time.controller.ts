@@ -1,16 +1,14 @@
 import {
   WorkingTimeGet,
   WorkingTimeChange,
-  WorkingTimeDelete,
 } from "kisszaya-table-reservation/lib/contracts";
-import { WEEKDAY } from "kisszaya-table-reservation/lib/interfaces";
 import {
   Body,
   Controller,
   Get,
   Logger,
   Param,
-  Patch,
+  Put,
   UseGuards,
 } from "@nestjs/common";
 
@@ -47,13 +45,14 @@ export class WorkingTimeController {
   }
 
   @UseGuards(JWTAuthGuard)
-  @Patch("/:restaurantId/working-time")
+  @Put("/:restaurantId/working-time")
   async changeRestaurantWorkingTime(
     @Param("restaurantId") restaurant_id: string,
     @UserId() user_id: number,
     @Body() dto: WorkingTimeChangeDto
   ) {
-    this.logger.log(`PATCH /api/restaurants/:restaurantId/working-time`);
+    this.logger.log(`PUT /api/restaurants/:restaurantId/working-time`);
+    console.log("TEST meow");
 
     try {
       return await this.brokerService.publish<
@@ -63,32 +62,6 @@ export class WorkingTimeController {
         user_id,
         restaurant_id: Number(restaurant_id),
         ...dto,
-      });
-    } catch (e) {
-      throw new InternalException(e);
-    }
-  }
-
-  @UseGuards(JWTAuthGuard)
-  @Patch("/:restaurantId/working-time/:weekday")
-  async deleteRestaurantWorkingTime(
-    @Param("restaurantId") restaurant_id: string,
-    @Param("weekday") weekday: WEEKDAY,
-    @UserId() user_id: number,
-    @Body() dto: WorkingTimeChangeDto
-  ) {
-    this.logger.log(
-      `DELETE /api/restaurants/:restaurantId/working-time/"weekday`
-    );
-
-    try {
-      return await this.brokerService.publish<
-        WorkingTimeDelete.Request,
-        WorkingTimeDelete.Response
-      >(WorkingTimeDelete.topic, {
-        user_id,
-        restaurant_id: Number(restaurant_id),
-        weekday,
       });
     } catch (e) {
       throw new InternalException(e);

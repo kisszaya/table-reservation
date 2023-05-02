@@ -4,7 +4,6 @@ import { Message, RMQMessage, RMQRoute, RMQValidate } from "nestjs-rmq";
 import { BrokerService } from "@/broker";
 import {
   WorkingTimeChange,
-  WorkingTimeDelete,
   WorkingTimeGet,
 } from "kisszaya-table-reservation/lib/contracts";
 import { WorkingTimeService } from "@/working-time/working-time.service";
@@ -26,16 +25,6 @@ export class WorkingTimeController {
   ): Promise<WorkingTimeChange.Response> {
     this.brokerService.setTraceId(msg);
     return this.workingTimeService.changeWorkingTime(data);
-  }
-
-  @RMQValidate()
-  @RMQRoute(WorkingTimeDelete.topic)
-  async deleteWorkingTime(
-    data: WorkingTimeDelete.Request,
-    @RMQMessage msg: Message
-  ): Promise<WorkingTimeDelete.Response> {
-    this.brokerService.setTraceId(msg);
-    return this.workingTimeService.deleteWorkingTime(data);
   }
 
   @RMQValidate()

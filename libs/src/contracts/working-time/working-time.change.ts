@@ -13,7 +13,6 @@ export namespace WorkingTimeChange {
     @IsNumber()
     user_id: number;
 
-    @IsNumber()
     workingTime: Requests.ChangeRestaurantWorkingTime["workingTime"];
   }
 
