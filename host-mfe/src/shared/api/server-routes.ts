@@ -5,6 +5,7 @@ const USER_SERVICE = "/users";
 const RESTAURANTS_SERVICE = "/restaurants";
 const EMPLOYEES = "/employees";
 const WORKING_TIME = "/working-time";
+const TABLES = "/tables";
 
 export const serverRoutes = {
   // auth
@@ -34,4 +35,10 @@ export const serverRoutes = {
     RESTAURANTS_SERVICE + `/${restaurant_id}` + WORKING_TIME,
   workingTime: (restaurant_id: string | number, weekday: WEEKDAY) =>
     RESTAURANTS_SERVICE + `/${restaurant_id}` + WORKING_TIME + `/${WEEKDAY}`,
+
+  // tables
+  tables: (restaurant_id: string | number) =>
+    RESTAURANTS_SERVICE + `/${restaurant_id}` + TABLES,
+  table: (restaurant_id: string | number, table_id: string | number) =>
+    RESTAURANTS_SERVICE + `/${restaurant_id}` + TABLES + `/${table_id}`,
 };

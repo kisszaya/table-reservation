@@ -14,7 +14,7 @@ export class SeatRepository {
   ) {}
 
   public async createSeat(seatEntity: SeatEntity) {
-    this.logger.log("create seat");
+    this.logger.log("create seat-fields-fields");
 
     const newSeat = this.seatModel.create(seatEntity);
 
@@ -23,7 +23,7 @@ export class SeatRepository {
   }
 
   public async findSeatByTableId(table_id: number) {
-    this.logger.log("find seat by table_id");
+    this.logger.log("find seat-fields-fields by table_id");
 
     return this.seatModel.findOneBy({
       table_id,

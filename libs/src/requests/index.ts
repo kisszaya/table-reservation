@@ -1,4 +1,12 @@
-import { IWorkingTime, USER_ROLE, WEEKDAY } from "../interfaces";
+import {
+  ISeat,
+  IWorkingTime,
+  SEAT_POSITION_VARIANT,
+  SEAT_VARIANT,
+  TABLE_VARIANT,
+  USER_ROLE,
+  WEEKDAY,
+} from "../interfaces";
 
 export namespace Requests {
   export interface UserLogin {
@@ -46,5 +54,20 @@ export namespace Requests {
     workingTime: {
       [key in WEEKDAY]?: IWorkingTime;
     };
+  }
+
+  export interface CreateTable {
+    persons_count: number;
+    variant: TABLE_VARIANT;
+    title: string;
+    height: number;
+    width: number;
+    description: string;
+    seats: {
+      variant: SEAT_VARIANT;
+      position: SEAT_POSITION_VARIANT;
+      position_id: number;
+    }[];
+    tags?: string[];
   }
 }

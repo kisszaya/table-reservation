@@ -3,6 +3,10 @@ import { Message, RMQMessage, RMQRoute, RMQValidate } from "nestjs-rmq";
 
 import { BrokerService } from "@/broker";
 import { TablesService } from "./tables.service";
+import {
+  TablesCreate,
+  TablesGet,
+} from "kisszaya-table-reservation/lib/contracts";
 
 @Controller()
 export class TablesController {
@@ -13,23 +17,22 @@ export class TablesController {
     private readonly tablesService: TablesService
   ) {}
 
-  // @RMQValidate()
-  // @RMQRoute(WorkingTimeChange.topic)
-  // async changeWorkingTime(
-  //   data: WorkingTimeChange.Request,
-  //   @RMQMessage msg: Message
-  // ): Promise<WorkingTimeChange.Response> {
-  //   this.brokerService.setTraceId(msg);
-  //   return this.workingTimeService.changeWorkingTime(data);
-  // }
-  //
-  // @RMQValidate()
-  // @RMQRoute(WorkingTimeGet.topic)
-  // async getWorkingTime(
-  //   data: WorkingTimeGet.Request,
-  //   @RMQMessage msg: Message
-  // ): Promise<WorkingTimeGet.Response> {
-  //   this.brokerService.setTraceId(msg);
-  //   return this.workingTimeService.getWorkingTime(data);
-  // }
+  @RMQValidate()
+  @RMQRoute(TablesCreate.topic)
+  async createTable(
+    data: TablesCreate.Request,
+    @RMQMessage msg: Message
+  ): Promise<TablesCreate.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.tablesService.createTable(data);
+  }
+  @RMQValidate()
+  @RMQRoute(TablesGet.topic)
+  async getWorkingTime(
+    data: TablesGet.Request,
+    @RMQMessage msg: Message
+  ): Promise<TablesGet.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.tablesService.getTables(data);
+  }
 }

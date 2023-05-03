@@ -12,7 +12,6 @@ interface IAddEmployeeFxProps {
 
 const _addEmployeeFx = createEffect(async (props: IAddEmployeeFxProps) => {
   const { employee, restaurant_id } = props;
-  console.log("TEST props", props);
 
   return await addEmployee({
     employee: { ...employee, roles: [employee.roles] },

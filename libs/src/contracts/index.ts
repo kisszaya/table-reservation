@@ -22,3 +22,7 @@ export * from "./employees/employees.delete";
 // working-time
 export * from "./working-time/working-time.get";
 export * from "./working-time/working-time.change";
+
+// tables
+export * from "./tables/tables.get";
+export * from "./tables/tables.create";

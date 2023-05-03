@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity("seat")
+@Entity("seat-fields-fields")
 export class SeatModel {
   @PrimaryGeneratedColumn({
     type: "bigint",

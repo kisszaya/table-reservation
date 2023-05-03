@@ -1,6 +1,7 @@
 import {
   IRestaurantEmployee,
   IRestaurantUserPreview,
+  ITablePreview,
   IWorkingTime,
   USER_STATUS,
   WEEKDAY,
@@ -68,5 +69,13 @@ export namespace Responses {
     workingTime: {
       [key in WEEKDAY]?: IWorkingTime;
     };
+  }
+
+  export interface GetRestaurantTables {
+    tables: ITablePreview[];
+  }
+
+  export interface CreateTable {
+    table: ITablePreview;
   }
 }
