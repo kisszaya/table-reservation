@@ -2,6 +2,7 @@ import { Group, Stack } from "@mantine/core";
 
 import { Button, Title, TITLE_VARIANT } from "shared/ui";
 import { openCreateTableModal } from "features/table-create";
+import { SettingsTableList } from "entities/table";
 
 export const TablesSettings = () => {
   return (
@@ -12,6 +13,7 @@ export const TablesSettings = () => {
           Добавить стол
         </Button>
       </Group>
+      <SettingsTableList />
     </Stack>
   );
 };

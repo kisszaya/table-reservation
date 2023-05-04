@@ -1,16 +1,20 @@
 interface Props {
   className?: string;
+  width?: number;
+  height?: number;
 }
 
-export const ChairIcon = ({ className }: Props) => {
+export const ChairIcon = ({ className, width, height }: Props) => {
+  const w = width || "64";
+  const h = height || "64";
+
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
+      width={w}
+      height={h}
+      viewBox={`0 0 64 64`}
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="32.1006" cy="28.3005" r="15.9714" fill="#7D88C3" />
       <path

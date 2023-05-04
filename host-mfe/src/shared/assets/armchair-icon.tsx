@@ -1,16 +1,20 @@
 interface Props {
   className?: string;
+  width?: number;
+  height?: number;
 }
 
-export const ArmchairIcon = ({ className }: Props) => {
+export const ArmchairIcon = ({ className, height, width }: Props) => {
+  const w = width || "64";
+  const h = height || "64";
+
   return (
     <svg
       className={className}
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
+      width={w}
+      height={h}
+      viewBox={`0 0 64 64`}
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <rect
         x="12"

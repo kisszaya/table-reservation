@@ -1,5 +1,6 @@
+import { SEAT_POSITION_OPTIONS } from "entities/table";
+
 import { ISeat } from "../../model";
-import { SEAT_POSITION_OPTIONS } from "../../const";
 import { drawPlus } from "./draw-plus";
 import { drawSeat } from "./draw-seat";
 

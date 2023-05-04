@@ -37,8 +37,12 @@ export const TableControl = () => {
             value={height}
             onChange={tableEvents.changeTableHeight}
             label="Высота стола"
+            max={4}
+            min={1}
           />
           <NumberInput
+            max={5}
+            min={1}
             value={width}
             onChange={tableEvents.changeTableWidth}
             label="Длина стола"
@@ -65,6 +69,7 @@ export const TableControl = () => {
           />
           <NumberInput
             required
+            min={0}
             label="Максимум человек за столом"
             value={personsCount}
             onChange={tableEvents.changeTablePersonsCount}

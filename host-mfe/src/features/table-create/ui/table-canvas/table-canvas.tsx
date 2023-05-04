@@ -1,15 +1,20 @@
 import { forwardRef } from "react";
 import { useStore } from "effector-react";
 
-import { canvasFields } from "../../model";
+import { getSeatPositionByCoordinates } from "entities/table";
+
+import { $tableSeats, canvasFields, tableFields } from "../../model";
 import { TABLE_CONSTRUCTOR_SETTINGS } from "../../const";
-import { openCreateSeatModal } from "../../lib";
+import { openCreateSeatModal, openDeleteSeatModal } from "../../lib";
 
 type Ref = HTMLCanvasElement;
 
 interface Props {}
 
 export const TableCanvas = forwardRef<Ref, Props>((props, ref) => {
+  const tableSeats = useStore($tableSeats);
+  const tableWidth = useStore(tableFields.$tableWidth);
+  const tableHeight = useStore(tableFields.$tableHeight);
   const canvasHeight = useStore(canvasFields.$canvasHeight);
   const canvasWidth = useStore(canvasFields.$canvasWidth);
 
@@ -31,7 +36,28 @@ export const TableCanvas = forwardRef<Ref, Props>((props, ref) => {
       coords.y / TABLE_CONSTRUCTOR_SETTINGS.HEIGHT_UNIT
     );
 
-    openCreateSeatModal({ heightNumber, widthNumber });
+    const positionByCoords = getSeatPositionByCoordinates({
+      widthNumber,
+      tableWidth,
+      tableHeight,
+      heightNumber,
+    });
+    if (!positionByCoords) return;
+
+    if (
+      tableSeats.find(
+        (seat) =>
+          seat.position === positionByCoords.position &&
+          seat.position_id === positionByCoords.position_id
+      )
+    ) {
+      openDeleteSeatModal({
+        position_id: positionByCoords.position_id,
+        position: positionByCoords.position,
+      });
+    } else {
+      openCreateSeatModal({ heightNumber, widthNumber });
+    }
   };
 
   return (

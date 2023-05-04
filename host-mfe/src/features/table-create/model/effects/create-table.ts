@@ -1,11 +1,18 @@
 import { attach, combine, createEffect } from "effector";
+import { closeModal } from "@mantine/modals";
 
 import { restaurantStore } from "entities/restaurant";
+
 import { tableFields } from "../store";
 import { createTable, CreateTableProps } from "../api";
+import { TABLE_MODAL_ID } from "../../const";
 
 const _createTableFx = createEffect(async (data: CreateTableProps) => {
-  return await createTable(data);
+  const res = (await createTable(data)).data.table;
+  if (res) {
+    closeModal(TABLE_MODAL_ID);
+  }
+  return res;
 });
 
 const _createTableStore = combine(

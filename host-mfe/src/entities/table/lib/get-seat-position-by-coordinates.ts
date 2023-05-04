@@ -1,10 +1,10 @@
 import { SEAT_POSITION_VARIANT } from "kisszaya-table-reservation/lib/interfaces";
 
-import { ISeatCreateProps } from "../../ui";
-
-interface Props extends ISeatCreateProps {
+interface Props {
   tableHeight: number;
   tableWidth: number;
+  widthNumber: number;
+  heightNumber: number;
 }
 
 type Return = {

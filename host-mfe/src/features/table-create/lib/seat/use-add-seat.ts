@@ -3,9 +3,10 @@ import { useStore } from "effector-react";
 import { closeModal } from "@mantine/modals";
 import { SEAT_VARIANT } from "kisszaya-table-reservation/lib/interfaces";
 
+import { getSeatPositionByCoordinates } from "entities/table";
+
 import { ISeatCreateProps } from "../../ui";
 import { addTableSeat, tableFields } from "../../model";
-import { getSeatPositionByCoordinates } from ".";
 import { SEAT_MODAL_ID } from "../../const";
 
 export const useAddSeat = (props: ISeatCreateProps) => {

@@ -23,7 +23,7 @@ export class TableRepository {
   }
 
   public async findTablesByRestaurantId(restaurant_id: number) {
-    this.logger.log("find table by restaurant_id");
+    this.logger.log("find tables by restaurant_id");
 
     return this.tableModel.findBy({
       restaurant_id,

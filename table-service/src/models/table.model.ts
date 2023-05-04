@@ -29,6 +29,18 @@ export class TableModel {
 
   @Column({
     nullable: false,
+    type: "int",
+  })
+  width: number;
+
+  @Column({
+    nullable: false,
+    type: "int",
+  })
+  height: number;
+
+  @Column({
+    nullable: false,
     enum: TABLE_VARIANT,
   })
   variant: TABLE_VARIANT;

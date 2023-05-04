@@ -1,0 +1,3 @@
+export const SEAT_MODAL_ID = "SEAT_MODAL_ID";
+export const TABLE_MODAL_ID = "TABLE_MODAL_ID";
+export const SEAT_DELETE_MODAL_ID = "SEAT_DELETE_MODAL_ID";

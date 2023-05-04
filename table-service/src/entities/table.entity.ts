@@ -10,6 +10,8 @@ export class TableEntity implements ITable {
   table_id?: number;
   title: string;
   variant: TABLE_VARIANT;
+  height: number;
+  width: number;
 
   constructor(table: ITable) {
     this.variant = table.variant;
@@ -18,5 +20,7 @@ export class TableEntity implements ITable {
     this.table_id = table.table_id;
     this.title = table.title;
     this.restaurant_id = table.restaurant_id;
+    this.width = table.width;
+    this.height = table.height;
   }
 }

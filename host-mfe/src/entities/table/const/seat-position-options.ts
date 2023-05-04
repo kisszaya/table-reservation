@@ -1,5 +1,4 @@
 import { SEAT_POSITION_VARIANT } from "kisszaya-table-reservation/lib/interfaces";
-
 export const SEAT_POSITION_OPTIONS: Record<
   SEAT_POSITION_VARIANT,
   {
