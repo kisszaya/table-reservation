@@ -28,7 +28,7 @@ export const Restaurant = () => {
         <Stack>
           <RestaurantProfileCard />
           <Button onClick={redirectToProfile} color="dark">
-            Go to profile
+            Перейти в профиль
           </Button>
         </Stack>
         <RestaurantServices services={services} />
