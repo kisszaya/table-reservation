@@ -19,7 +19,7 @@ export const Profile = () => {
       </Stack>
       <Stack className={classes.content}>
         <Group position="apart">
-          <Title>Restaurants</Title>
+          <Title>Рестораны</Title>
           <CreateRestaurantButton />
         </Group>
         <MeRestaurantsList />

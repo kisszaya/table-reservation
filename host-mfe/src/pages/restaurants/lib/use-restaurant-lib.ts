@@ -34,29 +34,30 @@ export const useRestaurantLib = () => {
 
   const services: IRestaurantServices = [
     {
-      title: "Employees",
-      description: "You can add waiters and administrators to the restaurant",
+      title: "Сотрудники",
+      description:
+        "Вы можете добавить официантов и администраторов в ваш ресторан",
       icon: IconUsers,
       onClick: openEmployees,
       roles: [USER_ROLE.ADMINISTRATOR],
     },
     {
-      title: "Settings",
-      description: "You can change settings of restaurant",
+      title: "Настройки",
+      description: "Редактируйте столики, время работы и основные настройки",
       icon: IconSettings,
       onClick: openSettings,
       roles: [USER_ROLE.ADMINISTRATOR],
     },
     {
-      title: "Discounts",
-      description: "You can add or remove discounts of restaurant",
+      title: "Акции",
+      description: "Добавьте информацию о скидках и акциях",
       icon: IconDiscount,
       onClick: openDiscounts,
       roles: [USER_ROLE.ADMINISTRATOR, USER_ROLE.HOSTESS],
     },
     {
-      title: "Booking panel",
-      description: "You can open booking-panel panel of restaurant",
+      title: "Панель бронирования",
+      description: "Ведите учет броней в режиме реального времени",
       icon: IconCoin,
       onClick: redirectToBookingPanel,
       roles: [USER_ROLE.ADMINISTRATOR, USER_ROLE.HOSTESS],

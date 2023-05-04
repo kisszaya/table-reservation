@@ -13,7 +13,7 @@ export const LogoutButton = () => {
 
   return (
     <Button onClick={onLogout} color="dark">
-      Logout button
+      Выйти из аккаунта
     </Button>
   );
 };
