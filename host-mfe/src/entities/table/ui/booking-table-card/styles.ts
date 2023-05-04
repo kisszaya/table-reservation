@@ -5,7 +5,7 @@ import { BOOKING_TABLES_COUNT } from "shared/const";
 export const useStyles = createStyles(() => ({
   card: {
     width: `${100 / BOOKING_TABLES_COUNT - 1}%`,
-    height: "250px",
+    height: "270px",
     cursor: "pointer",
     position: "relative",
   },
