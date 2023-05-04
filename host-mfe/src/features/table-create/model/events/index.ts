@@ -4,6 +4,3 @@ export * from "./reset";
 
 // table fields
 export * as tableEvents from "./table-fields";
-
-// seat fields
-export * as seatEvents from "./seat-fields";

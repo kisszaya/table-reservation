@@ -1,6 +1,12 @@
 import { TABLE_VARIANT } from "kisszaya-table-reservation/lib/interfaces";
 
-import { drawVerticalLine, drawHorizontalLine, drawPlus, drawTable } from ".";
+import {
+  drawVerticalLine,
+  drawHorizontalLine,
+  drawCellCenter,
+  drawTable,
+} from ".";
+import { ISeat } from "../../model";
 
 interface Props {
   tableWidth: number;
@@ -9,6 +15,7 @@ interface Props {
   canvasHeight: number;
   canvasWidth: number;
   tableVariant: TABLE_VARIANT;
+  tableSeats: ISeat[];
 }
 
 export const draw = (props: Props) => {
@@ -19,6 +26,7 @@ export const draw = (props: Props) => {
     canvasWidth,
     ctx,
     tableVariant,
+    tableSeats,
   } = props;
 
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -37,7 +45,7 @@ export const draw = (props: Props) => {
       }
 
       if (x === 1 || x === lastTableWidth || y === 1 || y === lastTableHeight) {
-        drawPlus({ x, y, ctx });
+        drawCellCenter({ x, y, ctx, tableSeats, tableHeight, tableWidth });
       }
     }
   }

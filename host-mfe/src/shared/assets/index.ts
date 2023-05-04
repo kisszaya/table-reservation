@@ -1,4 +1,2 @@
-import ArmchairIcon from "./armchair.svg";
-import ChairIcon from "./chair.svg";
-
-export { ArmchairIcon, ChairIcon };
+export * from "./armchair-icon";
+export * from "./chair-icon";

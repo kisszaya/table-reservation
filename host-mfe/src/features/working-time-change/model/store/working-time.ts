@@ -1,4 +1,4 @@
-import { createStore } from "effector";
+import { createEvent, createStore } from "effector";
 
 import { ITimeInput } from "shared/ui";
 

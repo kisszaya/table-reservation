@@ -11,6 +11,8 @@ export interface CreateTableProps {
 export const createTable = async (props: CreateTableProps) => {
   const { data, restaurant_id } = props;
 
+  console.log("TEST createTable", data);
+
   return await api.post<Responses.CreateTable>(
     serverRoutes.tables(restaurant_id),
     data

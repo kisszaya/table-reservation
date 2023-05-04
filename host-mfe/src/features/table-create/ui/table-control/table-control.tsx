@@ -1,4 +1,5 @@
 import { useStore } from "effector-react";
+import { FormEvent } from "react";
 import {
   Group,
   NativeSelect,
@@ -9,8 +10,9 @@ import {
 } from "@mantine/core";
 import { TABLE_VARIANT } from "kisszaya-table-reservation/lib/interfaces";
 
-import { tableFields, tableEvents } from "../../model";
+import { tableFields, tableEvents, createTable } from "../../model";
 import { tableVariantsData } from "../../const";
+import { Button } from "shared/ui";
 
 export const TableControl = () => {
   const variant = useStore(tableFields.$tableVariant);
@@ -20,47 +22,66 @@ export const TableControl = () => {
   const personsCount = useStore(tableFields.$tablePersonsCount);
   const description = useStore(tableFields.$tableDescription);
 
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    createTable();
+  };
+
+  const disabled = !title || !description || !personsCount;
+
   return (
-    <Stack>
-      <Group noWrap>
-        <NumberInput
-          value={height}
-          onChange={tableEvents.changeTableHeight}
-          label="Высота стола"
-        />
-        <NumberInput
-          value={width}
-          onChange={tableEvents.changeTableWidth}
-          label="Длина стола"
-        />
-        <NativeSelect
-          value={variant}
-          label="Форма стола"
-          data={tableVariantsData}
+    <form onSubmit={onSubmit}>
+      <Stack>
+        <Group noWrap>
+          <NumberInput
+            value={height}
+            onChange={tableEvents.changeTableHeight}
+            label="Высота стола"
+          />
+          <NumberInput
+            value={width}
+            onChange={tableEvents.changeTableWidth}
+            label="Длина стола"
+          />
+          <NativeSelect
+            value={variant}
+            label="Форма стола"
+            data={tableVariantsData}
+            onChange={(event) =>
+              tableEvents.changeTableVariant(
+                event.target.value as TABLE_VARIANT
+              )
+            }
+          />
+        </Group>
+        <Group noWrap position="apart">
+          <TextInput
+            required
+            label="Название стола (видно только сотрудникам)"
+            value={title}
+            onChange={(event) =>
+              tableEvents.changeTableTitle(event.target.value)
+            }
+          />
+          <NumberInput
+            required
+            label="Максимум человек за столом"
+            value={personsCount}
+            onChange={tableEvents.changeTablePersonsCount}
+          />
+        </Group>
+        <Textarea
+          required
+          label="Описание стола (видно клиентам)"
+          value={description}
           onChange={(event) =>
-            tableEvents.changeTableVariant(event.target.value as TABLE_VARIANT)
+            tableEvents.changeTableDescription(event.target.value)
           }
         />
-      </Group>
-      <Group noWrap>
-        <TextInput
-          label="Название стола (будет видно только сотрудникам)"
-          value={title}
-          onChange={(event) => tableEvents.changeTableTitle(event.target.value)}
-        />
-        <NumberInput
-          label="Максимум человек за столом"
-          value={personsCount}
-          onChange={tableEvents.changeTablePersonsCount}
-        />
-      </Group>
-      <Textarea
-        label="Описание стола (будет видно клиентам)"
-        value={description}
-        onChange={(event) =>
-          tableEvents.changeTableDescription(event.target.value)
-        }
-      />
-    </Stack>
+        <Button disabled={disabled} type="submit">
+          Добавить стол
+        </Button>
+      </Stack>
+    </form>
   );
 };
