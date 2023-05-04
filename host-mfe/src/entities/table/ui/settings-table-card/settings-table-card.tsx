@@ -1,10 +1,12 @@
 import { ITablePreview } from "kisszaya-table-reservation/lib/interfaces";
-import { Card, Divider, Group, Stack } from "@mantine/core";
-import { IconUsers } from "@tabler/icons-react";
+import { ActionIcon, Card, Divider, Group, Stack } from "@mantine/core";
+import { IconTrash, IconUsers } from "@tabler/icons-react";
+
+import { Title, Text } from "shared/ui";
 
 import { TableSchema } from "..";
-import { Title, Text } from "shared/ui";
 import { TABLE_SETTINGS_SCHEMA } from "../../const";
+import { removeTable } from "../../model";
 
 import { useStyles } from "./styles";
 
@@ -26,6 +28,12 @@ export const SettingsTableCard = (props: Props) => {
       ? TABLE_SETTINGS_SCHEMA.UNIT_SM
       : TABLE_SETTINGS_SCHEMA.UNIT_MD;
 
+  const onRemoveTable = () => {
+    if (table_id) {
+      removeTable(table_id);
+    }
+  };
+
   return (
     <Card withBorder>
       <Group noWrap>
@@ -34,9 +42,14 @@ export const SettingsTableCard = (props: Props) => {
           <Text size="sm" color="gray" weight={500}>
             {description}
           </Text>
-          <Group align="center" spacing="xs" mt={16}>
-            <IconUsers size={16} strokeWidth={3} />
-            <Text weight={900}>{persons_count}</Text>
+          <Group position="apart" align="center" mt={16}>
+            <Group align="center" spacing="xs">
+              <IconUsers size={16} strokeWidth={3} />
+              <Text weight={900}>{persons_count}</Text>
+            </Group>
+            <ActionIcon onClick={onRemoveTable} color="red">
+              <IconTrash size={20} />
+            </ActionIcon>
           </Group>
         </Stack>
         <Divider orientation="vertical" />

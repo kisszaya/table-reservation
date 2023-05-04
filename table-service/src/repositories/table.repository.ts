@@ -22,6 +22,18 @@ export class TableRepository {
     return newTable;
   }
 
+  public async findTableByTableId(table_id: number) {
+    this.logger.log("find table by table_id");
+
+    return await this.tableModel.findOneBy({ table_id });
+  }
+
+  public async deleteTableByTableId(table_id: number) {
+    this.logger.log("delete table by table_id");
+
+    return await this.tableModel.delete({ table_id });
+  }
+
   public async findTablesByRestaurantId(restaurant_id: number) {
     this.logger.log("find tables by restaurant_id");
 

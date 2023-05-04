@@ -26,3 +26,4 @@ export * from "./working-time/working-time.change";
 // tables
 export * from "./tables/tables.get";
 export * from "./tables/tables.create";
+export * from "./tables/tables.delete";

@@ -1,6 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import {
   TablesCreate,
+  TablesDelete,
   TablesGet,
 } from "kisszaya-table-reservation/lib/contracts";
 
@@ -68,6 +69,24 @@ export class TablesService {
 
     return {
       tables,
+    };
+  }
+
+  public async deleteTable(
+    data: TablesDelete.Request
+  ): Promise<TablesDelete.Response> {
+    const { table_id, user_id, restaurant_id } = data;
+
+    await this.seatRepository.deleteAllSeatsByTableId(table_id);
+
+    const table = await this.tableRepository.findTableByTableId(table_id);
+    await this.tableRepository.deleteTableByTableId(table_id);
+
+    return {
+      table: {
+        ...table,
+        seats: [],
+      },
     };
   }
 }

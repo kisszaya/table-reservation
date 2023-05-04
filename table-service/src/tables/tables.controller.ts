@@ -5,6 +5,7 @@ import { BrokerService } from "@/broker";
 import { TablesService } from "./tables.service";
 import {
   TablesCreate,
+  TablesDelete,
   TablesGet,
 } from "kisszaya-table-reservation/lib/contracts";
 
@@ -28,11 +29,21 @@ export class TablesController {
   }
   @RMQValidate()
   @RMQRoute(TablesGet.topic)
-  async getWorkingTime(
+  async getTables(
     data: TablesGet.Request,
     @RMQMessage msg: Message
   ): Promise<TablesGet.Response> {
     this.brokerService.setTraceId(msg);
     return this.tablesService.getTables(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(TablesDelete.topic)
+  async deleteTable(
+    data: TablesDelete.Request,
+    @RMQMessage msg: Message
+  ): Promise<TablesDelete.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.tablesService.deleteTable(data);
   }
 }

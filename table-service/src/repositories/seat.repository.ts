@@ -22,6 +22,14 @@ export class SeatRepository {
     return newSeat;
   }
 
+  public async deleteAllSeatsByTableId(table_id: number) {
+    this.logger.log("delete all seats by table_id");
+
+    return this.seatModel.delete({
+      table_id,
+    });
+  }
+
   public async findAllSeatsByTableId(table_id: number) {
     this.logger.log("find all seats by table_id");
 

@@ -1,10 +1,12 @@
 import {
   TablesGet,
   TablesCreate,
+  TablesDelete,
 } from "kisszaya-table-reservation/lib/contracts";
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Logger,
   Param,
@@ -61,6 +63,29 @@ export class TablesController {
         user_id,
         restaurant_id: Number(restaurant_id),
         table: dto,
+      });
+    } catch (e) {
+      throw new InternalException(e);
+    }
+  }
+
+  @UseGuards(JWTAuthGuard)
+  @Delete("/:restaurantId/tables/:tableId")
+  async deleteRestaurantTable(
+    @Param("restaurantId") restaurant_id: string,
+    @Param("tableId") table_id: string,
+    @UserId() user_id: number
+  ) {
+    this.logger.log(`DELETE /api/restaurants/:restaurantId/tables/:tableId`);
+
+    try {
+      return await this.brokerService.publish<
+        TablesDelete.Request,
+        TablesDelete.Response
+      >(TablesDelete.topic, {
+        user_id,
+        restaurant_id: Number(restaurant_id),
+        table_id: Number(table_id),
       });
     } catch (e) {
       throw new InternalException(e);

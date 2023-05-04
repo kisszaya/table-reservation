@@ -78,4 +78,8 @@ export namespace Responses {
   export interface CreateTable {
     table: ITablePreview;
   }
+
+  export interface DeleteTable {
+    table: ITablePreview;
+  }
 }
