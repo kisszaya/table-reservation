@@ -8,6 +8,7 @@ import { getPostgresConfig, getRMQConfig } from "@/configs";
 import { BrokerModule } from "@/broker";
 
 import { TablesModule } from "@/tables/tables.module";
+import { TagsModule } from "@/tags/tags.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { TablesModule } from "@/tables/tables.module";
     RMQModule.forRootAsync(getRMQConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
     TablesModule,
+    TagsModule,
   ],
   providers: [],
 })

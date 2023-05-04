@@ -29,4 +29,20 @@ export class TableTagRepository {
       table_id,
     });
   }
+
+  public async findTableTagsByTagId(tag_id: number) {
+    this.logger.log("find table tag by tag_id");
+
+    return this.tableTagModel.findBy({
+      tag_id,
+    });
+  }
+
+  public async deleteTableTagsByTableId(table_id: number) {
+    this.logger.log("delete table tag by table_id");
+
+    return this.tableTagModel.delete({
+      table_id,
+    });
+  }
 }

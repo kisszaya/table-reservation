@@ -8,6 +8,7 @@ import {
 import { SeatRepository, TableRepository } from "@/repositories";
 import { BrokerService } from "@/broker";
 import { SeatEntity, TableEntity } from "@/entities";
+import { TagsService } from "@/tags/tags.service";
 
 @Injectable()
 export class TablesService {
@@ -16,6 +17,7 @@ export class TablesService {
   constructor(
     private readonly tableRepository: TableRepository,
     private readonly seatRepository: SeatRepository,
+    private readonly tagsService: TagsService,
     private readonly brokerService: BrokerService
   ) {}
 
@@ -37,6 +39,11 @@ export class TablesService {
 
       await this.seatRepository.createSeat(seatEntity);
     }
+
+    await this.tagsService.addTagsToTable({
+      table_id: newTable.table_id,
+      tags,
+    });
 
     const allSeats = await this.seatRepository.findAllSeatsByTableId(
       newTable.table_id
@@ -81,6 +88,8 @@ export class TablesService {
 
     const table = await this.tableRepository.findTableByTableId(table_id);
     await this.tableRepository.deleteTableByTableId(table_id);
+
+    await this.tagsService.removeTagsByTable({ table_id: table.table_id });
 
     return {
       table: {

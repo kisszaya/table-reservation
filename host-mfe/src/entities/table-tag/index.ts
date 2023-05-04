@@ -1,0 +1,1 @@
+export { TableTagsSelect } from "./ui";

@@ -29,4 +29,10 @@ export class TagRepository {
       text,
     });
   }
+
+  public async getAllTags() {
+    this.logger.log("get all tags");
+
+    return this.tagModel.find();
+  }
 }

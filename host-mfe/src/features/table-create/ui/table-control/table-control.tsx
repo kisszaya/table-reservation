@@ -10,12 +10,15 @@ import {
 } from "@mantine/core";
 import { TABLE_VARIANT } from "kisszaya-table-reservation/lib/interfaces";
 
+import { Button } from "shared/ui";
+import { TableTagsSelect } from "entities/table-tag";
+
 import { tableFields, tableEvents, createTable } from "../../model";
 import { tableVariantsData } from "../../const";
-import { Button } from "shared/ui";
 
 export const TableControl = () => {
   const variant = useStore(tableFields.$tableVariant);
+  const tableTags = useStore(tableFields.$tableTags);
   const title = useStore(tableFields.$tableTitle);
   const height = useStore(tableFields.$tableHeight);
   const width = useStore(tableFields.$tableWidth);
@@ -82,6 +85,13 @@ export const TableControl = () => {
           onChange={(event) =>
             tableEvents.changeTableDescription(event.target.value)
           }
+        />
+        <TableTagsSelect
+          mt="xl"
+          tags={tableTags}
+          setTags={tableEvents.changeTableTags}
+          label="Теги по которым пользователи будут выбирать столики"
+          placeholder="Выберите тэги"
         />
         <Button disabled={disabled} type="submit">
           Добавить стол

@@ -7,6 +7,7 @@ import {
   $tableWidth,
 } from ".";
 import { $tableDescription } from "./table-description";
+import { $tableTags } from "./table-tags";
 import { $tableSeats } from "..";
 import { ITable } from "../../types";
 
@@ -18,7 +19,8 @@ const $tableFields = combine(
   $tablePersonsCount,
   $tableDescription,
   $tableSeats,
-  (width, height, variant, title, persons_count, description, seats) => {
+  $tableTags,
+  (width, height, variant, title, persons_count, description, seats, tags) => {
     const table: ITable = {
       title,
       height,
@@ -26,7 +28,7 @@ const $tableFields = combine(
       width,
       seats,
       description,
-      tags: [],
+      tags,
       persons_count,
     };
 

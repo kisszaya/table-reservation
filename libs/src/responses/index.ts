@@ -1,4 +1,5 @@
 import {
+  IPreviewTag,
   IRestaurantEmployee,
   IRestaurantUserPreview,
   ITablePreview,
@@ -81,5 +82,9 @@ export namespace Responses {
 
   export interface DeleteTable {
     table: ITablePreview;
+  }
+
+  export interface GetTags {
+    tags: IPreviewTag[];
   }
 }

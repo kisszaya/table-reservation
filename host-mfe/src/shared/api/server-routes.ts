@@ -6,6 +6,7 @@ const RESTAURANTS_SERVICE = "/restaurants";
 const EMPLOYEES = "/employees";
 const WORKING_TIME = "/working-time";
 const TABLES = "/tables";
+const TAGS = "/tags";
 
 export const serverRoutes = {
   // auth
@@ -41,4 +42,7 @@ export const serverRoutes = {
     RESTAURANTS_SERVICE + `/${restaurant_id}` + TABLES,
   table: (restaurant_id: string | number, table_id: string | number) =>
     RESTAURANTS_SERVICE + `/${restaurant_id}` + TABLES + `/${table_id}`,
+
+  // tags
+  tags: TAGS,
 };

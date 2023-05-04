@@ -4,3 +4,4 @@ export * from "./table-width";
 export * from "./table-title";
 export * from "./table-variant";
 export * from "./table-persons-count";
+export * from "./table-tags";

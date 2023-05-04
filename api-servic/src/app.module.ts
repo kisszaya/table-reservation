@@ -13,6 +13,7 @@ import {
   EmployeesController,
   WorkingTimeController,
   TablesController,
+  TagsController,
 } from "@/controllers";
 import { BrokerService } from "@/broker";
 import { JwtStrategy } from "@/strategies";
@@ -36,6 +37,7 @@ import { TokenService } from "@/services";
     EmployeesController,
     WorkingTimeController,
     TablesController,
+    TagsController,
   ],
   providers: [BrokerService, JwtStrategy, TokenService],
 })
