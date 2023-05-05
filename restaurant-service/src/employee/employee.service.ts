@@ -74,7 +74,7 @@ export class EmployeeService {
   public async addToRestaurant(
     data: EmployeesAdd.Request
   ): Promise<EmployeesAdd.Response> {
-    this.logger.log("add employee to restaurant");
+    this.logger.log("add employee to restaurants");
     const { user_id, restaurant_id, roles, ...userData } = data;
 
     await this.checkUserRights({
@@ -141,7 +141,7 @@ export class EmployeeService {
   public async deleteFromRestaurant(
     data: EmployeesDelete.Request
   ): Promise<EmployeesDelete.Response> {
-    this.logger.log("remove employee from restaurant");
+    this.logger.log("remove employee from restaurants");
     const { restaurant_id, user_id, employee_id } = data;
 
     await this.checkUserRights({
@@ -182,7 +182,7 @@ export class EmployeeService {
   public async getAllFromRestaurant(
     data: EmployeesGetRestaurant.Request
   ): Promise<EmployeesGetRestaurant.Response> {
-    this.logger.log("get all employees from restaurant");
+    this.logger.log("get all employees from restaurants");
     const { restaurant_id, user_id } = data;
 
     await this.checkUserRights({

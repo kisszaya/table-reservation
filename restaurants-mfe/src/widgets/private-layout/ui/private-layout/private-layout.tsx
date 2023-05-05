@@ -3,8 +3,11 @@ import { type FC, type PropsWithChildren, useCallback, useMemo } from 'react'
 import { userActions } from 'entities/user'
 import { useDefaultTranslation } from 'shared/lib'
 import { type INavbarButton, Navbar } from 'widgets/navbar'
-
 import { useAppDispatch } from 'shared/lib/hooks'
+import { Container } from 'shared/ui'
+
+import styles from './private-layout.module.scss'
+
 import { privateNavbarLinks } from '../../lib'
 
 export const PrivateLayout: FC<PropsWithChildren> = (props) => {
@@ -21,8 +24,10 @@ export const PrivateLayout: FC<PropsWithChildren> = (props) => {
         onClick: onLogout
     }), [onLogout, t])
 
-    return <div>
+    return <div className={styles.container}>
         <Navbar links={privateNavbarLinks} button={navbarButton}/>
-        {children}
+        <Container className={styles.container}>
+            {children}
+        </Container>
     </div>
 }

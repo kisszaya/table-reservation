@@ -1,12 +1,17 @@
 
 .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 16px;
     width: 100%;
     height: var(--navbar-height);
     background: var(--bg-secondary);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: inherit;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .switchers,

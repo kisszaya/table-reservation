@@ -5,7 +5,7 @@ import { Requests } from "../../requests";
 import { USER_ROLE } from "../../interfaces";
 
 export namespace RestaurantsChange {
-  export const topic = "restaurant.change.command";
+  export const topic = "restaurants.change.command";
 
   export class Request {
     @IsNumber()

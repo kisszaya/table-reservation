@@ -17,7 +17,7 @@ export class RestaurantWorkingTimeRepository {
   public async createRestaurantWorkingTime(
     restaurantWorkingTime: RestaurantWorkingTimeEntity
   ) {
-    this.logger.log("create new restaurant-working-time");
+    this.logger.log("create new restaurants-working-time");
 
     const newRestaurantWorkingTime = this.restaurantWorkingTimeModel.create(
       restaurantWorkingTime
@@ -30,7 +30,7 @@ export class RestaurantWorkingTimeRepository {
   public async findRestaurantWorkingTimeById(
     restaurant_working_time_id: number
   ) {
-    this.logger.log("find restaurant-working-time by id");
+    this.logger.log("find restaurants-working-time by id");
 
     return this.restaurantWorkingTimeModel.findOneBy({
       restaurant_working_time_id,
@@ -40,7 +40,7 @@ export class RestaurantWorkingTimeRepository {
   public async findAllRestaurantWorkingTimeByRestaurantId(
     restaurant_id: number
   ) {
-    this.logger.log("find restaurant-working-time by restaurant_id");
+    this.logger.log("find restaurants-working-time by restaurant_id");
 
     return this.restaurantWorkingTimeModel.findBy({
       restaurant_id,
@@ -48,7 +48,7 @@ export class RestaurantWorkingTimeRepository {
   }
 
   public async deleteRestaurantWorkingTimeById(restaurant_id: number) {
-    this.logger.log("delete restaurant-working-time by restaurant_id");
+    this.logger.log("delete restaurants-working-time by restaurant_id");
 
     return this.restaurantWorkingTimeModel.delete({
       restaurant_id,

@@ -2,6 +2,7 @@ import { type FC, type PropsWithChildren, useMemo } from 'react'
 
 import { useLoginByPhoneModal } from 'features/auth-by-phone'
 import { useDefaultTranslation } from 'shared/lib'
+import { Container } from 'shared/ui'
 import { type INavbarButton, Navbar } from 'widgets/navbar'
 
 import styles from './public-layout.module.scss'
@@ -18,8 +19,12 @@ export const PublicLayout: FC<PropsWithChildren> = (props) => {
         onClick: open
     }), [open, t])
 
-    return <div className={styles.container}>
-        <Navbar links={publicNavbarLinks} button={navbarButton}/>
-        {children}
-    </div>
+    return (
+        <div className={styles.container}>
+            <Navbar links={publicNavbarLinks} button={navbarButton}/>
+            <Container className={styles.container}>
+                {children}
+            </Container>
+        </div>
+    )
 }

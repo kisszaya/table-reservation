@@ -15,7 +15,7 @@ export class RestaurantRepository {
   ) {}
 
   public async createRestaurant(restaurant: RestaurantEntity) {
-    this.logger.log("create new restaurant");
+    this.logger.log("create new restaurants");
 
     const newRestaurant = this.restaurantModel.create(restaurant);
 
@@ -44,13 +44,13 @@ export class RestaurantRepository {
   }
 
   public async findRestaurantById(restaurant_id: number) {
-    this.logger.log("find restaurant by id");
+    this.logger.log("find restaurants by id");
 
     return this.restaurantModel.findOneBy({ restaurant_id });
   }
 
   public async deleteRestaurantById(restaurant_id: number) {
-    this.logger.log("delete restaurant by id");
+    this.logger.log("delete restaurants by id");
 
     return this.restaurantModel.delete({ restaurant_id });
   }

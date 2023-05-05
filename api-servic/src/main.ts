@@ -15,7 +15,7 @@ if (processEnv("SETUP.NODE") !== "development") {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({ credentials: true, origin: "http://localhost:3000" });
+  app.enableCors({ credentials: true, origin: ["http://localhost:3000", "http://localhost:3012"] });
   app.use(cookieParser());
 
   const logger = loggerMiddleware(app);

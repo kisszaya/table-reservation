@@ -2,6 +2,7 @@ import { type ICounterSchema } from 'entities/counter'
 import { type IUserSchema } from 'entities/user'
 import { type ILoginByPhoneSchema } from 'features/auth-by-phone'
 import { type IUserProfileSchema } from 'features/editable-user-profile-card'
+import { type IRestaurantsFiltersSchema } from 'features/restaurants-filters'
 
 export interface IStateSchema {
     counter: ICounterSchema
@@ -10,6 +11,7 @@ export interface IStateSchema {
     // async reducers
     loginByPhone?: ILoginByPhoneSchema
     userProfile?: IUserProfileSchema
+    restaurantsFilters?: IRestaurantsFiltersSchema
 }
 
 export type IStateSchemaKey = keyof IStateSchema
