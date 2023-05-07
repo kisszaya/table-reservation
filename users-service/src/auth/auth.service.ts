@@ -1,5 +1,5 @@
 import {
-  USER_ROLE,
+  USER_RIGHTS,
   USER_STATUS,
 } from "kisszaya-table-reservation/lib/interfaces";
 import {
@@ -55,7 +55,7 @@ export class AuthService {
     const { firstName, lastName, password, phone, email } = data;
 
     const oldUser = await this.userRepository.findUserByEmail(email);
-    if (Boolean(oldUser)) {
+    if (Boolean(oldUser) || oldUser.rights === USER_RIGHTS.EMPLOYEE) {
       throw new UserAlreadyExistException(`email ${email}`);
     }
 
@@ -78,7 +78,7 @@ export class AuthService {
     this.logger.log("validateUser");
 
     const user = await this.userRepository.findUserByEmail(email);
-    if (!user) {
+    if (!user || user.rights == USER_RIGHTS.VISITOR) {
       throw new UserNotExistException(`email ${email}`);
     }
 

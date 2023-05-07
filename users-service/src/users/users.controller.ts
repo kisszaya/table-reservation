@@ -4,6 +4,7 @@ import {
   UsersMeInfo,
   UsersInfo,
   UsersByIdInfo,
+  VisitorInfoByPhone,
 } from "kisszaya-table-reservation/lib/contracts";
 
 import { BrokerService } from "@/broker";
@@ -46,5 +47,15 @@ export class UsersController {
   ): Promise<UsersByIdInfo.Response> {
     this.brokerService.setTraceId(msg);
     return this.usersService.infoByUserIds(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(VisitorInfoByPhone.topic)
+  async visitorInfoByPhone(
+    data: VisitorInfoByPhone.Request,
+    @RMQMessage msg: Message
+  ): Promise<VisitorInfoByPhone.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.usersService.visitorInfoByPhone(data);
   }
 }

@@ -1,8 +1,10 @@
 import {
   IUser,
+  USER_RIGHTS,
   USER_STATUS,
 } from "kisszaya-table-reservation/lib/interfaces";
-import { compare, genSalt, hash } from 'bcryptjs';
+
+import { compare, genSalt, hash } from "bcryptjs";
 
 export class UserEntity implements IUser {
   user_id?: number;
@@ -11,6 +13,7 @@ export class UserEntity implements IUser {
   fullName: string;
   phone?: string;
   status: USER_STATUS;
+  rights?: USER_RIGHTS = USER_RIGHTS.EMPLOYEE;
 
   constructor(user: IUser) {
     this.password_hash = user.password_hash;
@@ -27,7 +30,7 @@ export class UserEntity implements IUser {
     return this;
   }
 
-  public async validatePassword (password: string) {
+  public async validatePassword(password: string) {
     return compare(password, this.password_hash);
   }
 }

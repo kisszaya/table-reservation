@@ -35,3 +35,8 @@ export * from "./tags/tags.get-restaurant";
 // restaurants-aggregator
 export * from "./aggregator-restaurants/aggregator-restaurants.get";
 export * from "./aggregator-restaurants/aggregator-restaurants.get-by-id";
+
+// visitor
+export * from "./visitor/visitor.register";
+export * from "./visitor/visitor.login";
+export * from "./visitor/visitor.info-by-phone";

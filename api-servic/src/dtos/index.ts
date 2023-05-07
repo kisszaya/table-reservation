@@ -6,3 +6,4 @@ export * from "./add-employee.dto";
 export * from "./restaurant-change.dto";
 export * from "./working-time-change.dto";
 export * from "./table-create.dto";
+export * from "./visitor-login.dto";

@@ -4,6 +4,7 @@ import {
   UsersRegister,
   UsersUpdateRefresh,
   UsersLogout,
+  VisitorLogin,
 } from "kisszaya-table-reservation/lib/contracts";
 import {
   Body,
@@ -16,7 +17,12 @@ import {
 } from "@nestjs/common";
 
 import { BrokerService } from "@/broker";
-import { UpdateTokensDto, UserLoginDto, UserRegisterDto } from "@/dtos";
+import {
+  UpdateTokensDto,
+  UserLoginDto,
+  UserRegisterDto,
+  VisitorLoginDto,
+} from "@/dtos";
 import { JWTAuthGuard, UserId } from "@/guards";
 import { TokenService } from "@/services";
 import { InternalException } from "@/exceptions";
@@ -43,6 +49,30 @@ export class AuthController {
         UsersLogin.Request,
         UsersLogin.Response
       >(UsersLogin.topic, dto);
+
+      this.tokenService.setRefreshCookie(response, refreshToken);
+      this.tokenService.setAccessCookie(response, data.accessToken);
+
+      return data;
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new InternalException(e);
+      }
+    }
+  }
+
+  @Post("visitor-login")
+  async visitorLogin(
+    @Body() dto: VisitorLoginDto,
+    @Res({ passthrough: true }) response: Response
+  ) {
+    this.logger.log("start /api/users/visitor-login");
+
+    try {
+      const { refreshToken, ...data } = await this.brokerService.publish<
+        VisitorLogin.Request,
+        VisitorLogin.Response
+      >(VisitorLogin.topic, dto);
 
       this.tokenService.setRefreshCookie(response, refreshToken);
       this.tokenService.setAccessCookie(response, data.accessToken);

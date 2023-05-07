@@ -9,3 +9,4 @@ export * from "./table";
 export * from "./seat";
 export * from "./tag";
 export * from "./table-tag";
+export * from './reserve'

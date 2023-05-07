@@ -16,7 +16,16 @@ export namespace Responses {
     status: USER_STATUS;
   }
 
+  export interface VisitorLogin {
+    accessToken: string;
+    status: USER_STATUS;
+  }
+
   export interface UserRegister {
+    status: "success";
+  }
+
+  export interface VisitorRegister {
     status: "success";
   }
 
@@ -91,10 +100,10 @@ export namespace Responses {
   }
 
   export interface GetAggregatorRestaurantPreviews {
-    restaurants: IAggregatorRestaurantPreview[]
+    restaurants: IAggregatorRestaurantPreview[];
   }
 
   export interface GetAggregatorRestaurant {
-    restaurant: IAggregatorRestaurant
+    restaurant: IAggregatorRestaurant;
   }
 }

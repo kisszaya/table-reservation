@@ -5,6 +5,12 @@ export interface IUser {
   phone?: string;
   status: USER_STATUS;
   password_hash: string;
+  rights?: USER_RIGHTS;
+}
+
+export enum USER_RIGHTS {
+  EMPLOYEE = 'employee',
+  VISITOR = 'visitor'
 }
 
 export enum USER_ROLE {

@@ -7,6 +7,7 @@ import { AuthController } from "./auth.controller";
 import { JwtService } from "./jwt.service";
 import { UserModel, RefreshSessionModel } from "@/models";
 import { UserRepository, SessionRepository } from "@/repositories";
+import { VisitorAuthService } from "@/auth/visitor-auth.service";
 
 @Module({
   imports: [
@@ -14,7 +15,13 @@ import { UserRepository, SessionRepository } from "@/repositories";
     TypeOrmModule.forFeature([RefreshSessionModel]),
     JwtModule.register({}),
   ],
-  providers: [AuthService, UserRepository, JwtService, SessionRepository],
+  providers: [
+    AuthService,
+    UserRepository,
+    JwtService,
+    SessionRepository,
+    VisitorAuthService,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

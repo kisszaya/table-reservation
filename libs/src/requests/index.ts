@@ -23,6 +23,18 @@ export namespace Requests {
     phone?: string;
   }
 
+  export interface VisitorRegister {
+    firstName: string;
+    lastName: string;
+    email?: string;
+    phone: string;
+  }
+
+  export interface VisitorLogin {
+    phone: string;
+    fingerprint: string;
+  }
+
   export interface UpdateRefreshToken {
     fingerprint: string;
   }

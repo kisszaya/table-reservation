@@ -1,3 +1,4 @@
+import { USER_RIGHTS } from "kisszaya-table-reservation/lib/interfaces";
 import {
   Column,
   Entity,
@@ -18,7 +19,7 @@ export class UserModel {
 
   @Column({
     nullable: false,
-    name: 'full_name'
+    name: "full_name",
   })
   fullName: string;
 
@@ -41,10 +42,17 @@ export class UserModel {
 
   @Column({
     nullable: false,
+    default: USER_RIGHTS.EMPLOYEE,
+    enum: USER_RIGHTS,
+  })
+  status: USER_STATUS;
+
+  @Column({
+    nullable: false,
     default: USER_STATUS.CREATED,
     enum: USER_STATUS,
   })
-  status: USER_STATUS;
+  rights: USER_RIGHTS;
 
   @CreateDateColumn({
     type: "timestamp",

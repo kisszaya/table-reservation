@@ -3,6 +3,7 @@ import {
   UsersByIdInfo,
   UsersInfo,
   UsersMeInfo,
+  VisitorInfoByPhone,
 } from "kisszaya-table-reservation/lib/contracts";
 
 import { UserRepository } from "@/repositories";
@@ -67,6 +68,29 @@ export class UsersService {
 
     return {
       users,
+    };
+  }
+
+  public async visitorInfoByPhone(
+    data: VisitorInfoByPhone.Request
+  ): Promise<VisitorInfoByPhone.Response> {
+    this.logger.log("visitor info by phone");
+
+    const user = await this.userRepository.findUserByPhone(data.phone);
+    if (!user) {
+      throw new UserNotExistException(`phone ${data.phone}`);
+    }
+
+    const { status, fullName, phone, user_id, email } = new UserEntity(user);
+
+    return {
+      user: {
+        phone,
+        email,
+        status,
+        fullName,
+        user_id,
+      },
     };
   }
 }
