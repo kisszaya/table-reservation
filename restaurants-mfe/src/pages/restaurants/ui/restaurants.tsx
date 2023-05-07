@@ -1,12 +1,18 @@
 import { DynamicModuleLoader, type IReducersList } from 'shared/lib/ui'
 import { RestaurantsFilters, restaurantsFiltersReducer } from 'features/restaurants-filters'
 
-import { RestaurantsPreviewList } from 'entities/restaurants'
+import {
+    restaurantReducer,
+    RestaurantsPreviewList,
+    restaurantsReducer
+} from 'entities/restaurants'
 
 import styles from './restaurants.module.scss'
 
 const asyncReducers: IReducersList = {
-    restaurantsFilters: restaurantsFiltersReducer
+    restaurantsFilters: restaurantsFiltersReducer,
+    restaurant: restaurantReducer,
+    restaurants: restaurantsReducer
 }
 
 const Restaurants = () => {
