@@ -30,3 +30,8 @@ export * from "./tables/tables.delete";
 
 // tags
 export * from "./tags/tags.get";
+export * from "./tags/tags.get-restaurant";
+
+// restaurants-aggregator
+export * from "./aggregator-restaurants/aggregator-restaurants.get";
+export * from "./aggregator-restaurants/aggregator-restaurants.get-by-id";

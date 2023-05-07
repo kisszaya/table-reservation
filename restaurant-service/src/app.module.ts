@@ -22,8 +22,8 @@ import { WorkingTimeModule } from "@/working-time/working-time.module";
     RMQModule.forRootAsync(getRMQConfig()),
     TypeOrmModule.forRootAsync(getPostgresConfig()),
     EmployeeModule,
-    RestaurantsModule,
     WorkingTimeModule,
+    RestaurantsModule,
   ],
   providers: [],
 })

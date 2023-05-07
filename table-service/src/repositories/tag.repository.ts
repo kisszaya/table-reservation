@@ -35,4 +35,10 @@ export class TagRepository {
 
     return this.tagModel.find();
   }
+
+  public async getTagByTagId(tag_id: number) {
+    this.logger.log("get tag tag_id");
+
+    return this.tagModel.findOneBy({ tag_id });
+  }
 }

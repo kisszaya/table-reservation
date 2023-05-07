@@ -1,6 +1,8 @@
 import { Controller, Logger } from "@nestjs/common";
 import { Message, RMQMessage, RMQRoute, RMQValidate } from "nestjs-rmq";
 import {
+  AggregatorRestaurantsGet,
+  AggregatorRestaurantsGetById,
   RestaurantsChange,
   RestaurantsCreate,
   RestaurantsGetById,
@@ -47,6 +49,26 @@ export class RestaurantsController {
   ): Promise<RestaurantsGetById.Response> {
     this.brokerService.setTraceId(msg);
     return await this.restaurantService.getById(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(AggregatorRestaurantsGet.topic)
+  async aggregatorGet(
+    data: AggregatorRestaurantsGet.Request,
+    @RMQMessage msg: Message
+  ): Promise<AggregatorRestaurantsGet.Response> {
+    this.brokerService.setTraceId(msg);
+    return await this.restaurantService.aggregatorGet(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(AggregatorRestaurantsGetById.topic)
+  async aggregatorGetById(
+    data: AggregatorRestaurantsGetById.Request,
+    @RMQMessage msg: Message
+  ): Promise<AggregatorRestaurantsGetById.Response> {
+    this.brokerService.setTraceId(msg);
+    return await this.restaurantService.aggregatorGetById(data);
   }
 
   @RMQValidate()

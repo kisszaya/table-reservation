@@ -1,7 +1,14 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { TagsGet } from "kisszaya-table-reservation/lib/contracts";
+import {
+  TagsGet,
+  TagsGetRestaurant,
+} from "kisszaya-table-reservation/lib/contracts";
 
-import { TableTagRepository, TagRepository } from "@/repositories";
+import {
+  TableRepository,
+  TableTagRepository,
+  TagRepository,
+} from "@/repositories";
 import { BrokerService } from "@/broker";
 import { TableTagEntity, TagEntity } from "@/entities";
 
@@ -12,6 +19,7 @@ export class TagsService {
   constructor(
     private readonly tableTagRepository: TableTagRepository,
     private readonly tagRepository: TagRepository,
+    private readonly tableRepository: TableRepository,
     private readonly brokerService: BrokerService
   ) {}
 
@@ -61,6 +69,37 @@ export class TagsService {
 
     return {
       tags: res,
+    };
+  }
+
+  public async getRestaurantTags(
+    data: TagsGetRestaurant.Request
+  ): Promise<TagsGetRestaurant.Response> {
+    const { restaurant_id } = data;
+
+    const tags: Record<string, number> = {};
+
+    const tables = await this.tableRepository.findTablesByRestaurantId(
+      restaurant_id
+    );
+
+    for (const table of tables) {
+      const tableTags = await this.tableTagRepository.findTableTagsByTagId(
+        table.table_id
+      );
+
+      for (const tableTag of tableTags) {
+        const tag = await this.tagRepository.getTagByTagId(tableTag.tag_id);
+
+        tags[tag.text] = tags[tag.text] ? tags[tag.text] + 1 : 0;
+      }
+    }
+
+    return {
+      tags: Object.entries(tags).map(([key, value]) => ({
+        popularity: value,
+        text: key,
+      })),
     };
   }
 }

@@ -7,7 +7,7 @@ import {
   RestaurantWorkingTimeRepository,
 } from "@/repositories";
 import { WorkingTimeService } from "./working-time.service";
-import { WorkingTimeController } from "./working-time.controller";
+import { WorkingTimeController } from "@/working-time/working-time.controller";
 
 @Module({
   imports: [
@@ -19,5 +19,6 @@ import { WorkingTimeController } from "./working-time.controller";
     RestaurantWorkingTimeRepository,
   ],
   controllers: [WorkingTimeController],
+  exports: [WorkingTimeService],
 })
 export class WorkingTimeModule {}

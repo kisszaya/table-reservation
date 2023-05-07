@@ -1,4 +1,6 @@
 import {
+  IAggregatorRestaurant,
+  IAggregatorRestaurantPreview,
   IPreviewTag,
   IRestaurantEmployee,
   IRestaurantUserPreview,
@@ -86,5 +88,13 @@ export namespace Responses {
 
   export interface GetTags {
     tags: IPreviewTag[];
+  }
+
+  export interface GetAggregatorRestaurantPreviews {
+    restaurants: IAggregatorRestaurantPreview[]
+  }
+
+  export interface GetAggregatorRestaurant {
+    restaurant: IAggregatorRestaurant
   }
 }

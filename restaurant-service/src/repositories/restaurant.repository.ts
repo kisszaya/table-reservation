@@ -49,6 +49,12 @@ export class RestaurantRepository {
     return this.restaurantModel.findOneBy({ restaurant_id });
   }
 
+  public async getAllRestaurants() {
+    this.logger.log("find all restaurants");
+
+    return this.restaurantModel.find();
+  }
+
   public async deleteRestaurantById(restaurant_id: number) {
     this.logger.log("delete restaurants by id");
 

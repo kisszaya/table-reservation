@@ -1,9 +1,12 @@
 import { Injectable, Logger } from "@nestjs/common";
 import {
+  AggregatorRestaurantsGet,
+  AggregatorRestaurantsGetById,
   RestaurantsChange,
   RestaurantsCreate,
   RestaurantsGetById,
   RestaurantsGetUser,
+  TagsGetRestaurant,
 } from "kisszaya-table-reservation/lib/contracts";
 
 import { RestaurantRepository } from "@/repositories";
@@ -15,6 +18,8 @@ import {
   RestaurantNotFoundException,
   RestaurantNotFoundForUserException,
 } from "@/exceptions";
+import { WorkingTimeService } from "@/working-time/working-time.service";
+import { BrokerService } from "@/broker";
 
 @Injectable()
 export class RestaurantsService {
@@ -22,7 +27,9 @@ export class RestaurantsService {
 
   constructor(
     private readonly restaurantRepository: RestaurantRepository,
-    private readonly employeeService: EmployeeService
+    private readonly employeeService: EmployeeService,
+    private readonly workingTimeService: WorkingTimeService,
+    private readonly brokerService: BrokerService
   ) {}
 
   public async create(
@@ -40,15 +47,6 @@ export class RestaurantsService {
       user_id,
       restaurant_id,
       roles: [USER_ROLE.ADMINISTRATOR],
-    });
-
-    console.log("TEST CREATE", {
-      restaurant_id,
-      roles,
-      photos,
-      address,
-      city,
-      name,
     });
 
     return {
@@ -89,6 +87,7 @@ export class RestaurantsService {
   public async change(
     data: RestaurantsChange.Request
   ): Promise<RestaurantsChange.Response> {
+    this.logger.log("change");
     const { restaurant_id, user_id, restaurant } = data;
 
     const employeeRecord = await this.employeeService.findRecord(
@@ -122,6 +121,7 @@ export class RestaurantsService {
   public async getById(
     data: RestaurantsGetById.Request
   ): Promise<RestaurantsGetById.Response> {
+    this.logger.log("get-by-id");
     const { restaurant_id, user_id } = data;
 
     const employeeRecord = await this.employeeService.findRecord(
@@ -152,6 +152,65 @@ export class RestaurantsService {
       address: restaurant.address,
       city: restaurant.city,
       name: restaurant.name,
+    };
+  }
+
+  public async aggregatorGet(
+    data: AggregatorRestaurantsGet.Request
+  ): Promise<AggregatorRestaurantsGet.Response> {
+    this.logger.log("aggregator get");
+
+    const { tags, search, opened } = data;
+
+    const restaurants = await this.restaurantRepository.getAllRestaurants();
+
+    return {
+      restaurants: restaurants.map(({ photos, ...restaurant }) => ({
+        ...restaurant,
+        opened: true,
+        tags: [],
+        photo: photos[0],
+      })),
+    };
+  }
+
+  public async aggregatorGetById(
+    data: AggregatorRestaurantsGetById.Request
+  ): Promise<AggregatorRestaurantsGetById.Response> {
+    this.logger.log("aggregator get-by-id");
+    const { restaurant_id } = data;
+
+    const restaurant = await this.restaurantRepository.findRestaurantById(
+      restaurant_id
+    );
+
+    if (!restaurant) {
+      throw new RestaurantNotFoundException(restaurant_id);
+    }
+
+    const { workingTime } = await this.workingTimeService.getWorkingTime({
+      restaurant_id,
+      user_id: 0,
+    });
+
+    const { tags } = await this.brokerService.publish<
+      TagsGetRestaurant.Request,
+      TagsGetRestaurant.Response
+    >(TagsGetRestaurant.topic, {
+      restaurant_id,
+    });
+
+    return {
+      restaurant: {
+        restaurant_id: restaurant.restaurant_id,
+        name: restaurant.name,
+        city: restaurant.city,
+        address: restaurant.address,
+        photos: restaurant.photos,
+        phone: restaurant.phone,
+        tags,
+        workingTime,
+      },
     };
   }
 }

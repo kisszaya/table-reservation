@@ -3,7 +3,10 @@ import { Message, RMQMessage, RMQRoute, RMQValidate } from "nestjs-rmq";
 
 import { BrokerService } from "@/broker";
 import { TagsService } from "./tags.service";
-import { TagsGet } from "kisszaya-table-reservation/lib/contracts";
+import {
+  TagsGet,
+  TagsGetRestaurant,
+} from "kisszaya-table-reservation/lib/contracts";
 
 @Controller()
 export class TagsController {
@@ -22,5 +25,15 @@ export class TagsController {
   ): Promise<TagsGet.Response> {
     this.brokerService.setTraceId(msg);
     return this.tagsService.getTags(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(TagsGetRestaurant.topic)
+  async getRestaurantTags(
+    data: TagsGetRestaurant.Request,
+    @RMQMessage msg: Message
+  ): Promise<TagsGetRestaurant.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.tagsService.getRestaurantTags(data);
   }
 }

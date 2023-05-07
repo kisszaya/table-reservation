@@ -14,6 +14,7 @@ import {
   WorkingTimeController,
   TablesController,
   TagsController,
+  AggregatorRestaurantsController,
 } from "@/controllers";
 import { BrokerService } from "@/broker";
 import { JwtStrategy } from "@/strategies";
@@ -38,6 +39,7 @@ import { TokenService } from "@/services";
     WorkingTimeController,
     TablesController,
     TagsController,
+    AggregatorRestaurantsController,
   ],
   providers: [BrokerService, JwtStrategy, TokenService],
 })
