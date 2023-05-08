@@ -2,6 +2,14 @@
 .button {
     cursor: pointer;
     color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: none;
+}
+
+.button:disabled {
+    background: var(--inverted-bg-secondary);
+    cursor: default;
 }
 
 .clear {
@@ -11,5 +19,20 @@
 
 .outline {
     background: none;
-    border-radius: var(--text-primary);
+    border: 1px solid var(--inverted-bg-primary);
+}
+
+.size-md {
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+.size-sm {
+    padding: 6px 8px;
+    font-size: 14px;
+}
+
+.size-xs {
+    padding: 4px 6px;
+    font-size: 14px;
 }

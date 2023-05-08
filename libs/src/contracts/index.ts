@@ -27,6 +27,7 @@ export * from "./working-time/working-time.change";
 export * from "./tables/tables.get";
 export * from "./tables/tables.create";
 export * from "./tables/tables.delete";
+export * from './tables/tables.get-free'
 
 // tags
 export * from "./tags/tags.get";
@@ -40,3 +41,8 @@ export * from "./aggregator-restaurants/aggregator-restaurants.get-by-id";
 export * from "./visitor/visitor.register";
 export * from "./visitor/visitor.login";
 export * from "./visitor/visitor.info-by-phone";
+
+// reserves
+export * from './reserves/reserves.create'
+export * from './reserves/reserves.get-visitor'
+export * from './reserves/reserves.change-visitor-status'

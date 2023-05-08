@@ -5,13 +5,34 @@
     cursor: pointer;
 }
 
-.img {
-    width: 200px;
-    height: 200px;
-}
 
 .info {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    margin-right: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.left {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
+}
+
+.img {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-weight: 300;
+    color: var(--text-secondary)
 }

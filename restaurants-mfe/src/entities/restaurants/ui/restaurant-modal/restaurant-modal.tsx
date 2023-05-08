@@ -1,13 +1,14 @@
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
+import { Loader } from 'shared/ui'
+import { useAppDispatch } from 'shared/lib/hooks'
+import { CreateReserveButton } from 'features/reserve-create'
 import {
     fetchRestaurantById,
     selectRestaurantData,
     selectRestaurantIsLoading
-} from 'entities/restaurants/model'
-import { Loader } from 'shared/ui'
-import { useAppDispatch } from 'shared/lib/hooks'
+} from '../../model'
 
 interface Props {
     restaurant_id: number
@@ -29,5 +30,6 @@ export const RestaurantModal = (props: Props) => {
 
     return <div>
         {restaurant.name}
+        <CreateReserveButton/>
     </div>
 }

@@ -1,7 +1,7 @@
 import {
   IAggregatorRestaurant,
   IAggregatorRestaurantPreview,
-  IPreviewTag,
+  IPreviewTag, IVisitorReservePreview,
   IRestaurantEmployee,
   IRestaurantUserPreview,
   ITablePreview,
@@ -105,5 +105,22 @@ export namespace Responses {
 
   export interface GetAggregatorRestaurant {
     restaurant: IAggregatorRestaurant;
+  }
+
+  export interface GetFreeRestaurantTables {
+    tables: (ITablePreview & {tags: string[]})[];
+  }
+
+  export interface CreateReserve {
+    accessToken: string;
+    status: USER_STATUS;
+  }
+
+  export interface GetVisitorReserves {
+    reserves: IVisitorReservePreview[]
+  }
+
+  export interface ChangeReserveVisitorStatus {
+    reserve: IVisitorReservePreview
   }
 }

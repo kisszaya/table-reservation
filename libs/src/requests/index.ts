@@ -1,6 +1,6 @@
 import {
-  ISeat,
-  IWorkingTime,
+  IVisitorReservePreview,
+  IWorkingTime, RESERVE_STATUS,
   SEAT_POSITION_VARIANT,
   SEAT_VARIANT,
   TABLE_VARIANT,
@@ -81,5 +81,21 @@ export namespace Requests {
       position_id: number;
     }[];
     tags?: string[];
+  }
+
+  export interface CreateReserve {
+    email: string
+    phone: string
+    first_name: string
+    last_name: string
+    time: number
+    month: number
+    day: number
+    persons_count: number
+    table_id: number
+  }
+
+  export interface ChangeReserveVisitorStatus {
+    status: RESERVE_STATUS.CANCELED
   }
 }

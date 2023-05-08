@@ -3,5 +3,7 @@ export {
     type IRestaurantSchema,
     type IRestaurantsSchema,
     restaurantsReducer,
-    restaurantReducer
+    restaurantReducer,
+    selectRestaurantWorkingTime,
+    selectRestaurantData
 } from './model'

@@ -10,6 +10,7 @@ export interface ITextInputProps extends HTMLInputProps {
     className?: string
     variant?: TEXT_INPUT_VARIANT
     autofocus?: boolean
+    label?: string
     readonly?: boolean
 }
 
@@ -18,6 +19,7 @@ type HTMLInputVariantProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value'
 export interface ITextInputVariantProps extends HTMLInputVariantProps {
     value: string
     className?: string
+    label?: string
     autofocus?: boolean
     readonly: boolean
 }

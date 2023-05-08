@@ -3,3 +3,9 @@ export enum BUTTON_VARIANT {
   DEFAULT = 'default',
   OUTLINE = 'outline'
 }
+
+export enum BUTTON_SIZE {
+  MD = 'md',
+  SM = 'sm',
+  XS = 'xs'
+}

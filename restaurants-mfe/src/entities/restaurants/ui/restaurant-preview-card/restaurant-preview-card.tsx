@@ -1,8 +1,9 @@
 import { type IAggregatorRestaurantPreview } from 'kisszaya-table-reservation/lib/interfaces'
 
-import { Title, Text, useModal } from 'shared/ui'
+import { Badge, BADGE_SIZE, BADGE_VARIANT, Card, Text, Title, useModal } from 'shared/ui'
 import { RestaurantModal } from 'entities/restaurants/ui'
 
+import { Group } from 'shared/ui/group/group'
 import styles from './restaurant-preview-card.module.scss'
 
 type Props = IAggregatorRestaurantPreview
@@ -16,21 +17,30 @@ export const RestaurantPreviewCard = (props: Props) => {
     }
 
     return (
-        <div
-            className={styles.container}
+        <Card
+            withBorder
+            withShadow
             onClick={() => { open(<RestaurantModal restaurant_id={restaurant_id}/>) }}
         >
-            <img className={styles.img}
-                src="https://media-cdn.tripadvisor.com/media/photo-s/16/70/5b/e3/city.jpg"
-                alt="Restaurant image"
-            />
-            <div className={styles.info}>
-                <Title>{name}</Title>
-                <Text>{address}</Text>
-                <Text>{city}</Text>
-                <Text>{address}</Text>
-                <Text>opened{opened}</Text>
-            </div>
-        </div>
+            <Group gap={24} noWrap>
+                <img className={styles.img}
+                    src="https://media-cdn.tripadvisor.com/media/photo-s/16/70/5b/e3/city.jpg"
+                    alt="Restaurant image"
+                />
+                <div className={styles.info}>
+                    <div className={styles.left}>
+                        <Title>{name}</Title>
+                        <div className={styles.fields}>
+                            <Text>{address}</Text>
+                            <Text>{city}</Text>
+                            <Text>{JSON.stringify(tags)}</Text>
+                        </div>
+                    </div>
+                    <Badge variant={BADGE_VARIANT.FILLED} size={BADGE_SIZE.SM}>
+                        opened
+                    </Badge>
+                </div>
+            </Group>
+        </Card>
     )
 }

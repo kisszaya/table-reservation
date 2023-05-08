@@ -10,9 +10,14 @@
     // text colors
     --text-primary: #181B1D;
     --text-secondary: #1F2224;
+    --text-tertriary: #c0c0c0;
     --inverted-text-primary: #FFF;
     --inverted-text-secondary: rgb(255 255 255 / 75%);
+    --inverted-text-tertriary: #ccc;
 
     // overlay colors
     --overlay-primary: rgb(0 0 0 / 60%);
+
+    // shadows
+    --shadow-primary: drop-shadow(0px 4px 12px rgb(0 0 0 / 10%));
 }

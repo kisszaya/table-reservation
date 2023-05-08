@@ -3,7 +3,7 @@ import { userActions } from 'entities/user'
 import { TestAsyncThunk } from 'shared/lib/tests'
 import { loginByPhone } from './login-by-phone'
 
-describe('loginByPhone async thunk test', () => {
+describe('getFreeTables async thunk test', () => {
     test('success result', async () => {
         const userData = { phone: '123' }
 

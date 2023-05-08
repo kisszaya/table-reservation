@@ -1,7 +1,7 @@
 import { loginByPhoneReducer, loginByPhoneActions } from './login-by-phone-slice'
 import { type ILoginByPhoneSchema } from '..'
 
-describe('loginByPhone slice', () => {
+describe('getFreeTables slice', () => {
     test('test setPhone', () => {
         const phone = '123'
 

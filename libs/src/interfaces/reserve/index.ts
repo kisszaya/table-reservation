@@ -1,3 +1,4 @@
+import {ITablePreview} from "../table";
 
 export interface IReserve {
     reserve_id?: number
@@ -7,6 +8,16 @@ export interface IReserve {
     time: string
     persons_count: number
     source: RESERVE_SOURCE
+}
+
+export interface IVisitorReservePreview {
+    reserve_id: number
+    persons_count: number
+    time: string
+    restaurant_name: string
+    restaurant_address: string
+    table: ITablePreview
+    status: RESERVE_STATUS
 }
 
 export enum RESERVE_STATUS {
