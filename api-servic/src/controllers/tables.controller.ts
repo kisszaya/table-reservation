@@ -2,6 +2,7 @@ import {
   TablesGet,
   TablesCreate,
   TablesDelete,
+  TablesGetFree,
 } from "kisszaya-table-reservation/lib/contracts";
 import {
   Body,
@@ -11,6 +12,7 @@ import {
   Logger,
   Param,
   Post,
+  Query,
   UseGuards,
 } from "@nestjs/common";
 
@@ -39,7 +41,31 @@ export class TablesController {
         TablesGet.Response
       >(TablesGet.topic, {
         user_id,
-        restaurant_id: Number(user_id),
+        restaurant_id: Number(restaurant_id),
+      });
+    } catch (e) {
+      throw new InternalException(e);
+    }
+  }
+
+  @Get("/:restaurantId/tables/free")
+  async getRestaurantFreeTables(
+    @Query("day") day: string,
+    @Query("time") time: string,
+    @Query("month") month: string,
+    @Param("restaurantId") restaurant_id: string
+  ) {
+    this.logger.log(`GET /api/restaurants/:restaurantId/tables/free`);
+
+    try {
+      return await this.brokerService.publish<
+        TablesGetFree.Request,
+        TablesGetFree.Response
+      >(TablesGetFree.topic, {
+        restaurant_id: Number(restaurant_id),
+        day: Number(day),
+        time: Number(time),
+        month: Number(month),
       });
     } catch (e) {
       throw new InternalException(e);

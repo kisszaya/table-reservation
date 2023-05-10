@@ -1,45 +1,49 @@
-import {Responses} from "../../responses";
-import {Requests} from "../../requests";
-import {IsNumber, IsString} from "class-validator";
-import {USER_STATUS} from "../../interfaces";
+import { Responses } from "../../responses";
+import { Requests } from "../../requests";
+import { IsEnum, IsNumber, IsString } from "class-validator";
+import { RESERVE_SOURCE, USER_STATUS } from "../../interfaces";
 
 export namespace ReservesCreate {
-    export const topic = "reserves.create.command";
+  export const topic = "reserves.create.command";
 
-    export class Request implements Requests.CreateReserve {
-        @IsNumber()
-        restaurant_id: number
+  export class Request implements Requests.CreateReserve {
+    @IsEnum(RESERVE_SOURCE)
+    source: RESERVE_SOURCE;
 
-        @IsNumber()
-        day: number;
+    @IsNumber()
+    restaurant_id: number;
 
-        @IsString()
-        email: string;
+    @IsNumber()
+    day: number;
 
-        @IsString()
-        first_name: string;
+    @IsString()
+    email: string;
 
-        @IsString()
-        last_name: string;
+    @IsString()
+    first_name: string;
 
-        @IsNumber()
-        month: number;
+    @IsString()
+    last_name: string;
 
-        @IsNumber()
-        persons_count: number;
+    @IsNumber()
+    month: number;
 
-        @IsString()
-        phone: string;
+    @IsNumber()
+    persons_count: number;
 
-        @IsNumber()
-        table_id: number;
+    @IsString()
+    phone: string;
 
-        @IsNumber()
-        time: number;
-    }
+    @IsNumber()
+    table_id: number;
 
-    export class Response implements Responses.CreateReserve {
-        accessToken: string
-        status: USER_STATUS;
-    }
+    @IsNumber()
+    time: number;
+  }
+
+  export class Response implements Responses.CreateReserve {
+    accessToken: string;
+    status: USER_STATUS;
+    refreshToken: string;
+  }
 }

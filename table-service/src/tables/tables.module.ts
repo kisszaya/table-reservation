@@ -25,5 +25,6 @@ import { TagsService } from "@/tags/tags.service";
     TagRepository,
   ],
   controllers: [TablesController],
+  exports: [TablesService],
 })
 export class TablesModule {}

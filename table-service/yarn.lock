@@ -1871,10 +1871,10 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-kisszaya-table-reservation@^0.0.82:
-  version "0.0.82"
-  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.82.tgz#afe835ac954715e1d6800721a904c3cc8b43bfab"
-  integrity sha512-wPpm54Bka55NsBspZ/9ltlggk8cbApHEC87b7tTI4TsoQQ/OkBFP/oZbsSXlyo4IAScbF8vHlznQKC/bteYjqA==
+kisszaya-table-reservation@^0.0.90:
+  version "0.0.90"
+  resolved "https://registry.yarnpkg.com/kisszaya-table-reservation/-/kisszaya-table-reservation-0.0.90.tgz#2ea5103095766d2528d3fd51a643ba0f5a2655b7"
+  integrity sha512-bTr3e3VfxlCLqKwuprQYTcKOGu+vyMBokfA8XE7cNkDZWZzdKvlcCa8MUeuIyxygn7XKja1UQKzLjgEGd2ySCA==
   dependencies:
     "@nestjs/common" "9.0.0"
     "@nestjs/core" "9.0.0"

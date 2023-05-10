@@ -37,7 +37,7 @@ export class WorkingTimeController {
         WorkingTimeGet.Response
       >(WorkingTimeGet.topic, {
         user_id,
-        restaurant_id: Number(user_id),
+        restaurant_id: Number(restaurant_id),
       });
     } catch (e) {
       throw new InternalException(e);

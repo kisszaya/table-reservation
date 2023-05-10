@@ -6,3 +6,4 @@ export { WorkingTimeController } from "./working-time.controller";
 export { TablesController } from "./tables.controller";
 export { TagsController } from "./tags.controller";
 export { AggregatorRestaurantsController } from "./aggregator-restaurants.controller";
+export { ReservesController } from "./reserves.controller";

@@ -7,6 +7,7 @@ import {
   TablesCreate,
   TablesDelete,
   TablesGet,
+  TablesGetFree,
 } from "kisszaya-table-reservation/lib/contracts";
 
 @Controller()
@@ -35,6 +36,16 @@ export class TablesController {
   ): Promise<TablesGet.Response> {
     this.brokerService.setTraceId(msg);
     return this.tablesService.getTables(data);
+  }
+
+  @RMQValidate()
+  @RMQRoute(TablesGetFree.topic)
+  async getFreeTables(
+    data: TablesGetFree.Request,
+    @RMQMessage msg: Message
+  ): Promise<TablesGetFree.Response> {
+    this.brokerService.setTraceId(msg);
+    return this.tablesService.getFreeTables(data);
   }
 
   @RMQValidate()

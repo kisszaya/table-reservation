@@ -3,12 +3,14 @@ import {
   TablesCreate,
   TablesDelete,
   TablesGet,
+  TablesGetFree,
 } from "kisszaya-table-reservation/lib/contracts";
 
 import { SeatRepository, TableRepository } from "@/repositories";
 import { BrokerService } from "@/broker";
 import { SeatEntity, TableEntity } from "@/entities";
 import { TagsService } from "@/tags/tags.service";
+import { ITablePreview } from "kisszaya-table-reservation/lib/interfaces";
 
 @Injectable()
 export class TablesService {
@@ -57,6 +59,15 @@ export class TablesService {
     };
   }
 
+  public async getTableByTableId(table_id: number): Promise<ITablePreview> {
+    const table = await this.tableRepository.findTableByTableId(table_id);
+    const seats = await this.seatRepository.findAllSeatsByTableId(table_id);
+    return {
+      ...table,
+      seats,
+    };
+  }
+
   public async getTables(data: TablesGet.Request): Promise<TablesGet.Response> {
     const { user_id, restaurant_id } = data;
 
@@ -70,6 +81,31 @@ export class TablesService {
       );
       tables.push({
         ...table,
+        seats: allSeats,
+      });
+    }
+
+    return {
+      tables,
+    };
+  }
+
+  public async getFreeTables(
+    data: TablesGetFree.Request
+  ): Promise<TablesGetFree.Response> {
+    const { day, restaurant_id, time, month } = data;
+
+    const tables: TablesGetFree.Response["tables"] = [];
+    const allTables = await this.tableRepository.findTablesByRestaurantId(
+      restaurant_id
+    );
+    for (const table of allTables) {
+      const allSeats = await this.seatRepository.findAllSeatsByTableId(
+        table.table_id
+      );
+      tables.push({
+        ...table,
+        tags: [],
         seats: allSeats,
       });
     }
