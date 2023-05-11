@@ -33,6 +33,7 @@
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "fingerprintjs2": "^2.1.4",
+    "ua-parser-js": "^1.0.33",
     "i18next": "^22.4.11",
     "jwt-decode": "^3.1.2",
     "kisszaya-table-reservation": "^0.0.79",
@@ -40,8 +41,7 @@
     "next-i18next": "^13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-i18next": "^12.2.0",
-    "ua-parser-js": "^1.0.33"
+    "react-i18next": "^12.2.0"
   },
   "devDependencies": {
     "@types/compose-function": "^0.0.30",

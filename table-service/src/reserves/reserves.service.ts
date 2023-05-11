@@ -94,6 +94,8 @@ export class ReservesService {
       user_id
     );
 
+    console.log('1 foundReserves', foundReserves)
+
     const reserves: ReservesGetVisitor.Response["reserves"] = [];
 
     for (const reserve of foundReserves) {
@@ -128,7 +130,7 @@ export class ReservesService {
       AggregatorRestaurantsGetById.Request,
       AggregatorRestaurantsGetById.Response
     >(AggregatorRestaurantsGetById.topic, {
-      restaurant_id: table.restaurant_id,
+      restaurant_id: Number(table.restaurant_id)
     });
 
     const time = new Date(

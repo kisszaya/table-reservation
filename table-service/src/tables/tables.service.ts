@@ -105,6 +105,8 @@ export class TablesService {
       );
       tables.push({
         ...table,
+        table_id: Number(table.table_id),
+        restaurant_id: Number(table.restaurant_id),
         tags: [],
         seats: allSeats,
       });

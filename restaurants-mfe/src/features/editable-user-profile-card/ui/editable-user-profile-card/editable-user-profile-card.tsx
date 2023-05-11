@@ -9,7 +9,11 @@ const asyncReducers: IReducersList = {
     userProfile: userProfileReducer
 }
 
-export const EditableUserProfileCard = () => {
+interface Props {
+    className?: string
+}
+
+export const EditableUserProfileCard = (props: Props) => {
     const dispatch = useAppDispatch()
     const values = useUserProfileCardValues()
 
@@ -20,6 +24,6 @@ export const EditableUserProfileCard = () => {
     }, [dispatch])
 
     return <DynamicModuleLoader reducers={asyncReducers}>
-        <ProfileCard {...values}/>
+        <ProfileCard {...values} className={props.className}/>
     </DynamicModuleLoader>
 }

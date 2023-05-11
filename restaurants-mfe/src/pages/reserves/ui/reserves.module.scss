@@ -1,0 +1,14 @@
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: inherit;
+    gap: 40px;
+    margin-top: 24px;
+}
+
+.right {
+    width: 300px;
+    flex-shrink: 0;
+}

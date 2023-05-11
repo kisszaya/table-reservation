@@ -19,7 +19,7 @@ export class UsersService {
   public async meInfo({
     user_id,
   }: UsersMeInfo.Request): Promise<UsersMeInfo.Response> {
-    this.logger.log("current user info");
+    this.logger.log("current me info");
 
     const user = await this.userRepository.findUserById(user_id);
     if (!user) {
@@ -37,7 +37,7 @@ export class UsersService {
   }
 
   public async infoByEmail(email: string): Promise<UsersInfo.Response> {
-    this.logger.log("user info by email");
+    this.logger.log("me info by email");
 
     const user = await this.userRepository.findUserByEmail(email);
     if (!user) {
@@ -58,7 +58,7 @@ export class UsersService {
   public async infoByUserIds(
     data: UsersByIdInfo.Request
   ): Promise<UsersByIdInfo.Response> {
-    this.logger.log("user info by user ids");
+    this.logger.log("me info by me ids");
 
     const users = await Promise.all(
       data.userIds.map(

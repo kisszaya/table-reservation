@@ -48,7 +48,7 @@ export class TablesController {
     }
   }
 
-  @Get("/:restaurantId/tables/free")
+  @Get("/:restaurantId/tables/free?")
   async getRestaurantFreeTables(
     @Query("day") day: string,
     @Query("time") time: string,

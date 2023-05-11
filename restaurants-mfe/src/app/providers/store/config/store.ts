@@ -7,7 +7,7 @@ import {
 import { type NavigateFunction } from 'react-router-dom'
 
 import { counterReducer } from 'entities/counter'
-import { userReducer } from 'entities/user'
+import { meReducer } from 'entities/me'
 import { $api } from 'shared/api'
 
 import { type IStateSchema } from '../types'
@@ -29,7 +29,7 @@ export const createReduxStore = (
     const rootReducers: IAsyncReducers = {
         ...asyncReducers,
         counter: counterReducer,
-        user: userReducer
+        me: meReducer
     }
 
     const reducerManager = createReducerManager(rootReducers)

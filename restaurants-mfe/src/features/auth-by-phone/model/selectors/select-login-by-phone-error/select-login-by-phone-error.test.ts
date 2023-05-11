@@ -4,7 +4,7 @@ import { selectLoginByPhoneError } from './select-login-by-phone-error'
 
 describe('selectLoginByPhoneError selector', () => {
     test('should return error value', () => {
-        const error = new Error('error')
+        const error = 'error'
 
         const state: DeepPartial<IStateSchema> = {
             loginByPhone: { error }

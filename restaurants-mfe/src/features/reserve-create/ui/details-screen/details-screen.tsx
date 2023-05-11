@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 
 import { NumberInput, Title, TITLE_SIZE } from 'shared/ui'
 import { useAppDispatch } from 'shared/lib/hooks'
+import { useSelectedTable } from 'features/reserve-create/lib'
 
 import styles from './details-screen.module.scss'
 
@@ -15,8 +16,10 @@ interface Props {
 }
 
 export const DetailsScreen = (props: Props) => {
+    const { table } = useSelectedTable()
     const dispatch = useAppDispatch()
     const persons_count = useSelector(selectCreateReservePersonsCount)
+
     const { onNext, onPrevious } = props
 
     const changePersonsCount = (value: number) => {
@@ -34,9 +37,10 @@ export const DetailsScreen = (props: Props) => {
 
                 <NumberInput
                     min={0}
+                    max={table.persons_count}
                     onChange={changePersonsCount}
                     value={persons_count || 0}
-                    label='Сколько будет человек?'
+                    label={`Сколько будет человек? (макс. ${table.persons_count})`}
                 />
             </div>
 

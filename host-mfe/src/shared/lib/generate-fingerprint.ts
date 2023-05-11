@@ -16,7 +16,7 @@ export const generateFingerprint = async (): Promise<string> => {
     preprocessor: (key: string, value: string) => {
       if (key === "userAgent") {
         const parser = new UAParser(value);
-        // return customized user agent (without browser version)
+        // return customized me agent (without browser version)
         return `${parser.getOS().name} :: ${parser.getBrowser().name} :: ${
           parser.getEngine().name
         }`;

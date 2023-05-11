@@ -33,6 +33,7 @@ export interface IEditableCardEditableProps {
 export interface IEditableCardBasicProps {
     editable?: IEditableCardEditableProps
     validationErrors?: null | VALIDATION_ERROR[]
+    className?: string
 }
 
 export interface IEditableCardProps extends IEditableCardBasicProps {

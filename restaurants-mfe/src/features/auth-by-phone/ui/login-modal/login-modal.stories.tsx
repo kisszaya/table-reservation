@@ -14,7 +14,7 @@ export default {
 const Template: ComponentStory<typeof LoginModal> = (args) => <LoginModal {...args} />
 
 const store: DeepPartial<IStateSchema> = {
-    user: { authData: null },
+    me: { me: null },
     loginByPhone: { phone: '999' }
 }
 

@@ -8,7 +8,7 @@ import {
   Controller,
   Get,
   Logger,
-  Param,
+  Param, Patch,
   Post,
   Res,
   UseGuards,
@@ -73,12 +73,12 @@ export class ReservesController {
     }
   }
 
-  @Post("/:reserveId")
+  @Patch("/:reserveId")
   async changeVisitorReserveStatus(
     @Param("reserveId") reserve_id: string,
     @Body() dto: VisitorReserveChangeStatusDto
   ) {
-    this.logger.log(`POST /api/reserves/:reserveId`);
+    this.logger.log(`PATCH /api/reserves/:reserveId`);
 
     try {
       return await this.brokerService.publish<

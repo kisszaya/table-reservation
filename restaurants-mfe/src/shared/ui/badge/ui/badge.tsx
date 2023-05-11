@@ -10,6 +10,7 @@ interface Props {
     size?: BADGE_SIZE
     variant?: BADGE_VARIANT
     onClick?: () => void
+    className?: string
 }
 
 export const Badge = memo((props: Props) => {
@@ -17,6 +18,7 @@ export const Badge = memo((props: Props) => {
         children,
         size = BADGE_SIZE.MD,
         onClick,
+        className,
         variant = BADGE_VARIANT.OUTLINED
     } = props
 
@@ -24,7 +26,8 @@ export const Badge = memo((props: Props) => {
         styles.badge,
         styles[size],
         styles[variant],
-        { [styles.clickable]: !!onClick }
+        { [styles.clickable]: !!onClick },
+        className
     )
 
     return <div className={classes} onClick={onClick}>

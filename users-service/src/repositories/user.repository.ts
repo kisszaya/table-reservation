@@ -15,7 +15,7 @@ export class UserRepository {
   ) {}
 
   public async createUser(user: UserEntity | VisitorEntity) {
-    this.logger.log("create new user");
+    this.logger.log("create new me");
 
     const newUser = this.userModel.create(user);
 
@@ -24,7 +24,7 @@ export class UserRepository {
   }
 
   public async findUserById(user_id: number) {
-    this.logger.log("find user by id");
+    this.logger.log("find me by id");
 
     return this.userModel.findOneBy({ user_id });
   }

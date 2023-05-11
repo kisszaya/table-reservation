@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 import { createReserveInitialState } from './initial-state'
 import { type ICreateReserveSchema } from '../types'
+import { createReserve, getFreeTables } from '..'
 
 export const createReserveSlice = createSlice({
     name: 'createReserve',
@@ -36,21 +37,45 @@ export const createReserveSlice = createSlice({
         },
         setMinutes: (state, action: PayloadAction<ICreateReserveSchema['minutes']>) => {
             state.minutes = action.payload
+        },
+        resetFreeTables: (state) => {
+            state.freeTables = createReserveInitialState.freeTables
+        },
+        resetTableId: (state) => {
+            state.table_id = createReserveInitialState.table_id
+        },
+        resetHours: (state) => {
+            state.hours = createReserveInitialState.hours
+        },
+        resetMinutes: (state) => {
+            state.minutes = createReserveInitialState.minutes
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getFreeTables.pending, (state) => {
+            state.error = null
+            state.isLoading = true
+        })
+        builder.addCase(getFreeTables.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload as string
+        })
+        builder.addCase(getFreeTables.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.freeTables = action.payload.tables
+        })
+        builder.addCase(createReserve.pending, (state) => {
+            state.error = null
+            state.isLoading = true
+        })
+        builder.addCase(createReserve.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload as string
+        })
+        builder.addCase(createReserve.fulfilled, (state, action) => {
+            state.isLoading = false
+        })
     }
-    // extraReducers: (builder) => {
-    //     builder.addCase(getFreeTables.pending, (state) => {
-    //         state.error = null
-    //         state.isLoading = true
-    //     })
-    //     builder.addCase(getFreeTables.rejected, (state, action) => {
-    //         state.isLoading = false
-    //         state.error = action.payload as Error
-    //     })
-    //     builder.addCase(getFreeTables.fulfilled, (state, action) => {
-    //         state.isLoading = false
-    //     })
-    // }
 })
 
 export const { actions: createReserveActions } = createReserveSlice

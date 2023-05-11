@@ -106,12 +106,10 @@ export class AuthService {
       throw new UserNotExistException(`id ${user_id}`);
     }
 
-    await this.jwtService.validateRefreshToken(oldRefreshToken, fingerprint);
+    await this.jwtService.validateRefreshToken(oldRefreshToken, fingerprint, user_id);
 
-    const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.generateAccessToken(user_id),
-      await this.jwtService.generateRefreshToken(user_id),
-    ]);
+    const accessToken = await this.jwtService.generateAccessToken(user_id)
+    const refreshToken = await this.jwtService.generateRefreshToken(user_id)
 
     await this.jwtService.saveRefreshSession({
       user_id,
@@ -128,7 +126,7 @@ export class AuthService {
   }: UsersLogout.Request): Promise<UsersLogout.Response> {
     this.logger.log("logout");
 
-    await this.jwtService.removeRefreshSession(refreshToken);
+    await this.jwtService.removeRefreshSession(refreshToken, user_id);
     return {
       status: "success",
     };

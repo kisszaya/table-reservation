@@ -1,23 +1,8 @@
-import {
-  AggregatorRestaurantsGet,
-  AggregatorRestaurantsGetById,
-  RestaurantsChange,
-  RestaurantsGetById,
-  RestaurantsGetUser,
-} from "kisszaya-table-reservation/lib/contracts";
-import {
-  Body,
-  Controller,
-  Get,
-  Logger,
-  Param,
-  Patch,
-  Query,
-  UseGuards,
-} from "@nestjs/common";
+import {AggregatorRestaurantsGet, AggregatorRestaurantsGetById,} from "kisszaya-table-reservation/lib/contracts";
+import {Controller, Get, Logger, Param, Query,} from "@nestjs/common";
 
-import { BrokerService } from "@/broker";
-import { InternalException } from "@/exceptions";
+import {BrokerService} from "@/broker";
+import {InternalException} from "@/exceptions";
 
 @Controller("aggregator-restaurants")
 export class AggregatorRestaurantsController {
@@ -33,9 +18,9 @@ export class AggregatorRestaurantsController {
   ) {
     this.logger.log("GET /api/aggregator-restaurants");
 
-    console.log("tags", tags);
-    console.log("search", search);
-    console.log("opened", opened);
+    // console.log("tags", tags);
+    // console.log("search", search);
+    // console.log("opened", opened);
 
     try {
       return await this.brokerService.publish<

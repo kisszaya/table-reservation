@@ -22,7 +22,7 @@ export const NumberInput = memo((props: Props) => {
     } = props
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        onChange(event.currentTarget.value as unknown as number)
+        onChange(Number(event.currentTarget.value))
     }
 
     if (!label) {

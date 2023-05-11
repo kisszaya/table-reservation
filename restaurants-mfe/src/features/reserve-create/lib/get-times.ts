@@ -28,9 +28,6 @@ export const getTimes = (props: Props): string[] => {
     const timeFromRound = Math.ceil(time_from / 30) * 30
     const timeToRound = Math.floor(time_to / 30) * 30
 
-    console.log('time_to', time_to, timeToRound)
-    console.log('time_from', time_from, timeFromRound)
-
     const times: string[] = []
 
     if (timeFromRound >= timeToRound) {

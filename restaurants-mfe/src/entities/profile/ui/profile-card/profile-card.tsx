@@ -18,6 +18,7 @@ interface Props extends IEditableCardBasicProps {
 
 export const ProfileCard = memo((props: Props) => {
     const {
+        className,
         onChangeEmail,
         onChangeFullName,
         fullName,
@@ -53,11 +54,10 @@ export const ProfileCard = memo((props: Props) => {
         phone])
 
     return (
-        <div>
-            <EditableCard
-                fields={fields}
-                editable={editable}
-                validationErrors={validationErrors}/>
-        </div>
+        <EditableCard
+            className={className}
+            fields={fields}
+            editable={editable}
+            validationErrors={validationErrors}/>
     )
 })

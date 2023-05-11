@@ -1,15 +1,20 @@
 import { memo, useMemo } from 'react'
+import classNames from 'classnames'
 
 import { TextInput } from 'shared/ui'
 import { validationErrorTexts } from 'shared/const'
-import { EditableHeader } from 'widgets/editable-card/ui'
-import { EDITABLE_CARD_FIELD_VARIANT, type IEditableCardProps } from '../../index'
+
+import styles from './editable-card.module.scss'
+
+import { EditableHeader } from '..'
+import { EDITABLE_CARD_FIELD_VARIANT, type IEditableCardProps } from '../..'
 
 export const EditableCard = memo((props: IEditableCardProps) => {
     const {
         editable,
         fields,
-        validationErrors
+        validationErrors,
+        className
     } = props
 
     const elements = useMemo(() => {
@@ -45,7 +50,7 @@ export const EditableCard = memo((props: IEditableCardProps) => {
         </div>
     }, [validationErrors])
 
-    return <div>
+    return <div className={classNames(styles.elements, className)}>
         { editable && <EditableHeader editable={editable}/>}
         {errors}
         {elements}

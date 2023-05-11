@@ -23,16 +23,16 @@ export class SessionRepository {
     return newSession;
   }
 
-  public async findSessionByToken(refreshToken: string) {
-    this.logger.log("find session by token");
+  public async findSessionByTokenAndUserId(refreshToken: string, user_id: number) {
+    this.logger.log("find session by token and user_id");
 
-    return this.sessionModel.findOneBy({ refreshToken });
+    return this.sessionModel.findOneBy({ refreshToken, user_id });
   }
 
-  public async deleteSessionByToken(refreshToken: string) {
-    this.logger.log("delete session by token");
+  public async deleteSessionByTokenAndUserId(refreshToken: string, user_id: number) {
+    this.logger.log("delete session by token and user_id");
 
-    return this.sessionModel.delete({ refreshToken });
+    return this.sessionModel.delete({ refreshToken, user_id });
   }
 
   public async findAllByUserId(user_id: number) {

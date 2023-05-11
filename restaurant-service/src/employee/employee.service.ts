@@ -57,7 +57,7 @@ export class EmployeeService {
   public async getUserRestaurantIds(
     user_id: number
   ): Promise<{ restaurants: { restaurant_id: number; roles: USER_ROLE[] }[] }> {
-    this.logger.log("get user restaurantIds");
+    this.logger.log("get me restaurantIds");
 
     const employees = await this.employeeRepository.findEmployeesByUserId(
       user_id
@@ -91,7 +91,7 @@ export class EmployeeService {
         UsersInfo.Response
       >(UsersInfo.topic, { email: userData.email });
     } catch (e) {
-      // if user dont exist
+      // if me dont exist
 
       const { email, lastName, firstName, password, phone } = userData;
 

@@ -3,6 +3,7 @@ import { type ICreateReserveSchema } from '../types'
 export const createReserveInitialState: ICreateReserveSchema = {
     error: null,
     isLoading: false,
+    freeTables: [],
     phone: null,
     day: null,
     email: null,

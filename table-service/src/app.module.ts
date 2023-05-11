@@ -9,6 +9,7 @@ import { BrokerModule } from "@/broker";
 
 import { TablesModule } from "@/tables/tables.module";
 import { TagsModule } from "@/tags/tags.module";
+import { ReservesModule } from "@/reserves/reserves.module";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TagsModule } from "@/tags/tags.module";
     TypeOrmModule.forRootAsync(getPostgresConfig()),
     TablesModule,
     TagsModule,
+    ReservesModule
   ],
   providers: [],
 })

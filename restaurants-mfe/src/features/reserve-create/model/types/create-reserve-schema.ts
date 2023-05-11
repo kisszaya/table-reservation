@@ -1,7 +1,9 @@
+import { type ITablePreview } from 'kisszaya-table-reservation/lib/interfaces'
 
 export interface ICreateReserveSchema {
+    freeTables: ITablePreview[]
     isLoading: boolean
-    error: Error | null
+    error: string | null
     day: number | null
     month: number | null
     hours: number | null

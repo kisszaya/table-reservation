@@ -125,11 +125,12 @@ export class AuthController {
         UsersUpdateRefresh.Response
       >(UsersUpdateRefresh.topic, message);
 
-      this.tokenService.setRefreshCookie(response, refreshToken);
+      this.tokenService.setRefreshCookie(response, data.refreshToken);
       this.tokenService.setAccessCookie(response, data.accessToken);
 
       return data;
     } catch (e) {
+      console.log('err', e)
       throw new InternalException(e);
     }
   }

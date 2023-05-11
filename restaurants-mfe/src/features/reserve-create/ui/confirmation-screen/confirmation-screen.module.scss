@@ -21,20 +21,11 @@
     overflow: hidden;
 }
 
-.infoItem {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.infoTitle {
-    color: var(--text-secondary) !important;
-}
-
 .left{
     padding: 40px;
     background: var(--bg-secondary);
     width: 40%;
+    gap: 6px;
     display: flex;
     flex-direction: column;
 }
@@ -45,4 +36,22 @@
     flex-direction: column;
     gap: 12px;
     width: 60%;
+}
+
+.table {
+    margin-top: 24px;
+    width: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+    gap: 8px;
 }

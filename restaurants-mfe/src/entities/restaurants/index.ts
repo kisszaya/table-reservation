@@ -5,5 +5,6 @@ export {
     restaurantsReducer,
     restaurantReducer,
     selectRestaurantWorkingTime,
-    selectRestaurantData
+    selectRestaurantData,
+    selectRestaurantId
 } from './model'

@@ -1,0 +1,41 @@
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: 1px solid var(--bg-secondary);
+    cursor: pointer;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.active {
+    border: 2px solid var(--inverted-bg-secondary);
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 12px 0 0;
+    background: var(--bg-secondary);
+    width: 60%;
+    padding: 8px;
+}
+
+.right {
+    display: flex;
+    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+}
+
+.bottom {
+    padding: 8px 12px;
+}

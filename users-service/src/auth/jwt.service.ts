@@ -59,19 +59,19 @@ export class JwtService {
     });
   }
 
-  public async validateRefreshToken(token: string, fingerprint: string) {
+  public async validateRefreshToken(token: string, fingerprint: string, user_id: number) {
     this.logger.log("validate refresh token");
 
-    const oldSession = await this.sessionRepository.findSessionByToken(token);
+    const parseEnv = envWrap(this.configService);
+    const defaultFingerprint = parseEnv("FINGERPRINT");
+
+    const oldSession = await this.sessionRepository.findSessionByTokenAndUserId(token, user_id);
 
     if (!oldSession) {
       throw new UnauthorizedException()
     }
 
-    await this.sessionRepository.deleteSessionByToken(token);
-
-    const parseEnv = envWrap(this.configService);
-    const defaultFingerprint = parseEnv("FINGERPRINT");
+    await this.sessionRepository.deleteSessionByTokenAndUserId(token, user_id);
 
     if (new Date() > oldSession.expiresIn) {
       throw new TokenExpiredException();
@@ -79,7 +79,8 @@ export class JwtService {
 
     if (
       defaultFingerprint !== fingerprint &&
-      oldSession.fingerprint !== fingerprint
+      oldSession.fingerprint !== fingerprint &&
+      oldSession.fingerprint !== defaultFingerprint
     ) {
       throw new InvalidSessionException();
     }
@@ -95,25 +96,29 @@ export class JwtService {
     const allSessions = await this.sessionRepository.findAllByUserId(
       session.user_id
     );
+
     if (allSessions.length >= 5) {
-      await Promise.all(
-        allSessions.map((session) =>
-          this.sessionRepository.deleteSessionByToken(session.refreshToken)
+      for (const session of allSessions) {
+        await this.sessionRepository.deleteSessionByTokenAndUserId(
+            session.refreshToken, session.user_id
         )
-      );
+      }
     }
 
     const sessionEntity = new SessionEntity({
       ...session,
       expiresIn: this.getExpiresInTimestamp(expiresIn),
     });
-    return await this.sessionRepository.createSession(sessionEntity);
+
+    const newSession = await this.sessionRepository.createSession(sessionEntity);
+
+    return newSession;
   }
 
-  public async removeRefreshSession(refreshToken: string) {
+  public async removeRefreshSession(refreshToken: string, user_id: number) {
     this.logger.log("remove refresh session");
 
-    return this.sessionRepository.deleteSessionByToken(refreshToken);
+    return this.sessionRepository.deleteSessionByTokenAndUserId(refreshToken, user_id);
   }
 
   private getExpiresInTimestamp(expiresIn: string) {

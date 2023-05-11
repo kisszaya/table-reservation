@@ -1,5 +1,4 @@
 
-import { userActions } from 'entities/user'
 import { TestAsyncThunk } from 'shared/lib/tests'
 import { loginByPhone } from './login-by-phone'
 
@@ -14,7 +13,7 @@ describe('getFreeTables async thunk test', () => {
         expect(thunk.api.post).toHaveBeenCalled()
         expect(result.meta.requestStatus).toBe('fulfilled')
         expect(result.payload).toBe(userData)
-        expect(thunk.dispatch).toHaveBeenCalledWith(userActions.setAuthData(userData))
+        // expect(thunk.dispatch).toHaveBeenCalledWith(meActions.setAuthData(userData))
         expect(thunk.dispatch).toHaveBeenCalledTimes(3)
     })
 

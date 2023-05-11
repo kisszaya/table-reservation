@@ -1,6 +1,6 @@
 import { type FC, type PropsWithChildren, useCallback, useMemo } from 'react'
 
-import { userActions } from 'entities/user'
+import { logout } from 'entities/me'
 import { useDefaultTranslation } from 'shared/lib'
 import { type INavbarButton, Navbar } from 'widgets/navbar'
 import { useAppDispatch } from 'shared/lib/hooks'
@@ -16,7 +16,7 @@ export const PrivateLayout: FC<PropsWithChildren> = (props) => {
     const { children } = props
 
     const onLogout = useCallback(() => {
-        dispatch(userActions.logout())
+        dispatch(logout())
     }, [dispatch])
 
     const navbarButton: INavbarButton = useMemo(() => ({

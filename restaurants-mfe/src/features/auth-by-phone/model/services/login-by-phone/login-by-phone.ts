@@ -1,22 +1,44 @@
+import { type AxiosResponse } from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { userActions, type IUser } from 'entities/user'
+import { type Responses } from 'kisszaya-table-reservation/lib/responses'
+import { type Requests } from 'kisszaya-table-reservation/lib/requests'
+
 import { type IThunkConfig } from 'app/providers/store'
+import { serverRoutes } from 'shared/api'
+import { generateFingerprint } from 'shared/lib'
+import { getMeInfo, meActions } from 'entities/me'
 
 interface Props {
     phone: string
 }
 
 export const loginByPhone =
-    createAsyncThunk<IUser, Props, IThunkConfig<Error>>('auth/loginByPassword',
+    createAsyncThunk<Responses.VisitorLogin, Props, IThunkConfig<string>>(
+        'auth/fetchReserves',
         async (data, thunkAPI) => {
-            const { dispatch, fulfillWithValue, extra } = thunkAPI
-            // TODO redo
+            const { dispatch, extra, rejectWithValue } = thunkAPI
+
+            const fingerprint = await generateFingerprint()
+
             try {
-                const res = await extra.api.post<IUser>('/', data)
-                dispatch(userActions.setAuthData(res.data))
+                const res =
+                    await extra.api.post<
+                        Responses.VisitorLogin,
+                        AxiosResponse<Responses.VisitorLogin>,
+                        Requests.VisitorLogin
+                    >(
+                        serverRoutes.login, {
+                            phone: data.phone,
+                            fingerprint
+                        },
+                        {
+                            withCredentials: true
+                        }
+                    )
+                dispatch(meActions.setAccessToken(res.data.accessToken))
+                await dispatch(getMeInfo())
                 return res.data
             } catch (e) {
-                dispatch(userActions.setAuthData({ phone: data.phone }))
-                return fulfillWithValue({ phone: data.phone })
+                return rejectWithValue('error')
             }
         })

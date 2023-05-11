@@ -17,5 +17,11 @@
 }
 
 .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: inherit;
+    padding-left: 24px;
+    gap: 8px;
     width: 40%;
 }

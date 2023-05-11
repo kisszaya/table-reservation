@@ -1,2 +1,2 @@
 export { Button } from './ui/button'
-export { BUTTON_VARIANT } from './const'
+export { BUTTON_VARIANT, BUTTON_SIZE } from './const'

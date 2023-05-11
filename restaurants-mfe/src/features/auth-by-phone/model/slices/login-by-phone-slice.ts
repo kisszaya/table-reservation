@@ -19,7 +19,7 @@ export const loginByPhoneSlice = createSlice({
         })
         builder.addCase(loginByPhone.rejected, (state, action) => {
             state.isLoading = false
-            state.error = action.payload as Error
+            state.error = action.payload as string
         })
         builder.addCase(loginByPhone.fulfilled, (state, action) => {
             state.isLoading = false
